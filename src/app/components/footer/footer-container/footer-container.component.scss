@@ -1,0 +1,22 @@
+.footer-header{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 5rem;
+        width: 100%;
+}
+
+.header-text{
+    color:white;
+}
+.skills{
+   width:100%;
+   display: inline-flex;
+   justify-content: space-evenly;
+}
+
+.skill{
+    color:white;
+    text-align: center;
+    flex-basis: 7%;
+}

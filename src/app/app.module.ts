@@ -7,8 +7,9 @@ import { BackgroundComponent } from './components/background/background.componen
 import { AboutMeComponent } from './components/about-me/about-me.component';
 import { ContactMeComponent } from './components/contact-me/contact-me.component';
 import { IntroductionComponent } from './components/introduction/introduction.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { FooterComponent } from './components/footer/footer-container/footer-container.component';
 import { ParticleCanvasComponent } from './components/particle-canvas/particle-canvas.component';
+import { SkillContainerComponent } from './components/footer/footer-container/skill-container/skill-container.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ParticleCanvasComponent } from './components/particle-canvas/particle-c
     ContactMeComponent,
     IntroductionComponent,
     FooterComponent,
-    ParticleCanvasComponent
+    ParticleCanvasComponent,
+    SkillContainerComponent
   ],
   imports: [
     BrowserModule,
