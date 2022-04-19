@@ -2,8 +2,12 @@
   <app-background></app-background>
 </div>
 <div class="header">
-  <app-about-me class="header-element-container"></app-about-me>
-  <app-contact-me class="header-element-container"></app-contact-me>
+  <div #aboutMe class="header-element-container">
+    <app-about-me></app-about-me>
+  </div>
+  <div #contactMe class="header-element-container">
+    <app-contact-me></app-contact-me>
+  </div>
 </div>
 <div class="introduction glass-effect">
   <app-introduction></app-introduction>
