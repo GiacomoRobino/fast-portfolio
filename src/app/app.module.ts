@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BackgroundComponent } from './components/background/background.component';
 import { AboutMeComponent } from './components/about-me/about-me.component';
@@ -20,11 +21,12 @@ import { SkillContainerComponent } from './components/footer/footer-container/sk
     IntroductionComponent,
     FooterComponent,
     ParticleCanvasComponent,
-    SkillContainerComponent
+    SkillContainerComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

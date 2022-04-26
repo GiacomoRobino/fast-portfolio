@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-introduction',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IntroductionComponent implements OnInit {
 
-  constructor() { }
+  private httpClient: HttpClient;
+  public text : string = "";
+
+  constructor(http: HttpClient) {
+    this.httpClient = http;
+  }
 
   ngOnInit(): void {
+    this.httpClient.get('assets/copywrite/presentation.txt', {responseType: 'text'})
+        .subscribe(data => this.text = data);
   }
 
 }

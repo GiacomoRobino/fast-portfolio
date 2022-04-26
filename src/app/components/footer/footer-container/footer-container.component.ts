@@ -12,7 +12,8 @@ export class FooterComponent implements OnInit {
   {name:"css3"},
   {name:"html"},
   {name:"greensock"},
-  {name:"javascript"}]
+  {name:"javascript"},
+  {name:"github"}]
 
   constructor() { }
 
