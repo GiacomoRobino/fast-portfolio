@@ -11,7 +11,8 @@ import { HttpClient } from '@angular/common/http';
 export class IntroductionComponent implements OnInit {
 
   private httpClient: HttpClient;
-  public text : string = "";
+  public text: string = "";
+  public shownText : string = "";
 
   constructor(http: HttpClient) {
     this.httpClient = http;
@@ -19,7 +20,15 @@ export class IntroductionComponent implements OnInit {
 
   ngOnInit(): void {
     this.httpClient.get('assets/copywrite/presentation.txt', {responseType: 'text'})
-        .subscribe(data => this.text = data);
+        .subscribe(data => {this.text = data; this.shownText = this.text;});
+  }
+
+  expandText(){
+    this.shownText = this.text;
+  }
+
+  collapseText(){
+    this.shownText = "";
   }
 
 }

@@ -6,10 +6,10 @@
     <app-about-me></app-about-me>
   </div>
   <div #contactMe class="header-element-container">
-    <app-contact-me></app-contact-me>
+    <app-contact-me (openContactMe)="expandContactMe($event)"></app-contact-me>
   </div>
 </div>
-<div class="introduction glass-effect">
+<div #introduction class="introduction glass-effect">
   <app-introduction></app-introduction>
 </div>
 <div class="footer">
