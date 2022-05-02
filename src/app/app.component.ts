@@ -28,12 +28,12 @@ export class AppComponent implements AfterViewInit {
   expandContactMe(expand : boolean){
     let tl = gsap.timeline();
     if(expand){
-      this.introductionComponent.expandText();
-    }
-    else{
       this.introductionComponent.collapseText();
     }
-    tl.to(this.introduction.nativeElement, {duration: 1, height : (expand? 500 : 0) + "px", ease: Power4.easeOut});
+    else{
+      this.introductionComponent.expandText();
+    }
+    tl.to(this.introduction.nativeElement, {duration: 1, height : (expand? 0 : 500) + "px", ease: Power4.easeOut});
 
   }
 }
