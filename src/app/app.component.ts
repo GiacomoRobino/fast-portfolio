@@ -31,7 +31,7 @@ export class AppComponent implements AfterViewInit {
       this.introductionComponent.collapseText();
     }
     else{
-      this.introductionComponent.expandText();
+      this.introductionComponent.writeText();
     }
     tl.to(this.introduction.nativeElement, {duration: 1, height : (expand? 0 : 500) + "px", ease: Power4.easeOut});
 
