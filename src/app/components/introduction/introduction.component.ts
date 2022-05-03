@@ -14,7 +14,7 @@ export class IntroductionComponent implements OnInit {
   public text: string = "";
   public shownText : string = "";
   private timeToWrite : number = 400.0;
-  private timeToCollapse : number = 0.1;
+  private interruptWriting : boolean = false;
   private specialCaractersMultipliers : {[key: string] : number} = {"." : 500.0, "," : 200.0}
 
   constructor(http: HttpClient) {
@@ -31,16 +31,9 @@ export class IntroductionComponent implements OnInit {
     this.shownText = this.text;
   }
 
-  collapseText(timeToCollapse : number = -1){
-    if(timeToCollapse === -1){
-      timeToCollapse = this.timeToCollapse/this.text.length;      
-    }
-    if(this.shownText.length > 0){
-      this.shownText = this.removeLastLetter(this.shownText);
-      setTimeout(() => {
-        this.collapseText(timeToCollapse);
-      }, timeToCollapse);
-   }
+  collapseText(){
+    this.shownText = "";
+    this.interruptWriting = true;
   }
 
   removeLastLetter(s: string){
@@ -54,17 +47,18 @@ export class IntroductionComponent implements OnInit {
   writeText(timeToWrite : number = -1){
     if(timeToWrite === -1){
       timeToWrite = this.timeToWrite/this.text.length;
+      this.interruptWriting = false;
     }
-    if(this.shownText.length < this.text.length){
+    if(this.shownText.length < this.text.length && !this.interruptWriting){
       this.shownText = this.addOneLetter(this.shownText, this.text);
       if(this.specialCaractersMultipliers[this.shownText.slice(-1)]){
         timeToWrite = timeToWrite * this.specialCaractersMultipliers[this.shownText.slice(-1)];
-        console.log("multiply", timeToWrite);
+        console.log("multiply", this.specialCaractersMultipliers[this.shownText.slice(-1)]);
         
       }
       else if(this.specialCaractersMultipliers[this.shownText.slice(-2, -1)]){
-        timeToWrite = timeToWrite / this.specialCaractersMultipliers[this.shownText.slice(-2)];
-        console.log("divide", timeToWrite);
+        timeToWrite = timeToWrite / this.specialCaractersMultipliers[this.shownText.slice(-2, -1)];
+        console.log("divide", this.specialCaractersMultipliers[this.shownText.slice(-2, -1)]);
       }
       setTimeout(() => {
         this.writeText(timeToWrite);
