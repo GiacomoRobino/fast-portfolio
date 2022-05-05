@@ -13,6 +13,8 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('introduction') introduction: any;
   @ViewChild(IntroductionComponent, {static: false}) private introductionComponent: any;
   title = 'portfolio-fast';
+  expand = false;
+
   introductionVisible = true;
   contactMeVisible = false;
 
@@ -27,17 +29,18 @@ export class AppComponent implements AfterViewInit {
     t2.from(this.contactMe.nativeElement, {duration: 1, y: -1000, ease: Power4.easeOut});
   }
 
-  expandContactMe(expand : boolean){
+  expandContactMe(){
+    this.expand = !this.expand;
     let tl = gsap.timeline();
-    if(expand){
+    if(this.expand){
       this.introductionComponent.collapseText();
     }
     else{
       this.introductionComponent.writeText();
     }
-    tl.to(this.introduction.nativeElement, {duration: 1, height : (expand? 0 : 500) + "px", ease: Power4.easeOut})
+    tl.to(this.introduction.nativeElement, {duration: 1, height : (this.expand? 0 : 500) + "px", ease: Power4.easeOut})
     .add( ()=>{ this.introductionVisible = false; this.contactMeVisible = true} )
-    .to(this.introduction.nativeElement, {duration: 1, height : (expand? 500 : 0) + "px", ease: Power4.easeOut});
+    .to(this.introduction.nativeElement, {duration: 1, height : (this.expand? 500 : 0) + "px", ease: Power4.easeOut});
 
   }
 }
