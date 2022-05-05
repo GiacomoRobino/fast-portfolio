@@ -10,7 +10,8 @@
   </div>
 </div>
 <div #introduction class="introduction glass-effect">
-  <app-introduction></app-introduction>
+  <app-introduction *ngIf="introductionVisible"></app-introduction>
+  <app-contact-me *ngIf="contactMeVisible"></app-contact-me >
 </div>
 <div class="footer">
   <app-footer></app-footer>

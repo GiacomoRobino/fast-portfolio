@@ -1,4 +1,4 @@
-Hello my name is Giacomo Robino.
+Hello, my name is Giacomo Robino.
 
 I'm a Frontend developer using web technologies to build amazing products
 and focusing on solving problems for different niches and different industries

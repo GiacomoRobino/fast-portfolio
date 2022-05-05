@@ -13,6 +13,8 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('introduction') introduction: any;
   @ViewChild(IntroductionComponent, {static: false}) private introductionComponent: any;
   title = 'portfolio-fast';
+  introductionVisible = true;
+  contactMeVisible = false;
 
   ngAfterViewInit(){
     this.moveHeaderButton();
@@ -33,7 +35,9 @@ export class AppComponent implements AfterViewInit {
     else{
       this.introductionComponent.writeText();
     }
-    tl.to(this.introduction.nativeElement, {duration: 1, height : (expand? 0 : 500) + "px", ease: Power4.easeOut});
+    tl.to(this.introduction.nativeElement, {duration: 1, height : (expand? 0 : 500) + "px", ease: Power4.easeOut})
+    .add( ()=>{ this.introductionVisible = false; this.contactMeVisible = true} )
+    .to(this.introduction.nativeElement, {duration: 1, height : (expand? 500 : 0) + "px", ease: Power4.easeOut});
 
   }
 }
