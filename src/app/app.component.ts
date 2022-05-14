@@ -11,12 +11,17 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('aboutMe') aboutMe: any;
   @ViewChild('contactMe') contactMe: any;
   @ViewChild('introduction') introduction: any;
+  @ViewChild('introductionButton') introductionButton: any;
   @ViewChild(IntroductionComponent, {static: false}) private introductionComponent: any;
   title = 'portfolio-fast';
   expand = false;
 
   introductionVisible = true;
   contactMeVisible = false;
+  aboutMeVisible = false;
+
+  currentVisibleComponent = "introduction";
+
 
   ngAfterViewInit(){
     this.moveHeaderButton();
@@ -29,18 +34,29 @@ export class AppComponent implements AfterViewInit {
     t2.from(this.contactMe.nativeElement, {duration: 1, y: -1000, ease: Power4.easeOut});
   }
 
+
   expandContactMe(){
-    this.expand = !this.expand;
+      let tl = gsap.timeline();
+      tl.to(this.introduction.nativeElement, {duration: 0.5, height : 0 + "px", ease: Power4.easeOut})
+    .add( ()=>{this.currentVisibleComponent = "contactMe"} )
+    .to(this.introduction.nativeElement, {duration: 0.5, height : 500  + "px", ease: Power4.easeOut});
+  }
+
+  expandAboutMe(){
     let tl = gsap.timeline();
-    if(this.expand){
-      this.introductionComponent.collapseText();
-    }
-    else{
-      this.introductionComponent.writeText();
-    }
-    tl.to(this.introduction.nativeElement, {duration: 1, height : (this.expand? 0 : 500) + "px", ease: Power4.easeOut})
-    .add( ()=>{ this.introductionVisible = false; this.contactMeVisible = true} )
-    .to(this.introduction.nativeElement, {duration: 1, height : (this.expand? 500 : 0) + "px", ease: Power4.easeOut});
+    tl.to(this.introduction.nativeElement, {duration: 0.5, height : 0 + "px", ease: Power4.easeOut})
+    .add( ()=>{this.currentVisibleComponent = "aboutMe"} )
+    .to(this.introduction.nativeElement, {duration: 0.5, height : 500 + "px", ease: Power4.easeOut});
 
   }
+
+  
+  expandIntroduction(){
+    let tl = gsap.timeline();
+    tl.to(this.introduction.nativeElement, {duration: 0.5, height : 0 + "px", ease: Power4.easeOut})
+    .add( ()=>{this.currentVisibleComponent = "introduction"} )
+    .to(this.introduction.nativeElement, {duration: 0.5, height : 500 + "px", ease: Power4.easeOut});
+    this.introductionComponent.writeText();
+  }
+
 }
