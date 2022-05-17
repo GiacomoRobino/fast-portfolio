@@ -2,20 +2,20 @@
   <app-background></app-background>
 </div>
 <div class="header">
-  <div #aboutMe class="header-element-container">
-    <button class="header-button glass-effect" (click)="expandAboutMe()">ABOUT ME</button>
+  <div #aboutMeButton class="header-element-container">
+    <button class="header-button glass-effect" (click)="click('aboutMe')">ABOUT ME</button>
   </div>
-  <div #contactMe class="header-element-container">
-    <button class="header-button glass-effect" (click)="expandContactMe()">CONTACT ME</button>
+  <div #contactMeButton class="header-element-container">
+    <button class="header-button glass-effect" (click)="click('contactMe')">CONTACT ME</button>
   </div>
   <div #introductionButton class="header-element-container introductionButton">
-    <button class="header-button glass-effect" (click)="expandIntroduction()">INTRODUCTION</button>
+    <button class="header-button glass-effect" (click)="click('visible')">INTRODUCTION</button>
   </div>
 </div>
-<div #introduction class="introduction glass-effect">
-  <app-introduction *ngIf="currentVisibleComponent === 'introduction'"></app-introduction>
-  <app-contact-me *ngIf="currentVisibleComponent === 'contactMe'"></app-contact-me >
-  <app-about-me *ngIf="currentVisibleComponent === 'aboutMe'"></app-about-me >
+<div #componentContainer class="introduction glass-effect">
+  <app-introduction #introductionModule *ngIf="visible.introduction"></app-introduction>
+  <app-contact-me #contactMeModule *ngIf="visible.contactMe"></app-contact-me >
+  <app-about-me #aboutMeModule *ngIf="visible.aboutMe"></app-about-me >
 </div>
 <div class="footer">
   <app-footer></app-footer>

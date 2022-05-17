@@ -6,19 +6,21 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./about-me.component.css']
 })
 export class AboutMeComponent implements OnInit {
-
-  @Output() openAboutMe = new EventEmitter<boolean>();
+  text = "";
 
   private opened = false;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.text = "About me"
   }
 
-  clickOpenContactMe() {
-    this.opened = !this.opened;
-    this.openAboutMe.emit(this.opened);
+  clickClose() {
+    return new Promise((resolve, reject) =>{
+      this.text = "";
+      resolve("foo")
+    })
   }
 
 }

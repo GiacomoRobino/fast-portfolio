@@ -58,13 +58,18 @@ export class IntroductionComponent implements OnInit {
       }
       else if(this.specialCaractersMultipliers[this.shownText.slice(-2, -1)]){
         timeToWrite = timeToWrite / this.specialCaractersMultipliers[this.shownText.slice(-2, -1)];
-        console.log("divide", this.specialCaractersMultipliers[this.shownText.slice(-2, -1)]);
       }
       setTimeout(() => {
         this.writeText(timeToWrite);
       }, timeToWrite);
    }
   
+  }
+  clickClose() {
+    return new Promise((resolve, reject) =>{
+      this.shownText = "";
+      resolve("foo")
+    })
   }
 
 }

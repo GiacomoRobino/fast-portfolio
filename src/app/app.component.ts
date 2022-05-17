@@ -8,55 +8,46 @@ import { IntroductionComponent } from './components/introduction/introduction.co
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit {
-  @ViewChild('aboutMe') aboutMe: any;
-  @ViewChild('contactMe') contactMe: any;
-  @ViewChild('introduction') introduction: any;
+  @ViewChild('aboutMe') aboutMeButton: any;
+  @ViewChild('aboutMeModule') aboutMeModule: any;
+  @ViewChild('contactMeButton') contactMeButton: any;
+  @ViewChild('contactMeModule') contactMeModule: any;
   @ViewChild('introductionButton') introductionButton: any;
-  @ViewChild(IntroductionComponent, {static: false}) private introductionComponent: any;
-  title = 'portfolio-fast';
-  expand = false;
+  @ViewChild('introductionModule') introductionModule: any;
+  @ViewChild('componentContainer') componentContainer: any;
 
-  introductionVisible = true;
-  contactMeVisible = false;
-  aboutMeVisible = false;
+  public modules : {[key:string]:any} = {}
+  public buttons : {[key:string]:any} = {}
+  public visible : {[key:string]:boolean} = {contactMe : false, aboutMe : true, introduction : false}
+  title = 'portfolio-fast';
 
   currentVisibleComponent = "introduction";
 
+  private currentlySelectedModule = {};
 
   ngAfterViewInit(){
-    this.moveHeaderButton();
-  }
-
-  moveHeaderButton(){
-    let tl = gsap.timeline();
-    let t2 = gsap.timeline();
-    tl.from(this.aboutMe.nativeElement, {duration: 1, y: -1000, ease: Power4.easeOut});
-    t2.from(this.contactMe.nativeElement, {duration: 1, y: -1000, ease: Power4.easeOut});
+    this.modules = { aboutMe : this.aboutMeModule, contactMe: this.contactMeModule, introduction: this.introductionModule}
+    this.buttons = { aboutMe : this.aboutMeButton, contactMe: this.contactMeButton, introduction: this.introductionButton}
   }
 
 
-  expandContactMe(){
+  click(element: string){
+    this.modules[this.getVisibleComponent()].clickClose().then( (data : string) => {
+      this.expandElement(element)
+    })
+  }
+
+  expandElement(elementToExpand : string){
       let tl = gsap.timeline();
-      tl.to(this.introduction.nativeElement, {duration: 0.5, height : 0 + "px", ease: Power4.easeOut})
-    .add( ()=>{this.currentVisibleComponent = "contactMe"} )
-    .to(this.introduction.nativeElement, {duration: 0.5, height : 500  + "px", ease: Power4.easeOut});
+      tl.to(this.componentContainer.nativeElement, {duration: 0.5, height : 0 + "px", ease: Power4.easeOut})
+        .to(this.componentContainer.nativeElement, {duration: 0.5, height : 500 + "px", ease: Power4.easeOut})
+        .add(()=>{
+          this.visible[this.getVisibleComponent()] = false
+          this.visible[elementToExpand] = true})
   }
 
-  expandAboutMe(){
-    let tl = gsap.timeline();
-    tl.to(this.introduction.nativeElement, {duration: 0.5, height : 0 + "px", ease: Power4.easeOut})
-    .add( ()=>{this.currentVisibleComponent = "aboutMe"} )
-    .to(this.introduction.nativeElement, {duration: 0.5, height : 500 + "px", ease: Power4.easeOut});
-
+  getVisibleComponent() : string{
+    let keys = Object.keys(this.visible);
+    return keys.filter(key => this.visible[key])[0]
   }
-
-  
-  expandIntroduction(){
-    let tl = gsap.timeline();
-    tl.to(this.introduction.nativeElement, {duration: 0.5, height : 0 + "px", ease: Power4.easeOut})
-    .add( ()=>{this.currentVisibleComponent = "introduction"} )
-    .to(this.introduction.nativeElement, {duration: 0.5, height : 500 + "px", ease: Power4.easeOut});
-    this.introductionComponent.writeText();
-  }
-
 }
