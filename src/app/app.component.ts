@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { gsap, Power4 } from 'gsap';
-import { IntroductionComponent } from './components/introduction/introduction.component';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +8,11 @@ import { IntroductionComponent } from './components/introduction/introduction.co
 })
 export class AppComponent implements AfterViewInit {
   @ViewChild('aboutMe') aboutMeButton: any;
-  @ViewChild('aboutMeModule') aboutMeModule: any;
+  @ViewChild('aboutMeComponent') aboutMeComponent: any;
   @ViewChild('contactMeButton') contactMeButton: any;
-  @ViewChild('contactMeModule') contactMeModule: any;
+  @ViewChild('contactMeComponent') contactMeComponent: any;
   @ViewChild('introductionButton') introductionButton: any;
-  @ViewChild('introductionModule') introductionModule: any;
+  @ViewChild('introductionComponent') introductionComponent: any;
   @ViewChild('componentContainer') componentContainer: any;
 
   public modules : {[key:string]:any} = {}
@@ -23,10 +22,9 @@ export class AppComponent implements AfterViewInit {
 
   currentVisibleComponent = "introduction";
 
-  private currentlySelectedModule = {};
 
   ngAfterViewInit(){
-    this.modules = { aboutMe : this.aboutMeModule, contactMe: this.contactMeModule, introduction: this.introductionModule}
+    this.modules = { aboutMe : this.aboutMeComponent, contactMe: this.contactMeComponent, introduction: this.introductionComponent}
     this.buttons = { aboutMe : this.aboutMeButton, contactMe: this.contactMeButton, introduction: this.introductionButton}
   }
 
