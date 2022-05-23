@@ -15,7 +15,7 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('contactMeButton') contactMeButton: any;
   @ViewChildren('contactMeComponent') contactMeComponent !: QueryList<ContactMeComponent>;
   @ViewChild('introductionButton') introductionButton: any;
-  @ViewChild('introductionComponent') introductionComponent !: QueryList<IntroductionComponent>;
+  @ViewChildren('introductionComponent') introductionComponent !: QueryList<IntroductionComponent>;
   @ViewChild('componentContainer') componentContainer: any;
 
   public modules : {[key:string]:any} = {}
