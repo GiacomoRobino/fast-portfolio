@@ -9,19 +9,23 @@ export class ContactMeComponent implements OnInit{
   @Output() openContactMe = new EventEmitter<boolean>();
   private opened = false;
   text = ""
+  
   constructor() { }
 
   ngOnInit(): void {
     this.text = "contact me!"
   }
-  clickOpenContactMe() {
+  
+  clickOpen() {
     this.opened = !this.opened;
+    console.log("click open contact me")
     this.openContactMe.emit(this.opened);
   }
 
   clickClose() {
     return new Promise((resolve, reject) =>{
       this.text = "";
+      console.log("closing contact me");
       resolve("foo")
     })
   }

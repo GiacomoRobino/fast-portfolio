@@ -9,9 +9,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./introduction.component.css']
 })
 export class IntroductionComponent implements OnInit {
-
-  private httpClient: HttpClient;
-  public text: string = "";
+  private httpClient: HttpClient;  
+  private opened = false;
+  text = ""
   public shownText : string = "";
   private timeToWrite : number = 400.0;
   private interruptWriting : boolean = false;
@@ -22,9 +22,12 @@ export class IntroductionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.text = "Introduction component"
+    /*
     this.httpClient.get('assets/copywrite/presentation.txt', {responseType: 'text'})
         .subscribe(data => {this.text = data;
         this.writeText();});
+        */
   }
 
   expandText(){
@@ -53,7 +56,6 @@ export class IntroductionComponent implements OnInit {
       this.shownText = this.addOneLetter(this.shownText, this.text);
       if(this.specialCaractersMultipliers[this.shownText.slice(-1)]){
         timeToWrite = timeToWrite * this.specialCaractersMultipliers[this.shownText.slice(-1)];
-        console.log("multiply", this.specialCaractersMultipliers[this.shownText.slice(-1)]);
         
       }
       else if(this.specialCaractersMultipliers[this.shownText.slice(-2, -1)]){
@@ -65,9 +67,16 @@ export class IntroductionComponent implements OnInit {
    }
   
   }
+  
+  clickOpen() {
+    this.opened = !this.opened;
+    console.log("click open introduction")
+  }
+
   clickClose() {
     return new Promise((resolve, reject) =>{
-      this.shownText = "";
+      this.text = "";
+      console.log("closing introduction");
       resolve("foo")
     })
   }

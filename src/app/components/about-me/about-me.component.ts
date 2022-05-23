@@ -7,7 +7,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class AboutMeComponent implements OnInit {
   text = "";
-
   private opened = false;
 
   constructor() { }
@@ -16,9 +15,15 @@ export class AboutMeComponent implements OnInit {
     this.text = "About me"
   }
 
+  clickOpen() {
+    this.opened = !this.opened;
+    console.log("click open about me")
+  }
+
   clickClose() {
     return new Promise((resolve, reject) =>{
       this.text = "";
+      console.log("closing about me");
       resolve("foo")
     })
   }
