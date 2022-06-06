@@ -4,11 +4,11 @@ import { catchError, retry } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-introduction',
-  templateUrl: './introduction.component.html',
-  styleUrls: ['./introduction.component.css']
+  selector: 'app-projects',
+  templateUrl: './projects.component.html',
+  styleUrls: ['./projects.component.css']
 })
-export class IntroductionComponent implements OnInit {
+export class ProjectsComponent implements OnInit {
   private httpClient: HttpClient;  
   private opened = false;
   text = ""
@@ -22,7 +22,7 @@ export class IntroductionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.text = "Introduction component"
+    this.text = "projects component"
     /*
     this.httpClient.get('assets/copywrite/presentation.txt', {responseType: 'text'})
         .subscribe(data => {this.text = data;

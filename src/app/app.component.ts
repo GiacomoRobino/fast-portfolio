@@ -2,7 +2,7 @@ import { AfterViewInit, Component, QueryList, ViewChild, ViewChildren } from '@a
 import { gsap, Power4 } from 'gsap';
 import { AboutMeComponent } from './components/about-me/about-me.component';
 import { ContactMeComponent } from './components/contact-me/contact-me.component';
-import { IntroductionComponent } from './components/introduction/introduction.component';
+import { ProjectsComponent } from './components/projects/projects.component';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +14,8 @@ export class AppComponent implements AfterViewInit {
   @ViewChildren('aboutMeComponent') aboutMeComponent !: QueryList<AboutMeComponent>;
   @ViewChild('contactMeButton') contactMeButton: any;
   @ViewChildren('contactMeComponent') contactMeComponent !: QueryList<ContactMeComponent>;
-  @ViewChild('introductionButton') introductionButton: any;
-  @ViewChildren('introductionComponent') introductionComponent !: QueryList<IntroductionComponent>;
+  @ViewChild('introductionButton') projectsButton: any;
+  @ViewChildren('introductionComponent') projectsComponent !: QueryList<ProjectsComponent>;
   @ViewChild('componentContainer') componentContainer: any;
 
   public modules : {[key:string]:any} = {}
@@ -25,14 +25,14 @@ export class AppComponent implements AfterViewInit {
 
 
   ngAfterViewInit(){
-    this.modules = { aboutMe : this.aboutMeComponent.first, contactMe: undefined, introduction: undefined}
-    this.buttons = { aboutMe : this.aboutMeButton, contactMe: this.contactMeButton, introduction: this.introductionButton}
+    this.modules = { aboutMe : this.aboutMeComponent.first, contactMe: undefined, projects: undefined}
+    this.buttons = { aboutMe : this.aboutMeButton, contactMe: this.contactMeButton, projects: this.projectsButton}
 
     this.aboutMeComponent.changes.subscribe((comps: QueryList <any>) =>{
       this.modules.aboutMe = comps.first;});
     this.contactMeComponent.changes.subscribe((comps: QueryList <any>) =>{
       this.modules.contactMe = comps.first;});
-    this.introductionComponent.changes.subscribe((comps: QueryList <any>) =>{
+    this.projectsComponent.changes.subscribe((comps: QueryList <any>) =>{
       this.modules.introduction = comps.first;});
   }
 
