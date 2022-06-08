@@ -3,12 +3,17 @@ import { gsap, Power4 } from 'gsap';
 import { AboutMeComponent } from './components/about-me/about-me.component';
 import { ContactMeComponent } from './components/contact-me/contact-me.component';
 import { ProjectsComponent } from './components/projects/projects.component';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+@Injectable()
+
 export class AppComponent implements AfterViewInit {
   @ViewChild('aboutMeButton') aboutMeButton: any;
   @ViewChildren('aboutMeComponent') aboutMeComponent !: QueryList<AboutMeComponent>;
@@ -18,6 +23,10 @@ export class AppComponent implements AfterViewInit {
   @ViewChildren('introductionComponent') projectsComponent !: QueryList<ProjectsComponent>;
   @ViewChild('componentContainer') componentContainer: any;
 
+  constructor(private http: HttpClient){
+
+  }
+
   public modules : {[key:string]:any} = {}
   public buttons : {[key:string]:any} = {}
   public visible : {[key:string]:boolean} = {contactMe : false, aboutMe : true, introduction : false}
@@ -25,6 +34,8 @@ export class AppComponent implements AfterViewInit {
 
 
   ngAfterViewInit(){
+    this.http.get<any>("https://api.spacexdata.com/v3/launches").subscribe(data => console.log(data));
+
     this.modules = { aboutMe : this.aboutMeComponent.first, contactMe: undefined, projects: undefined}
     this.buttons = { aboutMe : this.aboutMeButton, contactMe: this.contactMeButton, projects: this.projectsButton}
 
