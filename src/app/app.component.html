@@ -11,7 +11,7 @@
 </div>
 <div #componentContainer class="introduction glass-effect">
   <app-contact-me #contactMeComponent *ngIf="visible.contactMe"></app-contact-me >
-  <app-about-me #aboutMeComponent *ngIf="visible.aboutMe"></app-about-me >
+  <app-about-me #aboutMeComponent *ngIf="visible.aboutMe" [(initiated)]="initiated"></app-about-me >
 </div>
 <div class="footer">
   <app-footer></app-footer>

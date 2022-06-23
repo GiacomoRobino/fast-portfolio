@@ -30,6 +30,7 @@ export class AppComponent implements AfterViewInit {
   public modules : {[key:string]:any} = {}
   public buttons : {[key:string]:any} = {}
   public visible : {[key:string]:boolean} = {contactMe : false, aboutMe : true, introduction : false}
+  public initiated : boolean = false
   title = 'portfolio-fast';
 
 
