@@ -1,8 +1,15 @@
 {{text}}
+<div class="mail">
+    <button>copy mail to clipboard</button>
+</div>
 
-<button>copy mail to clipboard</button>
-<textarea id="some-value" class="message-content" (change)="doTextareaValueChange($event)">{{textareaValue}}</textarea>
-<button (click)="sendMessage()">Send message</button>
-<div>Social:</div>
-<app-social-card [name]="'Linkedin'"></app-social-card>
-<app-social-card [name]="'Github'"></app-social-card>
+<div class="direct-message">
+    <textarea id="some-value" class="message-content" (change)="doTextareaValueChange($event)">{{textareaValue}}</textarea>
+    <button (click)="sendMessage()">Send message</button>
+</div>
+
+<div class="social">
+Social
+    <app-social-card [name]="'Linkedin'"></app-social-card>
+    <app-social-card [name]="'Github'"></app-social-card>
+</div>
