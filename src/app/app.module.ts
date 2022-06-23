@@ -11,6 +11,9 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { FooterComponent } from './components/footer/footer-container/footer-container.component';
 import { ParticleCanvasComponent } from './components/particle-canvas/particle-canvas.component';
 import { SkillContainerComponent } from './components/footer/footer-container/skill-container/skill-container.component';
+import { ProjectPreviewComponent } from './components/projects/project-preview/project-preview.component';
+import { JobCardComponent } from './components/about-me/job-card/job-card.component';
+import { SocialCardComponent } from './components/contact-me/social-card/social-card.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { SkillContainerComponent } from './components/footer/footer-container/sk
     FooterComponent,
     ParticleCanvasComponent,
     SkillContainerComponent,
+    ProjectPreviewComponent,
+    JobCardComponent,
+    SocialCardComponent,
   ],
   imports: [
     BrowserModule,

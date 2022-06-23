@@ -1,0 +1,15 @@
+.message-content{
+    height: 20%;
+    width: 80%;
+    resize: none;
+    background-color: black;
+}
+
+button{
+    background-color: #301934;
+}
+
+app-social-card{
+    width: 100%;
+    background: white;
+}

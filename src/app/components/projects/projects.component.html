@@ -1,2 +1,6 @@
 <!-- <p style="white-space: pre-line">{{shownText}}</p> -->
-{{text}}
+<ul class="projects-list">
+    <li *ngFor="let project of projects">{{project}}
+        <app-project-preview></app-project-preview>
+    </li>
+</ul>

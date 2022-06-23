@@ -8,12 +8,8 @@
   <div #contactMeButton class="header-element-container">
     <button class="header-button glass-effect" (click)="click('contactMe')">CONTACT ME</button>
   </div>
-  <div #introductionButton class="header-element-container">
-    <button class="header-button glass-effect" (click)="click('introduction')">PROJECTS</button>
-  </div>
 </div>
 <div #componentContainer class="introduction glass-effect">
-  <app-projects #introductionComponent *ngIf="visible.introduction"></app-projects>
   <app-contact-me #contactMeComponent *ngIf="visible.contactMe"></app-contact-me >
   <app-about-me #aboutMeComponent *ngIf="visible.aboutMe"></app-about-me >
 </div>

@@ -1,1 +1,6 @@
-{{text}}
+{{shownText}}
+<div *ngIf="jobCardsVisible">
+    <app-job-card [name]="'Links Foundation'"></app-job-card>
+    <app-job-card [name]="'Hanon'"></app-job-card>
+    <app-job-card [name]="'Cluster Reply'"></app-job-card>
+</div>

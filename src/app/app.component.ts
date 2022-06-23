@@ -34,7 +34,6 @@ export class AppComponent implements AfterViewInit {
 
 
   ngAfterViewInit(){
-    this.http.get<any>("https://api.spacexdata.com/v3/launches").subscribe(data => console.log(data));
 
     this.modules = { aboutMe : this.aboutMeComponent.first, contactMe: undefined, projects: undefined}
     this.buttons = { aboutMe : this.aboutMeButton, contactMe: this.contactMeButton, projects: this.projectsButton}

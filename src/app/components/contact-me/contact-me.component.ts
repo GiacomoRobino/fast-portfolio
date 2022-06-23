@@ -9,12 +9,22 @@ export class ContactMeComponent implements OnInit{
   @Output() openContactMe = new EventEmitter<boolean>();
   private opened = false;
   text = ""
+  public message = "";
+  public textareaValue = '';
   
   constructor() { }
 
   ngOnInit(): void {
     this.text = "contact me!"
   }
+  doTextareaValueChange(ev: any) {
+    try {
+      this.textareaValue = ev.target.value;
+    } catch(e) {
+      console.info('could not set textarea-value');
+    }
+  }
+
   
   clickOpen() {
     this.opened = !this.opened;
@@ -28,6 +38,9 @@ export class ContactMeComponent implements OnInit{
       console.log("closing contact me");
       resolve("foo")
     })
+  }
+  sendMessage() {
+    console.log("sending message");
   }
 
 }
