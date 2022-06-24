@@ -1,17 +1,14 @@
 [
     {
-        "name": "Links Foundation",
-        "image": "",
-        "link": "https://linksfoundation.com",
-        "description": "Final thesis stage, creating an interface to run complex queries against IOT datasets",
+        "name": "CLUSTER REPLY",
+        "link": "https://www.reply.com/cluster-reply",
+        "description": "Front end developer, with a focus on Angular, for the financial sector",
         "period": {
-            "start": "03-2019",
-            "end": "06-2019"
+            "start": "5-2021"
         }
     },
     {
         "name": "HANON systems",
-        "image": "",
         "link": "https://www.hanonsystems.com",
         "description": "Developing internal tools with Python to increase developers productivity",
         "period": {
@@ -20,12 +17,12 @@
         }
     },
     {
-        "name": "CLUSTER REPLY",
-        "image": "",
-        "link": "https://www.reply.com/cluster-reply",
-        "description": "Front end developer, with a focus on Angular, for the financial sector",
+        "name": "LINKS foundation",
+        "link": "https://linksfoundation.com",
+        "description": "Final thesis stage, creating an interface to run complex queries against IOT datasets",
         "period": {
-            "start": "5-2021"
+            "start": "03-2019",
+            "end": "06-2019"
         }
     }
 ]

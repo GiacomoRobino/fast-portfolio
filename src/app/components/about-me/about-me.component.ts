@@ -35,7 +35,6 @@ export class AboutMeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(jobsConfig);
     
     this.httpClient
       .get('assets/copywrite/presentation.txt', { responseType: 'text' })
