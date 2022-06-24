@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter } from '@angular/core';
 import { JobCardComponent } from './job-card/job-card.component';
 import { forwardRef } from '@angular/core';
+import jobsConfig from '../../../assets/carreer/companies/companies.json';
+import { job } from './job-card/model';
 
 @Component({
   selector: 'app-about-me',
@@ -25,12 +27,15 @@ export class AboutMeComponent implements OnInit {
     ',': 200.0,
   };
   public jobCardsVisible = false;
+  public jobs : job[] = jobsConfig;
 
   constructor(http: HttpClient) {
     this.httpClient = http;
   }
 
   ngOnInit(): void {
+
+    console.log(jobsConfig);
     
     this.httpClient
       .get('assets/copywrite/presentation.txt', { responseType: 'text' })

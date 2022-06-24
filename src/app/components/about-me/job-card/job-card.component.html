@@ -1,7 +1,11 @@
 <div class="company-logo">
     company logo
 </div>
-<div class="">{{name}} link</div>
+<div class="link"><a [href]="job.link">{{job.name}}</a></div>
 <div class="description">
-    description
+    {{job.description}}
+</div>
+<div class="data">
+    <div class="start">{{job.period.start}}</div>
+    <div class="end">{{job.period.end}}</div>
 </div>

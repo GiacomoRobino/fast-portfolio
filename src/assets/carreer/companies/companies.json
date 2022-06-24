@@ -3,7 +3,7 @@
         "name": "Links Foundation",
         "image": "",
         "link": "https://linksfoundation.com",
-        "job": "Final thesis stage, creating an interface to run complex queries against IOT datasets",
+        "description": "Final thesis stage, creating an interface to run complex queries against IOT datasets",
         "period": {
             "start": "03-2019",
             "end": "06-2019"
@@ -13,7 +13,7 @@
         "name": "HANON systems",
         "image": "",
         "link": "https://www.hanonsystems.com",
-        "job": "Developing internal tools with Python to increase developers productivity",
+        "description": "Developing internal tools with Python to increase developers productivity",
         "period": {
             "start": "11-2019",
             "end": "4-2021"
@@ -23,7 +23,7 @@
         "name": "CLUSTER REPLY",
         "image": "",
         "link": "https://www.reply.com/cluster-reply",
-        "job": "Front end developer, with a focus on Angular, for the financial sector",
+        "description": "Front end developer, with a focus on Angular, for the financial sector",
         "period": {
             "start": "5-2021"
         }
