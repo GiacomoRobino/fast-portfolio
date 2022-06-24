@@ -1,6 +1,7 @@
 [
     {
         "name": "Computer Science",
+        "image": "",
         "level": "B.S",
         "link": "https://www.unito.it/",
         "description": "My true passion, discovered after a lot of searching",
@@ -11,6 +12,7 @@
     },
     {
         "name": "Law",
+        "image": "",
         "level": "Master",
         "link": "https://www.unito.it/",
         "description": "My first degree, and currently an hobby for my spare time",

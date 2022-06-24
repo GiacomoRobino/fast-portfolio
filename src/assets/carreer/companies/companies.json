@@ -1,6 +1,7 @@
 [
     {
         "name": "Links Foundation",
+        "image": "",
         "link": "https://linksfoundation.com",
         "job": "Final thesis stage, creating an interface to run complex queries against IOT datasets",
         "period": {
@@ -10,6 +11,7 @@
     },
     {
         "name": "HANON systems",
+        "image": "",
         "link": "https://www.hanonsystems.com",
         "job": "Developing internal tools with Python to increase developers productivity",
         "period": {
@@ -19,6 +21,7 @@
     },
     {
         "name": "CLUSTER REPLY",
+        "image": "",
         "link": "https://www.reply.com/cluster-reply",
         "job": "Front end developer, with a focus on Angular, for the financial sector",
         "period": {
