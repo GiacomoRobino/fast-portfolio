@@ -5,12 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './social-card.component.html',
   styleUrls: ['./social-card.component.css']
 })
-export class SocialCardComponent implements OnInit {
-  @Input() name: string = "";
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class SocialCardComponent {
+  @Input() name = "";
 
 }

@@ -6,19 +6,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css']
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectsComponent {
   public projects = ["project1", "project2", "project3"];
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-    
-  }
-
-  expandText(){
-  }
-
   
   clickOpen() {
     console.log("click open introduction")

@@ -11,8 +11,6 @@ export class ContactMeComponent implements OnInit{
   text = ""
   public message = "";
   public textareaValue = '';
-  
-  constructor() { }
 
   ngOnInit(): void {
     this.text = "contact me!"

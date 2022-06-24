@@ -6,11 +6,7 @@ import { job } from './model';
   templateUrl: './job-card.component.html',
   styleUrls: ['./job-card.component.css']
 })
-export class JobCardComponent implements OnInit {
+export class JobCardComponent {
   @Input() job!: job;
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

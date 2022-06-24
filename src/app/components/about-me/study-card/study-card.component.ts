@@ -6,12 +6,7 @@ import { study } from './model';
   templateUrl: './study-card.component.html',
   styleUrls: ['./study-card.component.css']
 })
-export class StudyCardComponent implements OnInit {
+export class StudyCardComponent {
   @Input() study!: study;
-  
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

@@ -30,7 +30,7 @@ export class AppComponent implements AfterViewInit {
   public modules : {[key:string]:any} = {}
   public buttons : {[key:string]:any} = {}
   public visible : {[key:string]:boolean} = {contactMe : false, aboutMe : true, introduction : false}
-  public initiated : boolean = false
+  public initiated = false
   title = 'portfolio-fast';
 
 
@@ -48,14 +48,14 @@ export class AppComponent implements AfterViewInit {
   }
 
   click(element: string){
-    let currentVisibleComponent = this.getVisibleComponent();
+    const currentVisibleComponent = this.getVisibleComponent();
     this.modules[currentVisibleComponent].clickClose().then( (data : string) => {
       this.expandElement(element)
     })
   }
 
   expandElement(elementToExpand : string){
-      let tl = gsap.timeline();
+      const tl = gsap.timeline();
       tl.to(this.componentContainer.nativeElement, {duration: 0.5, height : 0 + "px", ease: Power4.easeOut})
         .to(this.componentContainer.nativeElement, {duration: 0.5, height : 500 + "px", ease: Power4.easeOut})
         .add(()=>{
@@ -66,7 +66,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   getVisibleComponent() : string{
-    let keys = Object.keys(this.visible);
+    const keys = Object.keys(this.visible);
     return keys.filter(key => this.visible[key])[0]
   }
 }

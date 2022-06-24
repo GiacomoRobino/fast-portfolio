@@ -14,16 +14,16 @@ import { study } from './study-card/model';
   styleUrls: ['./about-me.component.css'],
 })
 export class AboutMeComponent implements OnInit {
-  @Input() initiated : boolean = false;
+  @Input() initiated = false;
   @Output() initiatedChange : EventEmitter<any> = new EventEmitter();
   @ViewChildren(forwardRef(() => JobCardComponent)) jobCards : QueryList<JobCardComponent> = new QueryList()
 
   private httpClient: HttpClient;
   private opened = false;
   private fullText = '';
-  public shownText: string = '';
-  private timeToWrite: number = 400.0;
-  private interruptWriting: boolean = false;
+  public shownText = '';
+  private timeToWrite = 400.0;
+  private interruptWriting = false;
   private specialCaractersMultipliers: { [key: string]: number } = {
     '.': 500.0,
     ',': 200.0,
@@ -69,7 +69,7 @@ export class AboutMeComponent implements OnInit {
   }
 
 
-  writeText(timeToWrite: number = -1, functionPassed: any = null): any{
+  writeText(timeToWrite = -1, functionPassed: any = null): any{
     return new Promise<void>((resolve,reject) => {
     if (timeToWrite === -1) {
       timeToWrite = this.timeToWrite / this.fullText.length;
