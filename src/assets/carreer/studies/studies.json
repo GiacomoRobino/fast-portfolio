@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Computer Science",
+        "level": "B.S",
+        "link": "https://www.unito.it/",
+        "description": "My true passion, discovered after a lot of searching",
+        "period": {
+            "start": "10-2015",
+            "end": "10-2019"
+        }
+    },
+    {
+        "name": "Law",
+        "level": "Master",
+        "link": "https://www.unito.it/",
+        "description": "My first degree, and currently an hobby for my spare time",
+        "period": {
+            "start": "10-2010",
+            "end": "9-2015"
+        }
+    }
+]

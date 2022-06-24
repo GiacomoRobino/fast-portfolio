@@ -1,6 +1,8 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter } from '@angular/core';
+import { JobCardComponent } from './job-card/job-card.component';
+import { forwardRef } from '@angular/core';
 
 @Component({
   selector: 'app-about-me',
@@ -10,6 +12,7 @@ import { EventEmitter } from '@angular/core';
 export class AboutMeComponent implements OnInit {
   @Input() initiated : boolean = false;
   @Output() initiatedChange : EventEmitter<any> = new EventEmitter();
+  @ViewChildren(forwardRef(() => JobCardComponent)) jobCards : QueryList<JobCardComponent> = new QueryList()
 
   private httpClient: HttpClient;
   private opened = false;
@@ -34,13 +37,13 @@ export class AboutMeComponent implements OnInit {
       .subscribe((data) => {
         if(this.initiated){
           this.shownText = data;
-          this.animateJobCards()
+          this.animateJobCards(0)
         }
         else{
         this.initiated = true;
         this.initiatedChange.emit(true)
         this.fullText = data;
-        this.writeText().then(()=>this.animateJobCards())
+        this.writeText().then(()=>this.animateJobCards(1000))
         }
         
       });
@@ -95,11 +98,11 @@ export class AboutMeComponent implements OnInit {
     this.interruptWriting = true;
   }
 
-  animateJobCards() {
-    console.log("ok2")
+  animateJobCards(timer: number) {
     setTimeout(() => {
       this.jobCardsVisible = true;
-    }, 1500);
+      console.log(this.jobCards)
+    }, timer);
   }
 
   removeLastLetter(s: string) {
