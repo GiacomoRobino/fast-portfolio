@@ -8,7 +8,6 @@ import { job } from './model';
 })
 export class JobCardComponent implements OnInit {
   @Input() job!: job;
-
   constructor() { }
 
   ngOnInit(): void {

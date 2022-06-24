@@ -4,7 +4,9 @@ import { EventEmitter } from '@angular/core';
 import { JobCardComponent } from './job-card/job-card.component';
 import { forwardRef } from '@angular/core';
 import jobsConfig from '../../../assets/carreer/companies/companies.json';
+import studiesConfig from '../../../assets/carreer/studies/studies.json';
 import { job } from './job-card/model';
+import { study } from './study-card/model';
 
 @Component({
   selector: 'app-about-me',
@@ -28,6 +30,7 @@ export class AboutMeComponent implements OnInit {
   };
   public jobCardsVisible = false;
   public jobs : job[] = jobsConfig;
+  public studies : study[] = studiesConfig;
 
   constructor(http: HttpClient) {
     this.httpClient = http;

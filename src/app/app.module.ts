@@ -14,6 +14,7 @@ import { SkillContainerComponent } from './components/footer/footer-container/sk
 import { ProjectPreviewComponent } from './components/projects/project-preview/project-preview.component';
 import { JobCardComponent } from './components/about-me/job-card/job-card.component';
 import { SocialCardComponent } from './components/contact-me/social-card/social-card.component';
+import { StudyCardComponent } from './components/about-me/study-card/study-card.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SocialCardComponent } from './components/contact-me/social-card/social-
     ProjectPreviewComponent,
     JobCardComponent,
     SocialCardComponent,
+    StudyCardComponent,
   ],
   imports: [
     BrowserModule,
