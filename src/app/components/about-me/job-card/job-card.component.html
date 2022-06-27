@@ -1,11 +1,15 @@
-<div class="company-logo">
-    <img class="company-image" [src]="'assets/carreer/companies/images/' + job.name + '.png'" [alt]="job.name + ' image'">
-</div>
-<div class="link"><a [href]="job.link">{{job.name}}</a></div>
-<div class="description">
-    {{job.description}}
-</div>
-<div class="data">
-    <div class="start">{{job.period.start}}</div>
-    <div class="end">{{job.period.end}}</div>
+<div class="card thin-glass-effect">
+    <div class="company-logo">
+        <img class="company-image" [src]="'assets/carreer/companies/images/' + job.name + '.png'" [alt]="job.name + ' image'">
+    </div>
+    <div class="info-container">
+        <div class="link"><a [href]="job.link">{{job.name}}</a></div>
+        <div class="description">
+            {{job.description}}
+        </div>
+        <div class="data">
+            <div class="start">{{job.period.start}}</div>
+            <div class="end">{{job.period.end}}</div>
+        </div>
+    </div>
 </div>

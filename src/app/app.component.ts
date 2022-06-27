@@ -36,15 +36,13 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit(){
 
-    this.modules = { aboutMe : this.aboutMeComponent.first, contactMe: undefined, projects: undefined}
-    this.buttons = { aboutMe : this.aboutMeButton, contactMe: this.contactMeButton, projects: this.projectsButton}
+    this.modules = { aboutMe : this.aboutMeComponent.first, contactMe: undefined}
+    this.buttons = { aboutMe : this.aboutMeButton, contactMe: this.contactMeButton}
 
     this.aboutMeComponent.changes.subscribe((comps: QueryList <any>) =>{
       this.modules.aboutMe = comps.first;});
     this.contactMeComponent.changes.subscribe((comps: QueryList <any>) =>{
       this.modules.contactMe = comps.first;});
-    this.projectsComponent.changes.subscribe((comps: QueryList <any>) =>{
-      this.modules.introduction = comps.first;});
   }
 
   click(element: string){
@@ -55,14 +53,9 @@ export class AppComponent implements AfterViewInit {
   }
 
   expandElement(elementToExpand : string){
-      const tl = gsap.timeline();
-      tl.to(this.componentContainer.nativeElement, {duration: 0.5, height : 0 + "px", ease: Power4.easeOut})
-        .to(this.componentContainer.nativeElement, {duration: 0.5, height : 500 + "px", ease: Power4.easeOut})
-        .add(()=>{
           this.visible[this.getVisibleComponent()] = false
           this.visible[elementToExpand] = true
-        }
-        )
+    
   }
 
   getVisibleComponent() : string{

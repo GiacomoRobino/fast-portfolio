@@ -6,13 +6,13 @@
 </div>
 <div class="jobs">
     jobs
-    <div *ngIf="jobCardsVisible">
+    <div *ngIf="jobCardsVisible" >
         <app-job-card *ngFor="let job of jobs" [job]="job"></app-job-card>
     </div>
 </div>
 <div class="studies">
     studies
-    <div *ngIf="jobCardsVisible">
+    <div *ngIf="jobCardsVisible"> 
         <app-study-card *ngFor="let study of studies" [study]="study"></app-study-card>
     </div>
 </div>

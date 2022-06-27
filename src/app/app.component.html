@@ -9,10 +9,12 @@
     <button class="header-button glass-effect" (click)="click('contactMe')">CONTACT ME</button>
   </div>
 </div>
-<div #componentContainer class="introduction glass-effect">
+<div #componentContainer class="element-container">
   <app-contact-me #contactMeComponent *ngIf="visible.contactMe"></app-contact-me >
   <app-about-me #aboutMeComponent *ngIf="visible.aboutMe" [(initiated)]="initiated"></app-about-me >
 </div>
+<!--
 <div class="footer">
   <app-footer></app-footer>
 </div>
+-->

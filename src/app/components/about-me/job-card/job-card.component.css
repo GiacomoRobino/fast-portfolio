@@ -2,3 +2,9 @@
     height: 50px;
     width: 50px;
 }
+
+.card{
+    margin: 1rem;
+    width: 60%;
+    display: flex;
+}
