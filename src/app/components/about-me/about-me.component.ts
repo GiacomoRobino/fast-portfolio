@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
+import { Component, Input, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter } from '@angular/core';
 import { JobCardComponent } from './job-card/job-card.component';
@@ -7,6 +7,7 @@ import jobsConfig from '../../../assets/carreer/companies/companies.json';
 import studiesConfig from '../../../assets/carreer/studies/studies.json';
 import { job } from './job-card/model';
 import { study } from './study-card/model';
+import { gsap, Power4 } from 'gsap';
 
 @Component({
   selector: 'app-about-me',
@@ -16,7 +17,8 @@ import { study } from './study-card/model';
 export class AboutMeComponent implements OnInit {
   @Input() initiated = false;
   @Output() initiatedChange : EventEmitter<any> = new EventEmitter();
-  @ViewChildren(forwardRef(() => JobCardComponent)) jobCards : QueryList<JobCardComponent> = new QueryList()
+  @ViewChildren(forwardRef(() => JobCardComponent)) jobCards : QueryList<JobCardComponent> = new QueryList();
+  @ViewChild('jobsHeader') jobsHeader: any ;
 
   private httpClient: HttpClient;
   private opened = false;
@@ -52,6 +54,9 @@ export class AboutMeComponent implements OnInit {
         }
         
       });
+        //const tl = gsap.timeline();
+        //tl.to(this.jobsHeader, {duration: 1,  color: "white"});
+      
   }
 
   clickOpen() {
@@ -112,10 +117,14 @@ export class AboutMeComponent implements OnInit {
     return destination + source.charAt(destination.length);
   }
 
-  animateJobCards(timer: number) {
+  animateJobCards(timer: number) {    
     setTimeout(() => {
       this.jobCardsVisible = true;
-      setTimeout(()=>this.jobCards.forEach((card, index) => card.showImage(index)), 0)
+      setTimeout(()=>{
+      const tl = gsap.timeline();
+       tl.to(this.jobsHeader.nativeElement, {duration: 1,  color: "white"});
+       this.jobCards.forEach((card, index) => card.showImage(index))}, 0);
+      
     }, timer);
   }
 }

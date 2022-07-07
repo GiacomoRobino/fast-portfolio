@@ -3,10 +3,13 @@
 </div>
 <div class="cv">download cv</div>
 <div class="jobs">
-  jobs
+  
   <div *ngIf="jobCardsVisible">
     <div class="jobs-list-container">
       <div class="jobs-list">
+        <div #jobsHeader class="jobs-header">
+          companies I worked for
+        </div>
         <div *ngFor="let job of jobs; index as i">
           <div class="card">
             <app-job-card [job]="job"></app-job-card>

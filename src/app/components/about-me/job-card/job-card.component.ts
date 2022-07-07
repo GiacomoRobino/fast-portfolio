@@ -14,7 +14,7 @@ export class JobCardComponent {
   showImage(index : number){
     setTimeout(() => {
       const tl = gsap.timeline();
-      tl.to(this.image.nativeElement, {duration: 1, width: "50px", height: "50px", ease: Power4.easeOut});  
-    }, index * 300);
+      tl.to(this.image.nativeElement, {duration: 3, width: "50px", height: "50px", ease: Power4.easeOut});  
+    }, index * 1500);
   }
 }

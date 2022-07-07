@@ -29,3 +29,15 @@
     justify-content: space-evenly;
     align-items: flex-start;
 }
+
+.jobs-header{
+    color: transparent;
+}
+
+.jobs{
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
