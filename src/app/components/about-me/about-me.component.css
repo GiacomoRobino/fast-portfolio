@@ -1,0 +1,16 @@
+.vertical-line {
+    border-left: 2px solid rgb(153, 205, 233, 0.5);
+    height: 50px;
+    
+  }
+
+.vertical-line-container{
+    display: flex;
+    justify-content: center;
+}
+
+
+.card{
+    display: flex;
+    justify-content: center;
+}

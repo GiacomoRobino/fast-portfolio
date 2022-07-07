@@ -7,12 +7,23 @@
 <div class="jobs">
     jobs
     <div *ngIf="jobCardsVisible" >
-        <app-job-card *ngFor="let job of jobs" [job]="job"></app-job-card>
+        <div class="jobs-container"*ngFor="let job of jobs; index as i">
+            <div *ngIf="i>0" class="vertical-line-container">
+                <div class="vertical-line"></div>
+            </div>
+            <div class="card">
+                <app-job-card [job]="job"></app-job-card>
+            </div>
+        </div>
     </div>
 </div>
 <div class="studies">
     studies
-    <div *ngIf="jobCardsVisible"> 
-        <app-study-card *ngFor="let study of studies" [study]="study"></app-study-card>
+    <div *ngIf="jobCardsVisible">
+        <div class="study-container"  *ngFor="let study of studies">
+            <div class="vertical-line"></div>
+            <app-study-card [study]="study"></app-study-card>
+        </div>
     </div>
 </div>
+
