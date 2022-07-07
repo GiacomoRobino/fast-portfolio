@@ -36,9 +36,7 @@ export class AboutMeComponent implements OnInit {
     this.httpClient = http;
   }
 
-  ngOnInit(): void {
-
-    
+  ngOnInit(): void {    
     this.httpClient
       .get('assets/copywrite/presentation.txt', { responseType: 'text' })
       .subscribe((data) => {
@@ -105,18 +103,19 @@ export class AboutMeComponent implements OnInit {
     this.interruptWriting = true;
   }
 
-  animateJobCards(timer: number) {
-    setTimeout(() => {
-      this.jobCardsVisible = true;
-      console.log(this.jobCards)
-    }, timer);
-  }
-
+  
   removeLastLetter(s: string) {
     return s.substring(0, s.length - 1);
   }
-
+  
   addOneLetter(destination: string, source: string) {
     return destination + source.charAt(destination.length);
+  }
+
+  animateJobCards(timer: number) {
+    setTimeout(() => {
+      this.jobCardsVisible = true;
+      setTimeout(()=>this.jobCards.forEach((card, index) => card.showImage(index)), 0)
+    }, timer);
   }
 }

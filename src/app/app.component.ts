@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { gsap, Power4 } from 'gsap';
 import { AboutMeComponent } from './components/about-me/about-me.component';
 import { ContactMeComponent } from './components/contact-me/contact-me.component';
 import { ProjectsComponent } from './components/projects/projects.component';

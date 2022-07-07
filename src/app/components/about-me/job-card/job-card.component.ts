@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { job } from './model';
+import { gsap, Power4 } from 'gsap';
 
 @Component({
   selector: 'app-job-card',
@@ -8,5 +9,12 @@ import { job } from './model';
 })
 export class JobCardComponent {
   @Input() job!: job;
-
+  @ViewChild("image") image: any;
+  
+  showImage(index : number){
+    setTimeout(() => {
+      const tl = gsap.timeline();
+      tl.to(this.image.nativeElement, {duration: 1, width: "50px", height: "50px", ease: Power4.easeOut});  
+    }, index * 300);
+  }
 }

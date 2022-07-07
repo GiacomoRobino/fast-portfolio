@@ -23,7 +23,7 @@
   }
 
 .institution-image{
-    height: 50px;
-    width: 50px;
+    height: 0px;
+    width: 0px;
     border-radius: 50%;
 }
