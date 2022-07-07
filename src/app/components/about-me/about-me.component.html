@@ -1,29 +1,27 @@
 <div class="main-text">
-    {{shownText}}
+  {{ shownText }}
 </div>
-<div class="cv">
-    download cv
-</div>
+<div class="cv">download cv</div>
 <div class="jobs">
-    jobs
-    <div *ngIf="jobCardsVisible" >
-        <div class="jobs-container"*ngFor="let job of jobs; index as i">
-            <div *ngIf="i>0" class="vertical-line-container">
-                <div class="vertical-line"></div>
-            </div>
-            <div class="card">
-                <app-job-card [job]="job"></app-job-card>
-            </div>
+  jobs
+  <div *ngIf="jobCardsVisible">
+    <div class="jobs-list-container">
+      <div class="jobs-list">
+        <div *ngFor="let job of jobs; index as i">
+          <div class="card">
+            <app-job-card [job]="job"></app-job-card>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 <div class="studies">
-    studies
-    <div *ngIf="jobCardsVisible">
-        <div class="study-container"  *ngFor="let study of studies">
-            <div class="vertical-line"></div>
-            <app-study-card [study]="study"></app-study-card>
-        </div>
+  studies
+  <div *ngIf="jobCardsVisible">
+    <div class="study-container" *ngFor="let study of studies">
+      <div class="vertical-line"></div>
+      <app-study-card [study]="study"></app-study-card>
     </div>
+  </div>
 </div>
-

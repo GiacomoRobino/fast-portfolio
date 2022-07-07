@@ -14,3 +14,18 @@
     display: flex;
     justify-content: center;
 }
+
+.jobs-list-container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.jobs-list{
+    display: flex;
+    align: center;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
