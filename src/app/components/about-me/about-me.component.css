@@ -48,3 +48,8 @@
     flex-direction: column;
     justify-content: center;
 }
+
+.main-text{
+    margin-top: 5%;
+    text-align: center;
+}

@@ -1,39 +1,33 @@
 <div class="main-container">
-<div class="main-text">
-  {{ shownText }}
-</div>
-<div *ngIf="step === 2">
-<!--<div class="cv">download cv</div>-->
-<div class="jobs">
-  <div>
-    <div class="jobs-list-container">
-      <div class="jobs-list">
-        <div #jobsHeader class="jobs-header">
-          companies I worked for
-        </div>
-        <div *ngFor="let job of jobs; index as i">
-          <div class="card">
-            <app-job-card [job]="job"></app-job-card>
+  <div #mainText class="main-text">
+    {{ shownText }}
+  </div>
+  <!--<div class="cv">download cv</div>-->
+  <div class="jobs">
+    <div>
+      <div class="jobs-list-container">
+        <div class="jobs-list">
+          <div #jobsHeader class="jobs-header">companies I worked for</div>
+          <div *ngFor="let job of jobs; index as i">
+            <div class="card">
+              <app-job-card [job]="job"></app-job-card>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div>
-  <div class="jobs-list-container">
-    <div class="jobs-list">
-      <div #studiesHeader class="jobs-header">
-        places where I studied
-      </div>
-      <div *ngFor="let study of studies; index as i">
-        <div class="card">
-          <app-study-card [study]="study"></app-study-card>
+  <div>
+    <div class="jobs-list-container">
+      <div class="jobs-list">
+        <div #studiesHeader class="jobs-header">places where I studied</div>
+        <div *ngFor="let study of studies; index as i">
+          <div class="card">
+            <app-study-card [study]="study"></app-study-card>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-</div>
 </div>

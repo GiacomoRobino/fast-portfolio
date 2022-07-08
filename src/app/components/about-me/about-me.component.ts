@@ -32,7 +32,7 @@ export class AboutMeComponent implements OnInit {
   studyCards: QueryList<StudyCardComponent> = new QueryList();
   @ViewChildren('jobsHeader') jobsHeader: any = new QueryList();;
   @ViewChildren('studiesHeader') studiesHeader: any = new QueryList();
-  public step = 1;
+  @ViewChild('mainText') mainText: any;
 
   private httpClient: HttpClient;
   private opened = false;
@@ -107,7 +107,6 @@ export class AboutMeComponent implements OnInit {
           this.writeText(timeToWrite).then(resolve);
         }, timeToWrite);
       } else {
-        this.step = 2;
         resolve();
       }
     });
