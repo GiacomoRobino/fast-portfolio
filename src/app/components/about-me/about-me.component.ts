@@ -44,19 +44,15 @@ export class AboutMeComponent implements OnInit {
       .subscribe((data) => {
         if(this.initiated){
           this.shownText = data;
-          this.animateJobCards(0)
+          this.animateJobs(0)
         }
         else{
         this.initiated = true;
         this.initiatedChange.emit(true)
         this.fullText = data;
-        this.writeText().then(()=>this.animateJobCards(1000))
+        this.writeText().then(()=>this.animateJobs(1000))
         }
-        
       });
-        //const tl = gsap.timeline();
-        //tl.to(this.jobsHeader, {duration: 1,  color: "white"});
-      
   }
 
   clickOpen() {
@@ -117,14 +113,24 @@ export class AboutMeComponent implements OnInit {
     return destination + source.charAt(destination.length);
   }
 
-  animateJobCards(timer: number) {    
+  animateJobs(timer: number) {
+    return new Promise((resolve, reject)=>{    
     setTimeout(() => {
       this.jobCardsVisible = true;
       setTimeout(()=>{
-      const tl = gsap.timeline();
-       tl.to(this.jobsHeader.nativeElement, {duration: 1,  color: "white"});
-       this.jobCards.forEach((card, index) => card.showImage(index))}, 0);
+       const tl = gsap.timeline();
+       tl.to(this.jobsHeader.nativeElement, {duration: 1,  color: "white"})
+       .then(() => this.animateJobCards().then(resolve));
+       }, 0);
       
     }, timer);
+  })
   }
+
+  animateJobCards(){
+    return new Promise((resolve, reject)=>{
+      const waitPromiseList = this.jobCards.map((card, index) => card.showImage(index))
+      Promise.all(waitPromiseList).then(()=>console.log("finished"))})
+
+    } 
 }
