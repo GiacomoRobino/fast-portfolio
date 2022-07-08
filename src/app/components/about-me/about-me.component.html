@@ -1,9 +1,10 @@
+<div class="main-container">
 <div class="main-text">
   {{ shownText }}
 </div>
-<div class="cv">download cv</div>
+<div *ngIf="step === 2">
+<!--<div class="cv">download cv</div>-->
 <div class="jobs">
-  
   <div>
     <div class="jobs-list-container">
       <div class="jobs-list">
@@ -33,4 +34,6 @@
       </div>
     </div>
   </div>
+</div>
+</div>
 </div>

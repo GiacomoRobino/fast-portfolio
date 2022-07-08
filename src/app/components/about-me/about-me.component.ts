@@ -31,7 +31,8 @@ export class AboutMeComponent implements OnInit {
   @ViewChildren(forwardRef(() => StudyCardComponent))
   studyCards: QueryList<StudyCardComponent> = new QueryList();
   @ViewChildren('jobsHeader') jobsHeader: any = new QueryList();;
-  @ViewChildren('studiesHeader') studiesHeader: any = new QueryList();;
+  @ViewChildren('studiesHeader') studiesHeader: any = new QueryList();
+  public step = 1;
 
   private httpClient: HttpClient;
   private opened = false;
@@ -80,7 +81,7 @@ export class AboutMeComponent implements OnInit {
     });
   }
 
-  writeText(timeToWrite = -1, functionPassed: any = null): any {
+  writeText(timeToWrite = -1): any {
     return new Promise<void>((resolve, reject) => {
       if (timeToWrite === -1) {
         timeToWrite = this.timeToWrite / this.fullText.length;
@@ -106,6 +107,7 @@ export class AboutMeComponent implements OnInit {
           this.writeText(timeToWrite).then(resolve);
         }, timeToWrite);
       } else {
+        this.step = 2;
         resolve();
       }
     });
