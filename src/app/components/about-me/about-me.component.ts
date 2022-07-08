@@ -62,7 +62,7 @@ export class AboutMeComponent implements OnInit {
           this.initiatedChange.emit(true);
           this.fullText = data;
           this.writeText().then(() =>
-            this.animateJobs(1000).then(() => this.animateStudies())
+            this.animateJobs(1000)
           );
         }
       });
