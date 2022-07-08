@@ -4,7 +4,7 @@
 <div class="cv">download cv</div>
 <div class="jobs">
   
-  <div *ngIf="jobCardsVisible">
+  <div>
     <div class="jobs-list-container">
       <div class="jobs-list">
         <div #jobsHeader class="jobs-header">
@@ -19,12 +19,18 @@
     </div>
   </div>
 </div>
-<div class="studies">
-  studies
-  <div *ngIf="jobCardsVisible">
-    <div class="study-container" *ngFor="let study of studies">
-      <div class="vertical-line"></div>
-      <app-study-card [study]="study"></app-study-card>
+
+<div>
+  <div class="jobs-list-container">
+    <div class="jobs-list">
+      <div #studiesHeader class="jobs-header">
+        places where I studied
+      </div>
+      <div *ngFor="let study of studies; index as i">
+        <div class="card">
+          <app-study-card [study]="study"></app-study-card>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,12 @@
-import { Component, Input, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter } from '@angular/core';
 import { JobCardComponent } from './job-card/job-card.component';
@@ -8,6 +16,7 @@ import studiesConfig from '../../../assets/carreer/studies/studies.json';
 import { job } from './job-card/model';
 import { study } from './study-card/model';
 import { gsap, Power4 } from 'gsap';
+import { StudyCardComponent } from './study-card/study-card.component';
 
 @Component({
   selector: 'app-about-me',
@@ -16,9 +25,13 @@ import { gsap, Power4 } from 'gsap';
 })
 export class AboutMeComponent implements OnInit {
   @Input() initiated = false;
-  @Output() initiatedChange : EventEmitter<any> = new EventEmitter();
-  @ViewChildren(forwardRef(() => JobCardComponent)) jobCards : QueryList<JobCardComponent> = new QueryList();
-  @ViewChild('jobsHeader') jobsHeader: any ;
+  @Output() initiatedChange: EventEmitter<any> = new EventEmitter();
+  @ViewChildren(forwardRef(() => JobCardComponent))
+  jobCards: QueryList<JobCardComponent> = new QueryList();
+  @ViewChildren(forwardRef(() => StudyCardComponent))
+  studyCards: QueryList<StudyCardComponent> = new QueryList();
+  @ViewChildren('jobsHeader') jobsHeader: any = new QueryList();;
+  @ViewChildren('studiesHeader') studiesHeader: any = new QueryList();;
 
   private httpClient: HttpClient;
   private opened = false;
@@ -30,27 +43,27 @@ export class AboutMeComponent implements OnInit {
     '.': 500.0,
     ',': 200.0,
   };
-  public jobCardsVisible = false;
-  public jobs : job[] = jobsConfig;
-  public studies : study[] = studiesConfig;
+  public jobs: job[] = jobsConfig;
+  public studies: study[] = studiesConfig;
 
   constructor(http: HttpClient) {
     this.httpClient = http;
   }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.httpClient
       .get('assets/copywrite/presentation.txt', { responseType: 'text' })
       .subscribe((data) => {
-        if(this.initiated){
+        if (this.initiated) {
           this.shownText = data;
-          this.animateJobs(0)
-        }
-        else{
-        this.initiated = true;
-        this.initiatedChange.emit(true)
-        this.fullText = data;
-        this.writeText().then(()=>this.animateJobs(1000))
+          this.animateJobs(0);
+        } else {
+          this.initiated = true;
+          this.initiatedChange.emit(true);
+          this.fullText = data;
+          this.writeText().then(() =>
+            this.animateJobs(1000).then(() => this.animateStudies())
+          );
         }
       });
   }
@@ -67,36 +80,35 @@ export class AboutMeComponent implements OnInit {
     });
   }
 
-
-  writeText(timeToWrite = -1, functionPassed: any = null): any{
-    return new Promise<void>((resolve,reject) => {
-    if (timeToWrite === -1) {
-      timeToWrite = this.timeToWrite / this.fullText.length;
-      this.interruptWriting = false;
-    }
-    if (
-      this.shownText.length < this.fullText.length &&
-      !this.interruptWriting
-    ) {
-      this.shownText = this.addOneLetter(this.shownText, this.fullText);
-      if (this.specialCaractersMultipliers[this.shownText.slice(-1)]) {
-        timeToWrite =
-          timeToWrite *
-          this.specialCaractersMultipliers[this.shownText.slice(-1)];
-      } else if (
-        this.specialCaractersMultipliers[this.shownText.slice(-2, -1)]
-      ) {
-        timeToWrite =
-          timeToWrite /
-          this.specialCaractersMultipliers[this.shownText.slice(-2, -1)];
+  writeText(timeToWrite = -1, functionPassed: any = null): any {
+    return new Promise<void>((resolve, reject) => {
+      if (timeToWrite === -1) {
+        timeToWrite = this.timeToWrite / this.fullText.length;
+        this.interruptWriting = false;
       }
-      setTimeout(() => {
-        this.writeText(timeToWrite).then(resolve);
-      }, timeToWrite);
-    } else {
-      resolve()
-    }
-  })
+      if (
+        this.shownText.length < this.fullText.length &&
+        !this.interruptWriting
+      ) {
+        this.shownText = this.addOneLetter(this.shownText, this.fullText);
+        if (this.specialCaractersMultipliers[this.shownText.slice(-1)]) {
+          timeToWrite =
+            timeToWrite *
+            this.specialCaractersMultipliers[this.shownText.slice(-1)];
+        } else if (
+          this.specialCaractersMultipliers[this.shownText.slice(-2, -1)]
+        ) {
+          timeToWrite =
+            timeToWrite /
+            this.specialCaractersMultipliers[this.shownText.slice(-2, -1)];
+        }
+        setTimeout(() => {
+          this.writeText(timeToWrite).then(resolve);
+        }, timeToWrite);
+      } else {
+        resolve();
+      }
+    });
   }
 
   collapseText() {
@@ -104,33 +116,47 @@ export class AboutMeComponent implements OnInit {
     this.interruptWriting = true;
   }
 
-  
   removeLastLetter(s: string) {
     return s.substring(0, s.length - 1);
   }
-  
+
   addOneLetter(destination: string, source: string) {
     return destination + source.charAt(destination.length);
   }
 
   animateJobs(timer: number) {
-    return new Promise((resolve, reject)=>{    
-    setTimeout(() => {
-      this.jobCardsVisible = true;
-      setTimeout(()=>{
-       const tl = gsap.timeline();
-       tl.to(this.jobsHeader.nativeElement, {duration: 1,  color: "white"})
-       .then(() => this.animateJobCards().then(resolve));
-       }, 0);
-      
-    }, timer);
-  })
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+          const tl = gsap.timeline();
+          tl.to(this.jobsHeader.first.nativeElement, {
+            duration: 1,
+            color: 'white',
+          }).then(() => this.animateJobCards()).then(() => this.animateStudies());
+      }, timer);
+    });
   }
 
-  animateJobCards(){
-    return new Promise((resolve, reject)=>{
-      const waitPromiseList = this.jobCards.map((card, index) => card.showImage(index))
-      Promise.all(waitPromiseList).then(()=>console.log("finished"))})
+  animateJobCards() {
+    return new Promise((resolve, reject) => {
+      const waitPromiseList = this.jobCards.map((card, index) =>
+        card.showImage(index)
+      );
+      Promise.all(waitPromiseList).then(resolve);
+    });
+  }
 
-    } 
+  animateStudies() {
+    const tl = gsap.timeline();
+    tl.to(this.studiesHeader.first.nativeElement, {
+      duration: 1,
+      color: 'white',
+    }).then(() => this.animateStudyCards());
+  }
+
+  animateStudyCards() {
+    const waitPromiseList = this.studyCards.map((card, index) =>
+      card.showImage(index)
+    );
+    Promise.all(waitPromiseList).then();
+  }
 }
