@@ -121,6 +121,10 @@ export class AboutMeComponent implements OnInit {
     });
   }
 
+  addOneLetter(destination: string, source: string) {
+    return destination + source.charAt(destination.length);
+  }
+  
   collapseText() {
     this.shownText = '';
     this.interruptWriting = true;
@@ -130,9 +134,6 @@ export class AboutMeComponent implements OnInit {
     return s.substring(0, s.length - 1);
   }
 
-  addOneLetter(destination: string, source: string) {
-    return destination + source.charAt(destination.length);
-  }
 
   animateJobs(timer: number) {
     return new Promise((resolve, reject) => {

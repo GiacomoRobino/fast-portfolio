@@ -22,6 +22,14 @@ export class AppComponent implements AfterViewInit {
   @ViewChildren('introductionComponent') projectsComponent !: QueryList<ProjectsComponent>;
   @ViewChild('componentContainer') componentContainer: any;
   public headerVisible = false;
+  public contactMeButtonText = "";
+  public fullText = "Contact Me";
+  private timeToWrite = 1000.0;
+  private specialCaractersMultipliers: { [key: string]: number } = {
+    '.': 500.0,
+    ',': 200.0,
+  };
+  private interruptWriting = false;
 
   constructor(private http: HttpClient){
 
@@ -65,5 +73,41 @@ export class AppComponent implements AfterViewInit {
 
   finishedIntro(){
     this.headerVisible = true;
+    this.writeText()
+  }
+
+  writeText(timeToWrite = -1): any {
+    return new Promise<void>((resolve, reject) => {
+      if (timeToWrite === -1) {
+        timeToWrite = this.timeToWrite / this.fullText.length;
+        this.interruptWriting = false;
+      }
+      if (
+        this.contactMeButtonText.length < this.fullText.length &&
+        !this.interruptWriting
+      ) {
+        this.contactMeButtonText = this.addOneLetter(this.contactMeButtonText, this.fullText);
+        if (this.specialCaractersMultipliers[this.contactMeButtonText.slice(-1)]) {
+          timeToWrite =
+            timeToWrite *
+            this.specialCaractersMultipliers[this.contactMeButtonText.slice(-1)];
+        } else if (
+          this.specialCaractersMultipliers[this.contactMeButtonText.slice(-2, -1)]
+        ) {
+          timeToWrite =
+            timeToWrite /
+            this.specialCaractersMultipliers[this.contactMeButtonText.slice(-2, -1)];
+        }
+        setTimeout(() => {
+          this.writeText(timeToWrite).then(resolve);
+        }, timeToWrite);
+      } else {
+        resolve();
+      }
+    });
+  }
+
+  addOneLetter(destination: string, source: string) {
+    return destination + source.charAt(destination.length);
   }
 }
