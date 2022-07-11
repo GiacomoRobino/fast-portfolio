@@ -21,6 +21,7 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('introductionButton') projectsButton: any;
   @ViewChildren('introductionComponent') projectsComponent !: QueryList<ProjectsComponent>;
   @ViewChild('componentContainer') componentContainer: any;
+  public headerVisible = false;
 
   constructor(private http: HttpClient){
 
@@ -60,5 +61,9 @@ export class AppComponent implements AfterViewInit {
   getVisibleComponent() : string{
     const keys = Object.keys(this.visible);
     return keys.filter(key => this.visible[key])[0]
+  }
+
+  finishedIntro(){
+    this.headerVisible = true;
   }
 }

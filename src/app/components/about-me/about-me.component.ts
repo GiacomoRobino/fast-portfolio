@@ -25,6 +25,7 @@ import { StudyCardComponent } from './study-card/study-card.component';
 })
 export class AboutMeComponent implements OnInit {
   @Input() initiated = false;
+  @Output() finishedIntro: EventEmitter<any> = new EventEmitter();
   @Output() initiatedChange: EventEmitter<any> = new EventEmitter();
   @ViewChildren(forwardRef(() => JobCardComponent))
   jobCards: QueryList<JobCardComponent> = new QueryList();
@@ -70,6 +71,7 @@ export class AboutMeComponent implements OnInit {
             color: 'transparent',
           }).then(() =>{
             this.mainTextVisible = false;
+            this.finishedIntro.emit()
             this.animateJobs(1000)
           })}
           );
@@ -79,7 +81,6 @@ export class AboutMeComponent implements OnInit {
 
   clickOpen() {
     this.opened = !this.opened;
-    console.log('click open about me');
   }
 
   clickClose() {

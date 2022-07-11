@@ -2,19 +2,20 @@
 <div class="background">
   <app-background></app-background>
 </div>
-<!--
-<div class="header">
+
+<div *ngIf="headerVisible" class="header">
+  <!--
   <div #aboutMeButton class="header-element-container">
     <button class="header-button glass-effect" (click)="click('aboutMe')">ABOUT ME</button>
-  </div>
+  </div> -->
   <div #contactMeButton class="header-element-container">
     <button class="header-button glass-effect" (click)="click('contactMe')">CONTACT ME</button>
   </div>
 </div>
--->
+
 <div #componentContainer class="element-container">
   <app-contact-me #contactMeComponent *ngIf="visible.contactMe"></app-contact-me >
-  <app-about-me #aboutMeComponent *ngIf="visible.aboutMe" [(initiated)]="initiated"></app-about-me >
+  <app-about-me #aboutMeComponent *ngIf="visible.aboutMe" [(initiated)]="initiated" (finishedIntro)="finishedIntro()"></app-about-me >
 </div>
 <!--
 <div class="footer">
