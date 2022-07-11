@@ -46,6 +46,7 @@ export class AboutMeComponent implements OnInit {
   };
   public jobs: job[] = jobsConfig;
   public studies: study[] = studiesConfig;
+  public mainTextVisible = true;
 
   constructor(http: HttpClient) {
     this.httpClient = http;
@@ -62,8 +63,15 @@ export class AboutMeComponent implements OnInit {
           this.initiated = true;
           this.initiatedChange.emit(true);
           this.fullText = data;
-          this.writeText().then(() =>
+          this.writeText().then(() =>{
+          const tl = gsap.timeline();
+          tl.to(this.mainText.nativeElement, {
+            duration: 1,
+            color: 'transparent',
+          }).then(() =>{
+            this.mainTextVisible = false;
             this.animateJobs(1000)
+          })}
           );
         }
       });

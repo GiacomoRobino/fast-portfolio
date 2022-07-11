@@ -1,5 +1,5 @@
 <div class="main-container">
-  <div #mainText class="main-text">
+  <div #mainText *ngIf="mainTextVisible" class="main-text">
     {{ shownText }}
   </div>
   <!--<div class="cv">download cv</div>-->
