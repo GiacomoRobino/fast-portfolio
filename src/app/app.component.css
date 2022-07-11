@@ -4,6 +4,10 @@
     justify-content: space-evenly;
 }
 
+.header-button{
+    font-size: 2rem;
+}
+
 .background{
   position: relative;
 }
@@ -26,3 +30,4 @@
     display: flex;
     flex-direction: column;
 }
+
