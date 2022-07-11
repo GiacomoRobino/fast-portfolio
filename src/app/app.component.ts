@@ -11,6 +11,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { gsap, Power4 } from 'gsap';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
@@ -87,11 +88,13 @@ export class AppComponent implements AfterViewInit {
   }
 
   click(element: string) {
+    this.cancelText(this.contactMeTextContext).then(()=>{
     this.changeTextContext('aboutMe', 'contactMe');
     const currentVisibleComponent = this.getVisibleComponent();
     this.modules[currentVisibleComponent].clickClose().then((data: string) => {
       this.expandElement(element);
     });
+  })
   }
 
   changeTextContext(a: any, b: any) {
@@ -151,5 +154,45 @@ export class AppComponent implements AfterViewInit {
 
   addOneLetter(destination: string, source: string) {
     return destination + source.charAt(destination.length);
+  }
+
+  
+  cancelText(textContext: any, timeToWrite = -1): any {
+    return new Promise<void>((resolve, reject) => {
+      if (timeToWrite === -1) {
+        timeToWrite = this.timeToWrite / textContext.fullText.length;
+        this.interruptWriting = false;
+      }
+      if (
+        textContext.shownText.length > 0 &&
+        !this.interruptWriting
+      ) {
+        textContext.shownText = this.removeOneLetter(
+          textContext.shownText
+        );
+        if (this.specialCaractersMultipliers[textContext.shownText.slice(-1)]) {
+          timeToWrite =
+            timeToWrite *
+            this.specialCaractersMultipliers[textContext.shownText.slice(-1)];
+        } else if (
+          this.specialCaractersMultipliers[textContext.shownText.slice(-2, -1)]
+        ) {
+          timeToWrite =
+            timeToWrite /
+            this.specialCaractersMultipliers[
+              textContext.shownText.slice(-2, -1)
+            ];
+        }
+        setTimeout(() => {
+          this.cancelText(textContext, timeToWrite).then(resolve);
+        }, timeToWrite);
+      } else {
+        resolve();
+      }
+    });
+  }
+
+  removeOneLetter(text: string) {
+    return text.slice(0, -1);
   }
 }
