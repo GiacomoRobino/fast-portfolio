@@ -22,8 +22,8 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('aboutMeButton') aboutMeButton: any;
   @ViewChildren('aboutMeComponent')
   aboutMeComponent!: QueryList<AboutMeComponent>;
-  @ViewChild('contactMeButtonContainer') contactMeButtonContainer: any;
-  @ViewChildren('headerButton') headerButtonList!: QueryList<any>;
+  @ViewChild('navigationButtonContainer') navigationButtonContainer: any;
+  @ViewChildren('navigationButton') navigationButtonList!: QueryList<any>;
   @ViewChildren('contactMeComponent')
   contactMeComponent!: QueryList<ContactMeComponent>;
   @ViewChild('introductionButton') projectsButton: any;
@@ -31,8 +31,10 @@ export class AppComponent implements AfterViewInit {
   projectsComponent!: QueryList<ProjectsComponent>;
   @ViewChild('componentContainer') componentContainer: any;
   public headerVisible = false;
-  public contactMeTextContext = {shownText: "", fullText: "Contact me"};
-  public downloadCvTextContext = {shownText: "", fullText: "Download cv"};
+  public contactMeTextContext = { shownText: '', fullText: 'Contact me' };
+  public aboutMeTextContext = { shownText: '', fullText: 'About me' };
+  public navigationButtonTextContext = { shownText: '', fullText: '' };
+  public downloadCvTextContext = { shownText: '', fullText: 'Download cv' };
   private timeToWrite = 1000.0;
   private specialCaractersMultipliers: { [key: string]: number } = {
     '.': 500.0,
@@ -53,12 +55,10 @@ export class AppComponent implements AfterViewInit {
   title = 'portfolio-fast';
 
   ngAfterViewInit() {
+    this.navigationButtonTextContext = this.contactMeTextContext;
     this.modules = {
       aboutMe: this.aboutMeComponent.first,
       contactMe: undefined,
-    };
-    this.buttons = {
-      aboutMe: this.aboutMeButton
     };
 
     this.aboutMeComponent.changes.subscribe((comps: QueryList<any>) => {
@@ -67,30 +67,36 @@ export class AppComponent implements AfterViewInit {
     this.contactMeComponent.changes.subscribe((comps: QueryList<any>) => {
       this.modules.contactMe = comps.first;
     });
-    this.headerButtonList.changes.subscribe((comps: QueryList<any>) => {
+    this.navigationButtonList.changes.subscribe((comps: QueryList<any>) => {
       {
         const tl = gsap.timeline();
         tl.to(comps.first.nativeElement, {
           duration: 2,
           borderColor: 'white',
-        }).then(() => this.writeText(this.downloadCvTextContext).then(()=>{
-          tl.to(comps.last.nativeElement, {
-            duration: 2,
-            borderColor: 'white',
-          }).then(() => this.writeText(this.contactMeTextContext));
-        }));
-
-        
+        })
+          .then(() => this.writeText(this.downloadCvTextContext))
+          .then(() => {
+            tl.to(comps.last.nativeElement, {
+              duration: 2,
+              borderColor: 'white',
+            });
+          })
+          .then(() => this.writeText(this.contactMeTextContext));
       }
-      
     });
   }
 
   click(element: string) {
+    this.changeTextContext('aboutMe', 'contactMe');
     const currentVisibleComponent = this.getVisibleComponent();
     this.modules[currentVisibleComponent].clickClose().then((data: string) => {
       this.expandElement(element);
     });
+  }
+
+  changeTextContext(a: any, b: any) {
+    this.navigationButtonTextContext = this.aboutMeTextContext;
+    this.writeText(this.aboutMeTextContext);
   }
 
   expandElement(elementToExpand: string) {
@@ -121,18 +127,12 @@ export class AppComponent implements AfterViewInit {
           textContext.shownText,
           textContext.fullText
         );
-        if (
-          this.specialCaractersMultipliers[textContext.shownText.slice(-1)]
-        ) {
+        if (this.specialCaractersMultipliers[textContext.shownText.slice(-1)]) {
           timeToWrite =
             timeToWrite *
-            this.specialCaractersMultipliers[
-              textContext.shownText.slice(-1)
-            ];
+            this.specialCaractersMultipliers[textContext.shownText.slice(-1)];
         } else if (
-          this.specialCaractersMultipliers[
-            textContext.shownText.slice(-2, -1)
-          ]
+          this.specialCaractersMultipliers[textContext.shownText.slice(-2, -1)]
         ) {
           timeToWrite =
             timeToWrite /
