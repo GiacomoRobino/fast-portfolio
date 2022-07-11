@@ -23,7 +23,7 @@ export class AppComponent implements AfterViewInit {
   @ViewChildren('aboutMeComponent')
   aboutMeComponent!: QueryList<AboutMeComponent>;
   @ViewChild('contactMeButtonContainer') contactMeButtonContainer: any;
-  @ViewChildren('contactMeButton') contactMeButtonList!: QueryList<any>;
+  @ViewChildren('headerButton') headerButtonList!: QueryList<any>;
   @ViewChildren('contactMeComponent')
   contactMeComponent!: QueryList<ContactMeComponent>;
   @ViewChild('introductionButton') projectsButton: any;
@@ -31,8 +31,8 @@ export class AppComponent implements AfterViewInit {
   projectsComponent!: QueryList<ProjectsComponent>;
   @ViewChild('componentContainer') componentContainer: any;
   public headerVisible = false;
-  public contactMeButtonText = '';
-  public fullText = 'Contact Me';
+  public contactMeTextContext = {shownText: "", fullText: "Contact me"};
+  public downloadCvTextContext = {shownText: "", fullText: "Download cv"};
   private timeToWrite = 1000.0;
   private specialCaractersMultipliers: { [key: string]: number } = {
     '.': 500.0,
@@ -67,14 +67,22 @@ export class AppComponent implements AfterViewInit {
     this.contactMeComponent.changes.subscribe((comps: QueryList<any>) => {
       this.modules.contactMe = comps.first;
     });
-    this.contactMeButtonList.changes.subscribe((comps: QueryList<any>) => {
+    this.headerButtonList.changes.subscribe((comps: QueryList<any>) => {
       {
         const tl = gsap.timeline();
         tl.to(comps.first.nativeElement, {
           duration: 2,
           borderColor: 'white',
-        }).then(() => this.writeText());
+        }).then(() => this.writeText(this.downloadCvTextContext).then(()=>{
+          tl.to(comps.last.nativeElement, {
+            duration: 2,
+            borderColor: 'white',
+          }).then(() => this.writeText(this.contactMeTextContext));
+        }));
+
+        
       }
+      
     });
   }
 
@@ -99,41 +107,41 @@ export class AppComponent implements AfterViewInit {
     this.headerVisible = true;
   }
 
-  writeText(timeToWrite = -1): any {
+  writeText(textContext: any, timeToWrite = -1): any {
     return new Promise<void>((resolve, reject) => {
       if (timeToWrite === -1) {
-        timeToWrite = this.timeToWrite / this.fullText.length;
+        timeToWrite = this.timeToWrite / textContext.fullText.length;
         this.interruptWriting = false;
       }
       if (
-        this.contactMeButtonText.length < this.fullText.length &&
+        textContext.shownText.length < textContext.fullText.length &&
         !this.interruptWriting
       ) {
-        this.contactMeButtonText = this.addOneLetter(
-          this.contactMeButtonText,
-          this.fullText
+        textContext.shownText = this.addOneLetter(
+          textContext.shownText,
+          textContext.fullText
         );
         if (
-          this.specialCaractersMultipliers[this.contactMeButtonText.slice(-1)]
+          this.specialCaractersMultipliers[textContext.shownText.slice(-1)]
         ) {
           timeToWrite =
             timeToWrite *
             this.specialCaractersMultipliers[
-              this.contactMeButtonText.slice(-1)
+              textContext.shownText.slice(-1)
             ];
         } else if (
           this.specialCaractersMultipliers[
-            this.contactMeButtonText.slice(-2, -1)
+            textContext.shownText.slice(-2, -1)
           ]
         ) {
           timeToWrite =
             timeToWrite /
             this.specialCaractersMultipliers[
-              this.contactMeButtonText.slice(-2, -1)
+              textContext.shownText.slice(-2, -1)
             ];
         }
         setTimeout(() => {
-          this.writeText(timeToWrite).then(resolve);
+          this.writeText(textContext, timeToWrite).then(resolve);
         }, timeToWrite);
       } else {
         resolve();

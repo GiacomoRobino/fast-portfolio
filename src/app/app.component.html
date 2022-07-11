@@ -8,8 +8,11 @@
   <div #aboutMeButton class="header-element-container">
     <button class="header-button glass-effect" (click)="click('aboutMe')">ABOUT ME</button>
   </div> -->
+  <div #downloadCvButtonContainer class="header-element-container">
+    <button #headerButton class="header-button" (click)="click('contactMe')">{{downloadCvTextContext.shownText}}</button>
+  </div>
   <div #contactMeButtonContainer class="header-element-container">
-    <button #contactMeButton class="header-button" (click)="click('contactMe')">{{contactMeButtonText}}</button>
+    <button #headerButton class="header-button" (click)="click('contactMe')">{{contactMeTextContext.shownText}}</button>
   </div>
 </div>
 
