@@ -100,7 +100,7 @@ export class AppComponent implements AfterViewInit {
 
   changeTextContext() {
     this.navigationButtonTextContext = this.textContexts[this.getVisibleComponent()];
-    this.writeText(this.aboutMeTextContext);
+    this.writeText(this.textContexts[this.getVisibleComponent()]);
   }
 
   expandElement() {
