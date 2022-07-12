@@ -34,6 +34,7 @@ export class AppComponent implements AfterViewInit {
   public headerVisible = false;
   public contactMeTextContext = { shownText: '', fullText: 'Contact me' };
   public aboutMeTextContext = { shownText: '', fullText: 'About me' };
+  public textContexts: { [key: string]: any } = {"contactMe" : this.contactMeTextContext, "aboutMe" : this.aboutMeTextContext}
   public navigationButtonTextContext = { shownText: '', fullText: '' };
   public downloadCvTextContext = { shownText: '', fullText: 'Download cv' };
   private timeToWrite = 1000.0;
@@ -49,10 +50,10 @@ export class AppComponent implements AfterViewInit {
   public buttons: { [key: string]: any } = {};
   public visible: { [key: string]: boolean } = {
     contactMe: false,
-    aboutMe: true,
-    introduction: false,
+    aboutMe: true
   };
   public initiated = false;
+  public visibleComponent = "aboutMe"
   title = 'portfolio-fast';
 
   ngAfterViewInit() {
@@ -87,29 +88,33 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  click(element: string) {
-    this.cancelText(this.contactMeTextContext).then(()=>{
-    this.changeTextContext('aboutMe', 'contactMe');
+  click() {
+    this.cancelText(this.textContexts[this.getNonVisibleComponent()]).then(()=>{
+    this.changeTextContext();
     const currentVisibleComponent = this.getVisibleComponent();
     this.modules[currentVisibleComponent].clickClose().then((data: string) => {
-      this.expandElement(element);
+      this.expandElement();
     });
   })
   }
 
-  changeTextContext(a: any, b: any) {
-    this.navigationButtonTextContext = this.aboutMeTextContext;
+  changeTextContext() {
+    this.navigationButtonTextContext = this.textContexts[this.getVisibleComponent()];
     this.writeText(this.aboutMeTextContext);
   }
 
-  expandElement(elementToExpand: string) {
+  expandElement() {
     this.visible[this.getVisibleComponent()] = false;
-    this.visible[elementToExpand] = true;
+    this.visible[this.getNonVisibleComponent()] = true;
+    this.visibleComponent = this.getNonVisibleComponent();
   }
 
-  getVisibleComponent(): string {
-    const keys = Object.keys(this.visible);
-    return keys.filter((key) => this.visible[key])[0];
+  getVisibleComponent(){
+    return this.visibleComponent === "aboutMe"? "aboutMe" : "contactMe"
+  }
+
+  getNonVisibleComponent(){
+    return this.visibleComponent === "aboutMe"? "contactMe" : "aboutMe" 
   }
 
   finishedIntro() {

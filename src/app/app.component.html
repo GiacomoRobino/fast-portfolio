@@ -5,10 +5,10 @@
 
 <div *ngIf="headerVisible" class="header">
   <div #downloadCvButtonContainer class="header-element-container">
-    <button #navigationButton class="header-button" (click)="click('contactMe')">{{downloadCvTextContext.shownText}}</button>
+    <button #navigationButton class="header-button" (click)="click()">{{downloadCvTextContext.shownText}}</button>
   </div>
   <div #navigationButtonContainer class="header-element-container">
-    <button #navigationButton class="header-button" (click)="click('contactMe')">{{navigationButtonTextContext.shownText}}</button>
+    <button #navigationButton class="header-button" (click)="click()">{{navigationButtonTextContext.shownText}}</button>
   </div>
 </div>
 

@@ -85,6 +85,7 @@ export class AboutMeComponent implements OnInit {
 
   clickClose() {
     return new Promise((resolve, reject) => {
+      console.log("close about me")
       this.collapseText();
       resolve('foo');
     });
