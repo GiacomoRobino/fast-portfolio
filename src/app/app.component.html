@@ -5,15 +5,14 @@
 
 <div *ngIf="headerVisible" class="header">
   <div #downloadCvButtonContainer class="header-element-container">
-    <!--
-    <button #navigationButton class="header-button" (click)="click()">{{downloadCvTextContext.shownText}}</button>
-    -->
-    <app-animated-border-button [text]="downloadCvTextContext.shownText"></app-animated-border-button>
+    <app-animated-border-button #navigationButton class="header-button" (click)="click()">
+      {{downloadCvTextContext.shownText}}
+    </app-animated-border-button>
   </div>
   <div #navigationButtonContainer class="header-element-container">
-    <button #navigationButton class="header-button" (click)="click()">
+    <app-animated-border-button #navigationButton class="header-button" (click)="click()">
       {{navigationButtonTextContext.shownText}}
-    </button>
+    </app-animated-border-button>
   </div>
 </div>
 
