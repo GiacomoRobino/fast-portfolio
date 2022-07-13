@@ -17,6 +17,7 @@ import { SocialCardComponent } from './components/contact-me/social-card/social-
 import { StudyCardComponent } from './components/about-me/study-card/study-card.component';
 import { MailContainerComponent } from './components/contact-me/mail-container/mail-container.component';
 import { DirectMessageComponent } from './components/contact-me/direct-message/direct-message.component';
+import { AnimatedBorderButtonComponent } from './components/common-components/animated-border-button/animated-border-button.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DirectMessageComponent } from './components/contact-me/direct-message/d
     StudyCardComponent,
     MailContainerComponent,
     DirectMessageComponent,
+    AnimatedBorderButtonComponent,
   ],
   imports: [
     BrowserModule,
