@@ -5,7 +5,7 @@ import { gsap, Power4 } from 'gsap';
 @Component({
   selector: 'app-study-card',
   templateUrl: './study-card.component.html',
-  styleUrls: ['./study-card.component.css']
+  styleUrls: ['./study-card.component.scss']
 })
 export class StudyCardComponent {
   @Input() study!: study;

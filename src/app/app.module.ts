@@ -15,6 +15,8 @@ import { ProjectPreviewComponent } from './components/projects/project-preview/p
 import { JobCardComponent } from './components/about-me/job-card/job-card.component';
 import { SocialCardComponent } from './components/contact-me/social-card/social-card.component';
 import { StudyCardComponent } from './components/about-me/study-card/study-card.component';
+import { MailContainerComponent } from './components/contact-me/mail-container/mail-container.component';
+import { DirectMessageComponent } from './components/contact-me/direct-message/direct-message.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { StudyCardComponent } from './components/about-me/study-card/study-card.
     JobCardComponent,
     SocialCardComponent,
     StudyCardComponent,
+    MailContainerComponent,
+    DirectMessageComponent,
   ],
   imports: [
     BrowserModule,

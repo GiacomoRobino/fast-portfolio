@@ -5,7 +5,7 @@ import { gsap, Power4 } from 'gsap';
 @Component({
   selector: 'app-job-card',
   templateUrl: './job-card.component.html',
-  styleUrls: ['./job-card.component.css']
+  styleUrls: ['./job-card.component.scss']
 })
 export class JobCardComponent {
   @Input() job!: job;

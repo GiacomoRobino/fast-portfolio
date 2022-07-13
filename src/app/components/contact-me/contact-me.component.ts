@@ -3,7 +3,7 @@ import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/cor
 @Component({
   selector: 'app-contact-me',
   templateUrl: './contact-me.component.html',
-  styleUrls: ['./contact-me.component.css']
+  styleUrls: ['./contact-me.component.scss']
 })
 export class ContactMeComponent implements OnInit{
   @Output() openContactMe = new EventEmitter<boolean>();
@@ -15,15 +15,7 @@ export class ContactMeComponent implements OnInit{
   ngOnInit(): void {
     this.text = "contact me!"
   }
-  doTextareaValueChange(ev: any) {
-    try {
-      this.textareaValue = ev.target.value;
-    } catch(e) {
-      console.info('could not set textarea-value');
-    }
-  }
 
-  
   clickOpen() {
     this.opened = !this.opened;
     console.log("click open contact me")
@@ -37,8 +29,4 @@ export class ContactMeComponent implements OnInit{
       resolve("foo")
     })
   }
-  sendMessage() {
-    console.log("sending message");
-  }
-
 }
