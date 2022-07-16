@@ -4,16 +4,17 @@
 </div>
 
 <div *ngIf="headerVisible" class="header">
+  <app-animated-border-button #navigationButton class="header-button" (click)="click()">
   <div #downloadCvButtonContainer class="header-element-container">
-    <app-animated-border-button #navigationButton class="header-button" (click)="click()">
       {{downloadCvTextContext.shownText}}
-    </app-animated-border-button>
-  </div>
+    </div>
+  </app-animated-border-button>
+  
+  <app-animated-border-button #navigationButton class="header-button" (click)="click()">
   <div #navigationButtonContainer class="header-element-container">
-    <app-animated-border-button #navigationButton class="header-button" (click)="click()">
       {{navigationButtonTextContext.shownText}}
-    </app-animated-border-button>
-  </div>
+    </div>
+  </app-animated-border-button>
 </div>
 
 <div #componentContainer class="element-container">

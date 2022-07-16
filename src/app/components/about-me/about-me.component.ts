@@ -140,10 +140,14 @@ export class AboutMeComponent implements OnInit {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
           const tl = gsap.timeline();
+          tl.to(this.jobsHeader.last.nativeElement, {
+            duration: 1,
+            color: 'white',
+          }).then( () =>
           tl.to(this.jobsHeader.first.nativeElement, {
             duration: 1,
             color: 'white',
-          }).then(() => this.animateJobCards()).then(() => this.animateStudies());
+          })).then(() => this.animateJobCards()).then(() => this.animateStudies());
       }, timer);
     });
   }

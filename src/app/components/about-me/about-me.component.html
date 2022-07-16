@@ -7,7 +7,12 @@
     <div>
       <div class="jobs-list-container">
         <div class="jobs-list">
-          <div #jobsHeader class="jobs-header">companies I worked for</div>
+          <div #jobsHeader class="jobs-header">
+            <app-animated-border-button #navigationButton class="header-button">
+              <div #jobsHeader class="companies-header-class"> Companies I worked for
+              </div>
+            </app-animated-border-button>
+          </div>
           <div *ngFor="let job of jobs; index as i">
             <div class="card">
               <app-job-card [job]="job"></app-job-card>
