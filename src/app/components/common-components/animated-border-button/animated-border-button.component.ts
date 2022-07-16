@@ -1,32 +1,35 @@
-import { Component, Output, Input, EventEmitter, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { gsap, Power4 } from 'gsap';
+import {
+  Component,
+  Output,
+  Input,
+  EventEmitter,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
+import { gsap } from 'gsap';
 
 @Component({
   selector: 'app-animated-border-button',
   templateUrl: './animated-border-button.component.html',
-  styleUrls: ['./animated-border-button.component.scss']
+  styleUrls: ['./animated-border-button.component.scss'],
 })
-export class AnimatedBorderButtonComponent implements AfterViewInit {
+export class AnimatedBorderButtonComponent {
   @Output() click = new EventEmitter();
-  @ViewChild("rectangle") rectangle : any;
-  @ViewChild("content") content : any;
+  @ViewChild('rectangle') rectangle: any;
+  @ViewChild('content') content: any;
 
-
-  ngAfterViewInit(){
-    const tl = gsap.timeline();
-    tl.to(this.rectangle.nativeElement, {
-      duration: 1,
-      strokeOpacity: 1,
-    })
-
-    tl.to(this.rectangle.nativeElement, {
-      duration: 1,
-      color: "white",
-    })
+  public showBorder(seconds: number) {
+    return new Promise<void>((resolve) => {
+      const tl = gsap.timeline();
+      tl.to(this.rectangle.nativeElement, {
+        duration: seconds,
+        strokeOpacity: 1,
+      }).then(() => resolve());
+    });
   }
-
+  
   public handleClick() {
-    
     this.click.emit();
-}
+  }
 }

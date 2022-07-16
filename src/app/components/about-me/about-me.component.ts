@@ -17,7 +17,7 @@ import { job } from './job-card/model';
 import { study } from './study-card/model';
 import { gsap, Power4 } from 'gsap';
 import { StudyCardComponent } from './study-card/study-card.component';
-
+import { AnimatedBorderButtonComponent } from '../common-components/animated-border-button/animated-border-button.component';
 @Component({
   selector: 'app-about-me',
   templateUrl: './about-me.component.html',
@@ -31,8 +31,9 @@ export class AboutMeComponent implements OnInit {
   jobCards: QueryList<JobCardComponent> = new QueryList();
   @ViewChildren(forwardRef(() => StudyCardComponent))
   studyCards: QueryList<StudyCardComponent> = new QueryList();
-  @ViewChildren('jobsHeader') jobsHeader: any = new QueryList();;
+  @ViewChildren(forwardRef(()=>AnimatedBorderButtonComponent)) jobsHeader: QueryList<AnimatedBorderButtonComponent> = new QueryList();
   @ViewChildren('studiesHeader') studiesHeader: any = new QueryList();
+  @ViewChildren('jobsHeaderText') jobsHeaderText: any = new QueryList();
   @ViewChild('mainText') mainText: any;
 
   private httpClient: HttpClient;
@@ -64,17 +65,17 @@ export class AboutMeComponent implements OnInit {
           this.initiated = true;
           this.initiatedChange.emit(true);
           this.fullText = data;
-          this.writeText().then(() =>{
-          const tl = gsap.timeline();
-          tl.to(this.mainText.nativeElement, {
-            duration: 1,
-            color: 'transparent',
-          }).then(() =>{
-            this.mainTextVisible = false;
-            this.finishedIntro.emit()
-            this.animateJobs(1000)
-          })}
-          );
+          this.writeText().then(() => {
+            const tl = gsap.timeline();
+            tl.to(this.mainText.nativeElement, {
+              duration: 1,
+              color: 'transparent',
+            }).then(() => {
+              this.mainTextVisible = false;
+              this.finishedIntro.emit();
+              this.animateJobs(1000);
+            });
+          });
         }
       });
   }
@@ -85,7 +86,7 @@ export class AboutMeComponent implements OnInit {
 
   clickClose() {
     return new Promise((resolve, reject) => {
-      console.log("close about me")
+      console.log('close about me');
       this.collapseText();
       resolve('foo');
     });
@@ -125,7 +126,7 @@ export class AboutMeComponent implements OnInit {
   addOneLetter(destination: string, source: string) {
     return destination + source.charAt(destination.length);
   }
-  
+
   collapseText() {
     this.shownText = '';
     this.interruptWriting = true;
@@ -135,19 +136,20 @@ export class AboutMeComponent implements OnInit {
     return s.substring(0, s.length - 1);
   }
 
-
   animateJobs(timer: number) {
     return new Promise((resolve, reject) => {
+      const tl = gsap.timeline();
       setTimeout(() => {
-          const tl = gsap.timeline();
-          tl.to(this.jobsHeader.last.nativeElement, {
-            duration: 1,
-            color: 'white',
-          }).then( () =>
-          tl.to(this.jobsHeader.first.nativeElement, {
-            duration: 1,
-            color: 'white',
-          })).then(() => this.animateJobCards()).then(() => this.animateStudies());
+        this.jobsHeader.last
+          .showBorder(1)
+          .then(()=>
+            //this.jobsHeader.last.showContent())
+            tl.to(this.jobsHeaderText.last.nativeElement, {
+              duration: 1,
+              color: "white",
+            }))
+          .then(() => this.animateJobCards())
+          .then(() => this.animateStudies());
       }, timer);
     });
   }
