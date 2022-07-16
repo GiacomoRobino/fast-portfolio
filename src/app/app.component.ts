@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  forwardRef,
   QueryList,
   ViewChild,
   ViewChildren,
@@ -12,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { gsap, Power4 } from 'gsap';
 import { ThisReceiver } from '@angular/compiler';
+import { AnimatedBorderButtonComponent } from './components/common-components/animated-border-button/animated-border-button.component';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +33,7 @@ export class AppComponent implements AfterViewInit {
   @ViewChildren('introductionComponent')
   projectsComponent!: QueryList<ProjectsComponent>;
   @ViewChild('componentContainer') componentContainer: any;
+  @ViewChildren(forwardRef(()=>AnimatedBorderButtonComponent)) navigationButtonsBorders: QueryList<AnimatedBorderButtonComponent> = new QueryList();
   public headerVisible = false;
   public contactMeTextContext = { shownText: '', fullText: 'Contact me' };
   public aboutMeTextContext = { shownText: '', fullText: 'About me' };
@@ -69,20 +72,11 @@ export class AppComponent implements AfterViewInit {
     this.contactMeComponent.changes.subscribe((comps: QueryList<any>) => {
       this.modules.contactMe = comps.first;
     });
-    this.navigationButtonList.changes.subscribe((comps: QueryList<any>) => {
+    this.navigationButtonsBorders.changes.subscribe((comps: QueryList<any>) => {
       {
-        const tl = gsap.timeline();
-        tl.to(comps.first.nativeElement, {
-          duration: 2,
-          borderColor: 'white',
-        })
+        this.navigationButtonsBorders.first.showBorder(1.3)
           .then(() => this.writeText(this.downloadCvTextContext))
-          .then(() => {
-            tl.to(comps.last.nativeElement, {
-              duration: 2,
-              borderColor: 'white',
-            });
-          })
+          .then(() => this.navigationButtonsBorders.last.showBorder(1.2))
           .then(() => this.writeText(this.contactMeTextContext));
       }
     });
