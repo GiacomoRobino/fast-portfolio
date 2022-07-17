@@ -4,10 +4,19 @@
     justify-content: center;
 }
 
+.jobs{
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
 .jobs-list-container{
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 60%;
 }
 
 .jobs-list{
@@ -16,6 +25,7 @@
     align-content: flex-start;
     justify-content: space-evenly;
     align-items: center;
+    width: 100%;
 }
 
 .companies-header-class{
@@ -24,15 +34,9 @@
 
 
 .jobs-header{
+    height: 3rem;
     color: transparent;
-}
-
-.jobs{
-    display: flex;
-    flex-direction: row;
-    align-content: flex-start;
-    justify-content: space-evenly;
-    align-items: flex-start;
+    width: 100%;
 }
 
 .main-container{
