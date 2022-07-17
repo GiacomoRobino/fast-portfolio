@@ -29,7 +29,4 @@ export class AnimatedBorderButtonComponent {
     });
   }
   
-  public handleClick() {
-    this.click.emit();
-  }
 }

@@ -83,6 +83,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   click() {
+    console.log("lick");
     this.cancelText(this.textContexts[this.getNonVisibleComponent()]).then(()=>{
     this.changeTextContext();
     const currentVisibleComponent = this.getVisibleComponent();
