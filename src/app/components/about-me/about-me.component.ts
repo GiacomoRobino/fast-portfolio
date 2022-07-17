@@ -31,7 +31,8 @@ export class AboutMeComponent implements OnInit {
   jobCards: QueryList<JobCardComponent> = new QueryList();
   @ViewChildren(forwardRef(() => StudyCardComponent))
   studyCards: QueryList<StudyCardComponent> = new QueryList();
-  @ViewChildren(forwardRef(()=>AnimatedBorderButtonComponent)) jobsHeader: QueryList<AnimatedBorderButtonComponent> = new QueryList();
+  @ViewChildren(forwardRef(() => AnimatedBorderButtonComponent))
+  jobsHeader: QueryList<AnimatedBorderButtonComponent> = new QueryList();
   @ViewChildren('studiesHeader') studiesHeader: any = new QueryList();
   @ViewChildren('jobsHeaderText') jobsHeaderText: any = new QueryList();
   @ViewChild('mainText') mainText: any;
@@ -140,16 +141,24 @@ export class AboutMeComponent implements OnInit {
     return new Promise((resolve, reject) => {
       const tl = gsap.timeline();
       setTimeout(() => {
-        this.jobsHeader.last
+        this.jobsHeader.first
           .showBorder(1)
-          .then(()=>
-            //this.jobsHeader.last.showContent())
-            tl.to(this.jobsHeaderText.last.nativeElement, {
+          .then(() =>
+            tl.to(this.jobsHeaderText.first.nativeElement, {
               duration: 1,
-              color: "white",
-            }))
+              color: 'white',
+            })
+          )
+          .then(() =>
+            this.jobsHeader.last.showBorder(1).then(() =>
+              tl.to(this.jobsHeaderText.last.nativeElement, {
+                duration: 1,
+                color: 'white',
+              })
+            )
+          )
           .then(() => this.animateJobCards())
-          .then(() => this.animateStudies());
+          .then(() => this.animateStudyCards());
       }, timer);
     });
   }
@@ -163,13 +172,6 @@ export class AboutMeComponent implements OnInit {
     });
   }
 
-  animateStudies() {
-    const tl = gsap.timeline();
-    tl.to(this.studiesHeader.first.nativeElement, {
-      duration: 1,
-      color: 'white',
-    }).then(() => this.animateStudyCards());
-  }
 
   animateStudyCards() {
     const waitPromiseList = this.studyCards.map((card, index) =>

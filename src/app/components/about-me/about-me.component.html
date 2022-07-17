@@ -20,10 +20,15 @@
       </div>
   </div>
 
-  <div>
+  <div class="jobs">
     <div class="jobs-list-container">
       <div class="jobs-list">
-        <div #studiesHeader class="jobs-header">places where I studied</div>
+        <div #jobsHeader class="jobs-header">
+          <app-animated-border-button #navigationButton class="header-button">
+            <div #jobsHeaderText class="companies-header-class"> Places where I studied
+            </div>
+          </app-animated-border-button>
+        </div>
         <div *ngFor="let study of studies; index as i">
           <div class="card">
             <app-study-card [study]="study"></app-study-card>
@@ -31,5 +36,5 @@
         </div>
       </div>
     </div>
-  </div>
 </div>
+
