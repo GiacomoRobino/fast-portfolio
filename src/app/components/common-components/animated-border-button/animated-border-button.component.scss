@@ -3,7 +3,11 @@
     height: 100%;
     position: relative;
     overflow: hidden;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
   }
 
   svg {
@@ -17,7 +21,7 @@
     fill: none;
     stroke: #fff;
     stroke-opacity: 0;
-    stroke-width: 2;
+    stroke-width: 8;
     stroke-dasharray: 422, 0;
     transition: all 0.35s linear;
   }
@@ -25,13 +29,13 @@
   .button:hover {
     
     rect {
-      stroke-width: 5;
+      stroke-width: 16;
       stroke-dasharray: 10%, 230%;
       stroke-dashoffset: 100;
       transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
     }
   }
   
-  .content{
-    color: white
+  .content-container{
+    
   }

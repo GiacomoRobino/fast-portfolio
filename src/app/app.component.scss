@@ -5,7 +5,8 @@
 }
 
 .header-button{
-    font-size: 2rem;
+    font-size: 4rem;
+    flex-shrink: 3;
 }
 
 .element-container{
@@ -13,7 +14,6 @@
     margin-left: auto;
     margin-right: auto;
     width: 80%;
-    border-radius: 20px;
 }
 
 .footer{
