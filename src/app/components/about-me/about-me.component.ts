@@ -60,8 +60,7 @@ export class AboutMeComponent implements OnInit {
       .get('assets/copywrite/presentation.txt', { responseType: 'text' })
       .subscribe((data) => {
         if (this.initiated) {
-          this.shownText = data;
-          this.animateJobs(0);
+          this.returnToPageAnimation()
         } else {
           this.initiated = true;
           this.initiatedChange.emit(true);
@@ -179,4 +178,8 @@ export class AboutMeComponent implements OnInit {
     );
     Promise.all(waitPromiseList).then();
   }
+
+  returnToPageAnimation(){
+    this.mainTextVisible = false;
+    this.animateJobs(0);}
 }
