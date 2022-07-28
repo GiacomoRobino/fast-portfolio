@@ -16,7 +16,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60%;
+    width: 100%;
 }
 
 .jobs-list{
@@ -36,7 +36,7 @@
 .jobs-header{
     height: 3rem;
     color: transparent;
-    width: 100%;
+    width: 60%;
 }
 
 .main-container{
@@ -50,4 +50,22 @@
 .main-text{
     margin-top: 25%;
     text-align: center;
+}
+
+.inner-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.jobs-icon-container-1{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.jobs-icon-container-2{}
+
+.centerer{
+    width: 33%;
 }
