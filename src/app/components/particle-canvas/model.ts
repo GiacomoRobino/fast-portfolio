@@ -11,7 +11,7 @@ export class Particle {
   public vector: { x: number; y: number };
   public ctx: any;
 
-  constructor(w: number, h: number, options: any, ctx: any, random: boolean = true) {
+  constructor(w: number, h: number, options: any, ctx: any, random = true) {
     this.valid = random;
     this.ctx = ctx;
     this.h = h;

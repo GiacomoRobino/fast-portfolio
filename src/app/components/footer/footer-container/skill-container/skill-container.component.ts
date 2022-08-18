@@ -5,13 +5,8 @@ import { Component, OnInit, Input} from '@angular/core';
   templateUrl: './skill-container.component.html',
   styleUrls: ['./skill-container.component.scss']
 })
-export class SkillContainerComponent implements OnInit {
-  @Input() skill: String = "";
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class SkillContainerComponent {
+  @Input() skill = "";
 
   getSkillSource(): string {
     return "assets/scalableVectorGraphics/skills/" + this.skill + ".svg";

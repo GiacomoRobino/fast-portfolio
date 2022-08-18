@@ -1,0 +1,14 @@
+.container{
+    margin: 1rem;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+}
+
+img {
+    border: solid 10px transparent;
+    transition: border-color 1s ease;
+}
+img:hover {
+    border-color: white;
+}

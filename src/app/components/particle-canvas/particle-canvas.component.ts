@@ -6,16 +6,16 @@ import { Particle } from './model';
   templateUrl: './particle-canvas.component.html',
   styleUrls: ['./particle-canvas.component.scss'],
 })
-export class ParticleCanvasComponent implements OnInit, AfterViewInit {
+export class ParticleCanvasComponent implements AfterViewInit {
   @ViewChild ('canvas') canvasReference : any;
   public canvas: any;
   public netActivated = true;
   public netType = "poly";
   public renderedFrames = 0;
-  public h: number = 0;
-  public w: number = 0;
-  public loopId: number = 0;
-  public id: number = 0;
+  public h = 0;
+  public w = 0;
+  public loopId = 0;
+  public id = 0;
   public ctx: any;
   public particles: any[] = [];
   public options = {
@@ -40,9 +40,6 @@ export class ParticleCanvasComponent implements OnInit, AfterViewInit {
   linkRadius: 100,
 };
 
-  constructor() {}
-
-  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.canvas =this.canvasReference.nativeElement;
@@ -95,14 +92,14 @@ export class ParticleCanvasComponent implements OnInit, AfterViewInit {
   }
 
   drawParticle() {
-    for (let particle of this.particles) {
+    for (const particle of this.particles) {
       particle.update();
       particle.draw();
     }
   }
 
   drawLine() {
-    for (let particle of this.particles) {
+    for (const particle of this.particles) {
       if(this.netType === "poly") {
       this.linkPointsPoly(particle, this.particles);}
       else {
@@ -114,10 +111,10 @@ export class ParticleCanvasComponent implements OnInit, AfterViewInit {
   
   linkPoints(point: any, hubs: Particle[]) {
     point.radius = 0.5;
-    let particleNeighborsNumber = point.radius;
-    for (var i = 0; i < hubs.length; i++) {
-      var distance = this.checkDistance(point.x, point.y, hubs[i].x, hubs[i].y);
-      var opacity = 1 - distance / this.options.linkRadius;
+    const particleNeighborsNumber = point.radius;
+    for (let i = 0; i < hubs.length; i++) {
+      const distance = this.checkDistance(point.x, point.y, hubs[i].x, hubs[i].y);
+      const opacity = 1 - distance / this.options.linkRadius;
       if (opacity > 0) {
         //particleNeighborsNumber += 0.3;
         if (this.netActivated && point.valid && !(hubs[i].valid)){
@@ -136,13 +133,12 @@ export class ParticleCanvasComponent implements OnInit, AfterViewInit {
 
   linkPointsPoly(point: any, hubs: any[]) {
     point.radius = 0.5;
-    let particleNeighborsNumber = point.radius;
-    let neighbors = [];
-    for (var i = 0; i < hubs.length; i++) {
-      var distance = this.checkDistance(point.x, point.y, hubs[i].x, hubs[i].y);
-      var opacity = 1 - distance / this.options.linkRadius;
+    const particleNeighborsNumber = point.radius;
+    const neighbors = [];
+    for (let i = 0; i < hubs.length; i++) {
+      const distance = this.checkDistance(point.x, point.y, hubs[i].x, hubs[i].y);
+      const opacity = 1 - distance / this.options.linkRadius;
       if ((opacity > 0 ) && hubs[i].valid) {
-        //particleNeighborsNumber += 0.3;
         if (this.netActivated){
         this.ctx.lineWidth = 0.5;
         this.ctx.strokeStyle = 'rgb(100,100,200)';
@@ -152,7 +148,7 @@ export class ParticleCanvasComponent implements OnInit, AfterViewInit {
     }
     if (neighbors.length > 0 && this.netActivated) {
       this.ctx.beginPath();
-      for(let neighbor of neighbors) {
+      for(const neighbor of neighbors) {
         this.ctx.moveTo(point.x, point.y);
         this.ctx.lineTo(neighbor.x, neighbor.y);
         this.ctx.moveTo(point.x, point.y);}

@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './footer-container.component.html',
   styleUrls: ['./footer-container.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
   public skills = [{name:"angular"},
   {name:"d3js"},
   {name:"typescript"},
@@ -14,10 +14,5 @@ export class FooterComponent implements OnInit {
   {name:"greensock"},
   {name:"javascript"},
   {name:"github"}]
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

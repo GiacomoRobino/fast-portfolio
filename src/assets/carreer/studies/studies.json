@@ -1,0 +1,24 @@
+[
+    {
+        "name": "Computer Science",
+        "institution": "unito",
+        "level": "B.S",
+        "link": "https://www.unito.it/",
+        "description": "My true passion, discovered after a lot of searching",
+        "period": {
+            "start": "10-2015",
+            "end": "10-2019"
+        }
+    },
+    {
+        "name": "Law",
+        "institution": "unito",
+        "level": "Master",
+        "link": "https://www.unito.it/",
+        "description": "My first degree, even if it didn't became my carreer I still have a strong interest for public policy issues",
+        "period": {
+            "start": "10-2010",
+            "end": "9-2015"
+        }
+    }
+]
