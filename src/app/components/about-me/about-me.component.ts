@@ -36,7 +36,10 @@ export class AboutMeComponent implements OnInit {
   @ViewChildren('studiesHeader') studiesHeader: any = new QueryList();
   @ViewChildren('jobsHeaderText') jobsHeaderText: any = new QueryList();
   @ViewChild('mainText') mainText: any;
+  @ViewChildren('jobDescription')
+  jobDescription: any = new QueryList();
 
+  public shownJob = { name: '', description: '' };
   private httpClient: HttpClient;
   private opened = false;
   private fullText = '';
@@ -60,7 +63,7 @@ export class AboutMeComponent implements OnInit {
       .get('assets/copywrite/presentation.txt', { responseType: 'text' })
       .subscribe((data) => {
         if (this.initiated) {
-          this.returnToPageAnimation()
+          this.returnToPageAnimation();
         } else {
           this.initiated = true;
           this.initiatedChange.emit(true);
@@ -149,12 +152,12 @@ export class AboutMeComponent implements OnInit {
             })
           )
           .then(() =>
-            this.jobsHeader.last.showBorder(1).then(() =>
+            this.jobsHeader.last.showBorder(1).then(() => {
               tl.to(this.jobsHeaderText.last.nativeElement, {
                 duration: 1,
                 color: 'white',
-              })
-            )
+              });
+            })
           )
           .then(() => this.animateJobCards())
           .then(() => this.animateStudyCards());
@@ -167,10 +170,10 @@ export class AboutMeComponent implements OnInit {
       const waitPromiseList = this.jobCards.map((card, index) =>
         card.showImage(index)
       );
+      this.assignJobsPreviewFunctions();
       Promise.all(waitPromiseList).then(resolve);
     });
   }
-
 
   animateStudyCards() {
     const waitPromiseList = this.studyCards.map((card, index) =>
@@ -179,7 +182,33 @@ export class AboutMeComponent implements OnInit {
     Promise.all(waitPromiseList).then();
   }
 
-  returnToPageAnimation(){
+  returnToPageAnimation() {
     this.mainTextVisible = false;
-    this.animateJobs(0);}
+    this.animateJobs(0);
+  }
+
+  showJob(job: any) {
+    console.log('waiting');
+  }
+
+  hideJob() {
+    this.setJobDescriptionColor('transparent');
+  }
+
+  setJobDescriptionColor(color: string) {
+    this.jobDescription._results.forEach((element: any) => {
+      const tl = gsap.timeline();
+      tl.to(element.nativeElement, {
+        duration: 0.2,
+        color: color,
+      });
+    });
+  }
+
+  assignJobsPreviewFunctions() {
+    this.showJob = (job) => {
+      this.setJobDescriptionColor('white');
+      this.shownJob = { name: job.name, description: job.description };
+    };
+  }
 }

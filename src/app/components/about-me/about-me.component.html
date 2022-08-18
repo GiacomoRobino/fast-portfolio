@@ -14,18 +14,18 @@
         </div>
 
         <div class="jobs-icon-container-1">
-          <div class="centerer">
-            some other thing
+          <div class="centerer job-name job-description" #jobDescription>
+            {{shownJob.name}}
           </div>
           <div class="jobs-icon-container-2" class="centerer">
             <div *ngFor="let job of jobs; index as i">
               <div class="card">
-                <app-job-card class="inner-card" [job]="job"></app-job-card>
+                <app-job-card class="inner-card" (updateJob)="showJob(job)" (leaveJob)="hideJob()" [job]="job"></app-job-card>
               </div>
             </div>
           </div>
-          <div class="centerer">
-            job description
+          <div class="centerer job-description" #jobDescription>
+            {{shownJob.description}}
           </div>
         </div>
       </div>
