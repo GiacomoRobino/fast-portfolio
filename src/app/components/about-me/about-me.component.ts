@@ -31,9 +31,6 @@ export class AboutMeComponent implements OnInit {
   jobCards: QueryList<JobCardComponent> = new QueryList();
   @ViewChildren(forwardRef(() => StudyCardComponent))
   studyCards: QueryList<StudyCardComponent> = new QueryList();
-  @ViewChildren(forwardRef(() => AnimatedBorderButtonComponent))
-  jobsHeader: QueryList<AnimatedBorderButtonComponent> = new QueryList();
-  @ViewChildren('studiesHeader') studiesHeader: any = new QueryList();
   @ViewChildren('jobsHeaderText') jobsHeaderText: any = new QueryList();
   @ViewChild('mainText') mainText: any;
   @ViewChild('mainContainer') mainContainer: any;
@@ -149,24 +146,22 @@ export class AboutMeComponent implements OnInit {
   animateJobs(timer: number) {
     return new Promise((resolve, reject) => {
       const tl = gsap.timeline();
+      console.log(this.jobsHeaderText);
       setTimeout(() => {
-        this.jobsHeader.first
-          .showBorder(1)
-          .then(() =>
             tl.to(this.jobsHeaderText.first.nativeElement, {
               duration: 1,
               color: 'white',
+            });
+            tl.to(this.jobsHeaderText.last.nativeElement, {
+              duration: 1,
+              color: 'white',
             })
-          )
-          .then(() =>
-            this.jobsHeader.last.showBorder(1).then(() => {
-              tl.to(this.jobsHeaderText.last.nativeElement, {
-                duration: 1,
-                color: 'white',
-              });
-            })
-          )
           .then(() => this.animateJobCards())
+          .then(() =>
+          () => {
+            ;
+          }
+        )
           .then(() => this.animateStudyCards());
       }, timer);
     });
