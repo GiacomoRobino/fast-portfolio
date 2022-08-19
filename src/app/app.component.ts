@@ -11,8 +11,6 @@ import { ContactMeComponent } from './components/contact-me/contact-me.component
 import { ProjectsComponent } from './components/projects/projects.component';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { gsap, Power4 } from 'gsap';
-import { ThisReceiver } from '@angular/compiler';
 import { AnimatedBorderButtonComponent } from './components/common-components/animated-border-button/animated-border-button.component';
 
 @Component({
@@ -22,11 +20,8 @@ import { AnimatedBorderButtonComponent } from './components/common-components/an
 })
 @Injectable()
 export class AppComponent implements AfterViewInit {
-  @ViewChild('aboutMeButton') aboutMeButton: any;
   @ViewChildren('aboutMeComponent')
   aboutMeComponent!: QueryList<AboutMeComponent>;
-  @ViewChild('navigationButtonContainer') navigationButtonContainer: any;
-  @ViewChildren('navigationButton') navigationButtonList!: QueryList<any>;
   @ViewChildren('contactMeComponent')
   contactMeComponent!: QueryList<ContactMeComponent>;
   @ViewChild('introductionButton') projectsButton: any;
@@ -83,7 +78,6 @@ export class AppComponent implements AfterViewInit {
   }
 
   click() {
-    console.log("lick");
     this.cancelText(this.textContexts[this.getNonVisibleComponent()]).then(()=>{
     this.changeTextContext();
     const currentVisibleComponent = this.getVisibleComponent();

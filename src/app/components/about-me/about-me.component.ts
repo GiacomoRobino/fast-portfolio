@@ -87,7 +87,6 @@ export class AboutMeComponent implements OnInit {
 
   clickClose() {
     return new Promise((resolve, reject) => {
-      console.log('close about me');
       this.collapseText();
       const tl = gsap.timeline();
       tl.to(this.mainContainer.nativeElement, {
@@ -146,7 +145,6 @@ export class AboutMeComponent implements OnInit {
   animateJobs(timer: number) {
     return new Promise((resolve, reject) => {
       const tl = gsap.timeline();
-      console.log(this.jobsHeaderText);
       setTimeout(() => {
             tl.to(this.jobsHeaderText.first.nativeElement, {
               duration: 1,
@@ -200,7 +198,6 @@ export class AboutMeComponent implements OnInit {
   setJobDescriptionColor(color: string) {
     this.jobDescription._results.forEach((element: any, index: number) => {
       const duration = 0.8 * (2 - index);
-      console.log(duration);
       const tl = gsap.timeline();
       tl.to(element.nativeElement, {
         duration,

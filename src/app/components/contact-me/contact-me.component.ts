@@ -28,7 +28,6 @@ export class ContactMeComponent implements OnInit, AfterViewInit{
 
   clickOpen() {
     this.opened = !this.opened;
-    console.log("click open contact me")
     this.openContactMe.emit(this.opened);
   }
 
@@ -40,7 +39,6 @@ export class ContactMeComponent implements OnInit, AfterViewInit{
         opacity: 0,
       }).then(()=>{
       this.text = "";
-      console.log("closing contact me");
       resolve("foo")
       
     })

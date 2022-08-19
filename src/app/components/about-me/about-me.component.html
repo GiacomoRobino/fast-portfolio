@@ -6,10 +6,10 @@
     <div class="jobs-list-container">
       <div class="jobs-list">
         <div class="jobs-header header-button companies-header-class">
-          <span #jobsHeaderText>Companies I worked for</span>
+          <span #jobsHeaderText class="intermediate-text">Companies I worked for</span>
         </div>
         <div class="jobs-icon-container-1">
-          <div class="centerer job-name job-description" #jobDescription>
+          <div class="centerer job-name job-description intermediate-text" #jobDescription>
             {{ shownJob.name }}
           </div>
           <div class="jobs-icon-container-2" class="centerer">
@@ -36,7 +36,7 @@
     <div class="jobs-list-container">
       <div class="jobs-list">
         <div class="jobs-header header-button companies-header-class">
-          <span #jobsHeaderText>Places where I studied</span>
+          <span #jobsHeaderText class="intermediate-text">Places where I studied</span>
         </div>
         <div *ngFor="let study of studies; index as i">
           <div class="card">
