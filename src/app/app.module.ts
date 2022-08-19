@@ -19,6 +19,8 @@ import { MailContainerComponent } from './components/contact-me/mail-container/m
 import { DirectMessageComponent } from './components/contact-me/direct-message/direct-message.component';
 import { AnimatedBorderButtonComponent } from './components/common-components/animated-border-button/animated-border-button.component';
 import { CopyMailComponent } from './components/contact-me/copy-mail/copy-mail.component';
+import { WriteMailComponent } from './components/contact-me/write-mail/write-mail.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,11 +40,13 @@ import { CopyMailComponent } from './components/contact-me/copy-mail/copy-mail.c
     DirectMessageComponent,
     AnimatedBorderButtonComponent,
     CopyMailComponent,
+    WriteMailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
