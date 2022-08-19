@@ -15,7 +15,7 @@ import jobsConfig from '../../../assets/carreer/companies/companies.json';
 import studiesConfig from '../../../assets/carreer/studies/studies.json';
 import { job } from './job-card/model';
 import { study } from './study-card/model';
-import { gsap, Power4 } from 'gsap';
+import { gsap } from 'gsap';
 import { StudyCardComponent } from './study-card/study-card.component';
 import { AnimatedBorderButtonComponent } from '../common-components/animated-border-button/animated-border-button.component';
 @Component({
@@ -36,6 +36,7 @@ export class AboutMeComponent implements OnInit {
   @ViewChildren('studiesHeader') studiesHeader: any = new QueryList();
   @ViewChildren('jobsHeaderText') jobsHeaderText: any = new QueryList();
   @ViewChild('mainText') mainText: any;
+  @ViewChild('mainContainer') mainContainer: any;
   @ViewChildren('jobDescription')
   jobDescription: any = new QueryList();
 
@@ -91,7 +92,13 @@ export class AboutMeComponent implements OnInit {
     return new Promise((resolve, reject) => {
       console.log('close about me');
       this.collapseText();
-      resolve('foo');
+      const tl = gsap.timeline();
+      tl.to(this.mainContainer.nativeElement, {
+        duration: 1,
+        opacity: 0,
+      }).then(() => {
+        resolve('foo');
+      });
     });
   }
 
@@ -197,7 +204,7 @@ export class AboutMeComponent implements OnInit {
 
   setJobDescriptionColor(color: string) {
     this.jobDescription._results.forEach((element: any, index: number) => {
-      const duration =  0.8 * (2 - index);
+      const duration = 0.8 * (2 - index);
       console.log(duration);
       const tl = gsap.timeline();
       tl.to(element.nativeElement, {
