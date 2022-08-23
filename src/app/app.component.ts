@@ -104,6 +104,11 @@ export class AppComponent implements AfterViewInit {
     document.body.appendChild(link);
     link.click();
     link.remove();
+
+    this.cancelText(this.downloadCvTextContext).then(()=>{
+    this.downloadCvTextContext = { shownText: '', fullText: 'Cv Downloaded!' }
+    this.writeText(this.downloadCvTextContext)}
+    )
   }
 
   changeTextContext() {
