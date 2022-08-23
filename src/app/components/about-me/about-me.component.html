@@ -1,7 +1,12 @@
 <div class="main-container" #mainContainer>
-  <div #mainText *ngIf="mainTextVisible" class="main-text">
+  <div *ngIf="mainTextVisible" class="main-text intermediate-text">
+  <div #mainText >
     {{ shownText }}
   </div>
+  <div #author class="author-class">
+    {{ author }}
+  </div>
+</div>
   <div class="jobs">
     <div class="jobs-list-container">
       <div class="jobs-list">

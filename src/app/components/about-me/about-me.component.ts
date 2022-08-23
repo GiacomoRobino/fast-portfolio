@@ -17,7 +17,7 @@ import { job } from './job-card/model';
 import { study } from './study-card/model';
 import { gsap } from 'gsap';
 import { StudyCardComponent } from './study-card/study-card.component';
-import { AnimatedBorderButtonComponent } from '../common-components/animated-border-button/animated-border-button.component';
+
 @Component({
   selector: 'app-about-me',
   templateUrl: './about-me.component.html',
@@ -33,6 +33,7 @@ export class AboutMeComponent implements OnInit {
   studyCards: QueryList<StudyCardComponent> = new QueryList();
   @ViewChildren('jobsHeaderText') jobsHeaderText: any = new QueryList();
   @ViewChild('mainText') mainText: any;
+  @ViewChild('author') authorText: any;
   @ViewChild('mainContainer') mainContainer: any;
   @ViewChildren('jobDescription')
   jobDescription: any = new QueryList();
@@ -42,15 +43,17 @@ export class AboutMeComponent implements OnInit {
   private opened = false;
   private fullText = '';
   public shownText = '';
-  private timeToWrite = 400.0;
+  private timeToWrite = 500.0;
   private interruptWriting = false;
   private specialCaractersMultipliers: { [key: string]: number } = {
-    '.': 500.0,
-    ',': 200.0,
+    '.': 100.0,
+    ',': 50.0,
+    '\n': 100.0
   };
   public jobs: job[] = jobsConfig;
   public studies: study[] = studiesConfig;
   public mainTextVisible = true;
+  public author = '';
 
   constructor(http: HttpClient) {
     this.httpClient = http;
@@ -58,20 +61,28 @@ export class AboutMeComponent implements OnInit {
 
   ngOnInit(): void {
     this.httpClient
-      .get('assets/copywrite/presentation.txt', { responseType: 'text' })
+      .get('assets/copywrite/quotes.txt', { responseType: 'text' })
       .subscribe((data) => {
         if (this.initiated) {
           this.returnToPageAnimation();
         } else {
           this.initiated = true;
           this.initiatedChange.emit(true);
-          this.fullText = data;
+          this.fullText = this.getRandomQuote(data);
           this.writeText().then(() => {
             const tl = gsap.timeline();
+            tl.to(this.authorText.nativeElement, { duration: 1, opacity: 1})
+            .then(()=>
             tl.to(this.mainText.nativeElement, {
               duration: 1,
               color: 'transparent',
-            }).then(() => {
+            }))
+            .then(()=>
+            tl.to(this.authorText.nativeElement, {
+              duration: 0.5,
+              color: 'transparent',
+            }))
+            .then(() => {
               this.mainTextVisible = false;
               this.finishedIntro.emit();
               this.animateJobs(1000);
@@ -96,6 +107,13 @@ export class AboutMeComponent implements OnInit {
         resolve('foo');
       });
     });
+  }
+
+  getRandomQuote(data: string){
+    const quote = data.split("\n")[0].split("|");
+    this.author = quote[1].split("\r")[0].trim();
+    return quote[0] + ".";
+
   }
 
   writeText(timeToWrite = -1): any {
