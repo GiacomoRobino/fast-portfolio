@@ -15,7 +15,7 @@ import jobsConfig from '../../../assets/carreer/companies/companies.json';
 import studiesConfig from '../../../assets/carreer/studies/studies.json';
 import { job } from './job-card/model';
 import { study } from './study-card/model';
-import { gsap, Power4 } from 'gsap';
+import { gsap } from 'gsap';
 import { StudyCardComponent } from './study-card/study-card.component';
 import { AnimatedBorderButtonComponent } from '../common-components/animated-border-button/animated-border-button.component';
 @Component({
@@ -31,11 +31,9 @@ export class AboutMeComponent implements OnInit {
   jobCards: QueryList<JobCardComponent> = new QueryList();
   @ViewChildren(forwardRef(() => StudyCardComponent))
   studyCards: QueryList<StudyCardComponent> = new QueryList();
-  @ViewChildren(forwardRef(() => AnimatedBorderButtonComponent))
-  jobsHeader: QueryList<AnimatedBorderButtonComponent> = new QueryList();
-  @ViewChildren('studiesHeader') studiesHeader: any = new QueryList();
   @ViewChildren('jobsHeaderText') jobsHeaderText: any = new QueryList();
   @ViewChild('mainText') mainText: any;
+  @ViewChild('mainContainer') mainContainer: any;
   @ViewChildren('jobDescription')
   jobDescription: any = new QueryList();
 
@@ -89,9 +87,14 @@ export class AboutMeComponent implements OnInit {
 
   clickClose() {
     return new Promise((resolve, reject) => {
-      console.log('close about me');
       this.collapseText();
-      resolve('foo');
+      const tl = gsap.timeline();
+      tl.to(this.mainContainer.nativeElement, {
+        duration: 1,
+        opacity: 0,
+      }).then(() => {
+        resolve('foo');
+      });
     });
   }
 
@@ -143,23 +146,20 @@ export class AboutMeComponent implements OnInit {
     return new Promise((resolve, reject) => {
       const tl = gsap.timeline();
       setTimeout(() => {
-        this.jobsHeader.first
-          .showBorder(1)
-          .then(() =>
             tl.to(this.jobsHeaderText.first.nativeElement, {
               duration: 1,
               color: 'white',
+            });
+            tl.to(this.jobsHeaderText.last.nativeElement, {
+              duration: 1,
+              color: 'white',
             })
-          )
-          .then(() =>
-            this.jobsHeader.last.showBorder(1).then(() => {
-              tl.to(this.jobsHeaderText.last.nativeElement, {
-                duration: 1,
-                color: 'white',
-              });
-            })
-          )
           .then(() => this.animateJobCards())
+          .then(() =>
+          () => {
+            ;
+          }
+        )
           .then(() => this.animateStudyCards());
       }, timer);
     });
@@ -196,10 +196,11 @@ export class AboutMeComponent implements OnInit {
   }
 
   setJobDescriptionColor(color: string) {
-    this.jobDescription._results.forEach((element: any) => {
+    this.jobDescription._results.forEach((element: any, index: number) => {
+      const duration = 0.8 * (2 - index);
       const tl = gsap.timeline();
       tl.to(element.nativeElement, {
-        duration: 0.2,
+        duration,
         color: color,
       });
     });

@@ -6,7 +6,8 @@
 }
 
 img {
-    border: double 10px transparent;
+    border: solid 10px transparent;
+    padding: 3px;
     transition: border-color 1s ease;
 }
 img:hover {

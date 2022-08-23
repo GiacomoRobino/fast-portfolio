@@ -33,12 +33,10 @@ export class JobCardComponent {
   }
 
   showJob(){
-    console.log("ok");
     this.updateJob.emit(this.job);
   }
 
   hideJob(){
-    console.log("ok");
     this.leaveJob.emit();
   }
 }

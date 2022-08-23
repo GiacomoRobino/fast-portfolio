@@ -1,46 +1,42 @@
-<div class="main-container">
+<div class="main-container" #mainContainer>
   <div #mainText *ngIf="mainTextVisible" class="main-text">
     {{ shownText }}
   </div>
   <div class="jobs">
     <div class="jobs-list-container">
       <div class="jobs-list">
-        <div #jobsHeader class="jobs-header">
-          <app-animated-border-button #navigationButton class="header-button">
-            <div #jobsHeaderText class="companies-header-class">
-              Companies I worked for
-            </div>
-          </app-animated-border-button>
+        <div class="jobs-header header-button companies-header-class">
+          <span #jobsHeaderText class="intermediate-text">Companies I worked for</span>
         </div>
-
         <div class="jobs-icon-container-1">
-          <div class="centerer job-name job-description" #jobDescription>
-            {{shownJob.name}}
+          <div class="centerer job-name job-description intermediate-text" #jobDescription>
+            {{ shownJob.name }}
           </div>
           <div class="jobs-icon-container-2" class="centerer">
             <div *ngFor="let job of jobs; index as i">
               <div class="card">
-                <app-job-card class="inner-card" (updateJob)="showJob(job)" (leaveJob)="hideJob()" [job]="job"></app-job-card>
+                <app-job-card
+                  class="inner-card"
+                  (updateJob)="showJob(job)"
+                  (leaveJob)="hideJob()"
+                  [job]="job"
+                ></app-job-card>
               </div>
             </div>
           </div>
           <div class="centerer job-description" #jobDescription>
-            {{shownJob.description}}
+            {{ shownJob.description }}
           </div>
         </div>
       </div>
     </div>
   </div>
-
+<!--
   <div class="jobs">
     <div class="jobs-list-container">
       <div class="jobs-list">
-        <div #jobsHeader class="jobs-header">
-          <app-animated-border-button #navigationButton class="header-button">
-            <div #jobsHeaderText class="companies-header-class">
-              Places where I studied
-            </div>
-          </app-animated-border-button>
+        <div class="jobs-header header-button companies-header-class">
+          <span #jobsHeaderText class="intermediate-text">Places where I studied</span>
         </div>
         <div *ngFor="let study of studies; index as i">
           <div class="card">
@@ -50,4 +46,5 @@
       </div>
     </div>
   </div>
+  -->
 </div>

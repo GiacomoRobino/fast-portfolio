@@ -14,10 +14,17 @@ import { gsap } from 'gsap';
   templateUrl: './animated-border-button.component.html',
   styleUrls: ['./animated-border-button.component.scss'],
 })
-export class AnimatedBorderButtonComponent {
+export class AnimatedBorderButtonComponent implements AfterViewInit {
   @Output() click = new EventEmitter();
   @ViewChild('rectangle') rectangle: any;
   @ViewChild('content') content: any;
+  @Input('initTime') initTime = -1;
+
+  ngAfterViewInit(){
+    if(this.initTime > 0){
+      this.showBorder(this.initTime);
+    }
+  }
 
   public showBorder(seconds: number) {
     return new Promise<void>((resolve) => {

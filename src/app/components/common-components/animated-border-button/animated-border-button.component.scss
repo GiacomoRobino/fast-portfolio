@@ -3,11 +3,13 @@
     height: 100%;
     position: relative;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-evenly;
-    
+    display: table;
+    text-align: center;
+  }
+
+  span {
+    display: table-cell;
+    vertical-align: middle;
   }
 
   svg {
@@ -34,8 +36,4 @@
       stroke-dashoffset: 100;
       transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
     }
-  }
-  
-  .content-container{
-    
   }

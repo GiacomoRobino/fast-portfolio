@@ -1,0 +1,24 @@
+<div class="main-container">
+  <div class="container">
+    <div>write a message here:</div>
+    <div class="form-container">
+      <form [formGroup]="mailForm">
+        <textarea
+          class="mail-textarea"
+          id="mail"
+          type="text"
+          formControlName="mail"
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="6"
+        ></textarea>
+      </form>
+    </div>
+</div>
+<div class="send-button-container">
+<div class="send-button">
+  <app-animated-border-button [initTime]="4" (click)="click()"
+    >Send mail</app-animated-border-button
+  >
+</div>
+</div>
+</div>

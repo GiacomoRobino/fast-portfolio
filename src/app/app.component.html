@@ -1,25 +1,43 @@
 <div class="app-main-container">
-<div class="background">
-  <app-background></app-background>
-</div>
+  <div class="background">
+    <app-background></app-background>
+  </div>
 
-<div *ngIf="headerVisible" class="header">
-  <app-animated-border-button #navigationButton class="header-button" (click)="click()">
-  <div #downloadCvButtonContainer class="header-element-container">
-      {{downloadCvTextContext.shownText}}
+  <div *ngIf="headerVisible" class="header">
+    <app-animated-border-button
+      #navigationButton
+      class="header-button"
+      (click)="download()"
+    >
+      <div #downloadCvButtonContainer class="header-element-container">
+        {{ downloadCvTextContext.shownText }}
+      </div>
+    </app-animated-border-button>
+
+    <app-animated-border-button
+      #navigationButton
+      class="header-button"
+      (click)="click()"
+    >
+      <div #navigationButtonContainer class="header-element-container">
+        {{ navigationButtonTextContext.shownText }}
+      </div>
+    </app-animated-border-button>
+  </div>
+
+  <div class="" #componentContainer>
+    <div
+      *ngIf="visible.contactMe"
+      class="element-container contact-me-container"
+    >
+      <app-contact-me #contactMeComponent></app-contact-me>
     </div>
-  </app-animated-border-button>
-  
-  <app-animated-border-button #navigationButton class="header-button" (click)="click()">
-  <div #navigationButtonContainer class="header-element-container">
-    {{navigationButtonTextContext.shownText}}
+    <div *ngIf="visible.aboutMe" class="element-container">
+      <app-about-me
+        #aboutMeComponent
+        [(initiated)]="initiated"
+        (finishedIntro)="finishedIntro()"
+      ></app-about-me>
     </div>
-  </app-animated-border-button>
-</div>
-
-<div #componentContainer class="element-container">
-  <app-contact-me #contactMeComponent *ngIf="visible.contactMe"></app-contact-me >
-  <app-about-me #aboutMeComponent *ngIf="visible.aboutMe" [(initiated)]="initiated" (finishedIntro)="finishedIntro()"></app-about-me >
-</div>
-
+  </div>
 </div>
