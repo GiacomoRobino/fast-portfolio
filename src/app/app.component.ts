@@ -28,11 +28,15 @@ export class AppComponent implements AfterViewInit {
   @ViewChildren('introductionComponent')
   projectsComponent!: QueryList<ProjectsComponent>;
   @ViewChild('componentContainer') componentContainer: any;
-  @ViewChildren(forwardRef(()=>AnimatedBorderButtonComponent)) navigationButtonsBorders: QueryList<AnimatedBorderButtonComponent> = new QueryList();
+  @ViewChildren(forwardRef(() => AnimatedBorderButtonComponent))
+  navigationButtonsBorders: QueryList<AnimatedBorderButtonComponent> = new QueryList();
   public headerVisible = false;
   public contactMeTextContext = { shownText: '', fullText: 'Contact me' };
   public aboutMeTextContext = { shownText: '', fullText: 'About me' };
-  public textContexts: { [key: string]: any } = {"contactMe" : this.contactMeTextContext, "aboutMe" : this.aboutMeTextContext}
+  public textContexts: { [key: string]: any } = {
+    contactMe: this.contactMeTextContext,
+    aboutMe: this.aboutMeTextContext,
+  };
   public navigationButtonTextContext = { shownText: '', fullText: '' };
   public downloadCvTextContext = { shownText: '', fullText: 'Download cv' };
   private timeToWrite = 1000.0;
@@ -48,10 +52,10 @@ export class AppComponent implements AfterViewInit {
   public buttons: { [key: string]: any } = {};
   public visible: { [key: string]: boolean } = {
     contactMe: false,
-    aboutMe: true
+    aboutMe: true,
   };
   public initiated = false;
-  public visibleComponent = "aboutMe"
+  public visibleComponent = 'aboutMe';
   title = 'portfolio-fast';
 
   ngAfterViewInit() {
@@ -69,7 +73,8 @@ export class AppComponent implements AfterViewInit {
     });
     this.navigationButtonsBorders.changes.subscribe((comps: QueryList<any>) => {
       {
-        this.navigationButtonsBorders.first.showBorder(1.3)
+        this.navigationButtonsBorders.first
+          .showBorder(1.3)
           .then(() => this.writeText(this.downloadCvTextContext))
           .then(() => this.navigationButtonsBorders.last.showBorder(1.2))
           .then(() => this.writeText(this.contactMeTextContext));
@@ -78,17 +83,32 @@ export class AppComponent implements AfterViewInit {
   }
 
   click() {
-    this.cancelText(this.textContexts[this.getNonVisibleComponent()]).then(()=>{
-    this.changeTextContext();
-    const currentVisibleComponent = this.getVisibleComponent();
-    this.modules[currentVisibleComponent].clickClose().then((data: string) => {
-      this.expandElement();
-    });
-  })
+    this.cancelText(this.textContexts[this.getNonVisibleComponent()]).then(
+      () => {
+        this.changeTextContext();
+        const currentVisibleComponent = this.getVisibleComponent();
+        this.modules[currentVisibleComponent]
+          .clickClose()
+          .then((data: string) => {
+            this.expandElement();
+          });
+      }
+    );
+  }
+
+  download() {
+    const link = document.createElement('a');
+    link.setAttribute('type', 'hidden');
+    link.href = 'assets/cv/Giacomo_Robino.pdf';
+    link.download = 'Giacomo_Robino.pdf';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
   }
 
   changeTextContext() {
-    this.navigationButtonTextContext = this.textContexts[this.getVisibleComponent()];
+    this.navigationButtonTextContext =
+      this.textContexts[this.getVisibleComponent()];
     this.writeText(this.textContexts[this.getVisibleComponent()]);
   }
 
@@ -98,12 +118,12 @@ export class AppComponent implements AfterViewInit {
     this.visibleComponent = this.getNonVisibleComponent();
   }
 
-  getVisibleComponent(){
-    return this.visibleComponent === "aboutMe"? "aboutMe" : "contactMe"
+  getVisibleComponent() {
+    return this.visibleComponent === 'aboutMe' ? 'aboutMe' : 'contactMe';
   }
 
-  getNonVisibleComponent(){
-    return this.visibleComponent === "aboutMe"? "contactMe" : "aboutMe" 
+  getNonVisibleComponent() {
+    return this.visibleComponent === 'aboutMe' ? 'contactMe' : 'aboutMe';
   }
 
   finishedIntro() {
@@ -150,20 +170,14 @@ export class AppComponent implements AfterViewInit {
     return destination + source.charAt(destination.length);
   }
 
-  
   cancelText(textContext: any, timeToWrite = -1): any {
     return new Promise<void>((resolve, reject) => {
       if (timeToWrite === -1) {
         timeToWrite = this.timeToWrite / textContext.fullText.length;
         this.interruptWriting = false;
       }
-      if (
-        textContext.shownText.length > 0 &&
-        !this.interruptWriting
-      ) {
-        textContext.shownText = this.removeOneLetter(
-          textContext.shownText
-        );
+      if (textContext.shownText.length > 0 && !this.interruptWriting) {
+        textContext.shownText = this.removeOneLetter(textContext.shownText);
         if (this.specialCaractersMultipliers[textContext.shownText.slice(-1)]) {
           timeToWrite =
             timeToWrite *

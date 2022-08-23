@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LinkedinLinkComponent {
   click(){
-    console.log("go to linkedin")
+    window.open("https://www.linkedin.com/in/giacomo-robino-4196ba62/")
   }
 
 }
