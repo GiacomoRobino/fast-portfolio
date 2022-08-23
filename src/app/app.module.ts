@@ -21,6 +21,7 @@ import { AnimatedBorderButtonComponent } from './components/common-components/an
 import { CopyMailComponent } from './components/contact-me/copy-mail/copy-mail.component';
 import { WriteMailComponent } from './components/contact-me/write-mail/write-mail.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LinkedinLinkComponent } from './components/contact-me/linkedin-link/linkedin-link.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     DirectMessageComponent,
     AnimatedBorderButtonComponent,
     CopyMailComponent,
-    WriteMailComponent
+    WriteMailComponent,
+    LinkedinLinkComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { gsap } from 'gsap';
+import '../../../assets/mail/smtp.js';
+declare let Email : any;
 
 @Component({
   selector: 'app-contact-me',
@@ -43,6 +45,7 @@ export class ContactMeComponent implements OnInit, AfterViewInit{
       
     })
   }
-    )}
+    )
+  }
 }
 
