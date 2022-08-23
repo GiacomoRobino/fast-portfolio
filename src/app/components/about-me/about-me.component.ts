@@ -33,7 +33,7 @@ export class AboutMeComponent implements OnInit {
   studyCards: QueryList<StudyCardComponent> = new QueryList();
   @ViewChildren('jobsHeaderText') jobsHeaderText: any = new QueryList();
   @ViewChild('mainText') mainText: any;
-  @ViewChild('author') authorText: any;
+  @ViewChild('authorText') authorText: any;
   @ViewChild('mainContainer') mainContainer: any;
   @ViewChildren('jobDescription')
   jobDescription: any = new QueryList();
@@ -43,7 +43,7 @@ export class AboutMeComponent implements OnInit {
   private opened = false;
   private fullText = '';
   public shownText = '';
-  private timeToWrite = 500.0;
+  private timeToWrite = 1000.0;
   private interruptWriting = false;
   private specialCaractersMultipliers: { [key: string]: number } = {
     '.': 100.0,
@@ -110,7 +110,9 @@ export class AboutMeComponent implements OnInit {
   }
 
   getRandomQuote(data: string){
-    const quote = data.split("\n")[0].split("|");
+    const splittedData =  data.split("\n");
+    const randomIndex = Math.floor(Math.random()*splittedData.length)
+    const quote = splittedData[randomIndex].split("|");
     this.author = quote[1].split("\r")[0].trim();
     return quote[0] + ".";
 
