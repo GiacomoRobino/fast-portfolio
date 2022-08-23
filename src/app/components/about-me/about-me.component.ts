@@ -147,11 +147,11 @@ export class AboutMeComponent implements OnInit {
       const tl = gsap.timeline();
       setTimeout(() => {
             tl.to(this.jobsHeaderText.first.nativeElement, {
-              duration: 1,
+              duration: 0.6,
               color: 'white',
             });
             tl.to(this.jobsHeaderText.last.nativeElement, {
-              duration: 1,
+              duration: 0.5,
               color: 'white',
             })
           .then(() => this.animateJobCards())

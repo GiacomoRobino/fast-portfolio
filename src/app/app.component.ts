@@ -57,8 +57,10 @@ export class AppComponent implements AfterViewInit {
   public initiated = false;
   public visibleComponent = 'aboutMe';
   title = 'portfolio-fast';
+  public buttonBlock = true;
 
   ngAfterViewInit() {
+    this.buttonBlock = false;
     this.navigationButtonTextContext = this.contactMeTextContext;
     this.modules = {
       aboutMe: this.aboutMeComponent.first,
@@ -82,7 +84,9 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  click() {
+  changePage() {
+    if(!this.buttonBlock){
+      this.buttonBlock = true;
     this.cancelText(this.textContexts[this.getNonVisibleComponent()]).then(
       () => {
         this.changeTextContext();
@@ -90,10 +94,12 @@ export class AppComponent implements AfterViewInit {
         this.modules[currentVisibleComponent]
           .clickClose()
           .then((data: string) => {
+            this.buttonBlock = false;
             this.expandElement();
           });
       }
     );
+    }
   }
 
   download() {
