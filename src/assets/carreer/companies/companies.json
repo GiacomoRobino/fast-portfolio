@@ -2,27 +2,28 @@
     {
         "name": "CLUSTER REPLY",
         "link": "https://www.reply.com/cluster-reply",
-        "description": "Front end developer, with a focus on Angular, for the financial sector",
+        "description": "Front end developer, with a focus on Angular, for the banking sector",
         "period": {
-            "start": "5-2021"
+            "start": "5/2021",
+            "end": "currently working"
         }
     },
     {
         "name": "HANON systems",
         "link": "https://www.hanonsystems.com",
-        "description": "Developing internal tools with Python to increase developers productivity",
+        "description": "Developing internal utility tools with Python to increase engineers productivity. Refactoring the existing code analysis and compilation pipeline, reviewing the code requirements",
         "period": {
-            "start": "11-2019",
-            "end": "4-2021"
+            "start": "11/2019",
+            "end": "4/2021"
         }
     },
     {
         "name": "LINKS foundation",
         "link": "https://linksfoundation.com",
-        "description": "Final thesis stage, creating an interface to run complex queries against IOT datasets",
+        "description": "Final thesis stage for the B.S. in Computer Science, creating both a graphical and a command line interface to run complex queries against IOT datasets",
         "period": {
-            "start": "03-2019",
-            "end": "06-2019"
+            "start": "03/2019",
+            "end": "06/2019"
         }
     }
 ]

@@ -39,4 +39,9 @@ export class JobCardComponent {
   hideJob(){
     this.leaveJob.emit();
   }
+
+  redirect(link: any){
+    console.log(link)
+    window.open(link)
+  }
 }

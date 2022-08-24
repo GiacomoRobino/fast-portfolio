@@ -38,16 +38,16 @@ export class AboutMeComponent implements OnInit {
   @ViewChildren('jobDescription')
   jobDescription: any = new QueryList();
 
-  public shownJob = { name: '', description: '' };
+  public shownJob = { name: '', description: '', period: {start: '', end: ''} };
   private httpClient: HttpClient;
   private opened = false;
   private fullText = '';
   public shownText = '';
-  private timeToWrite = 1000.0;
+  private timeToWrite = 1500.0;
   private interruptWriting = false;
   private specialCaractersMultipliers: { [key: string]: number } = {
-    '.': 100.0,
-    ',': 50.0,
+    '.': 50.0,
+    ',': 40.0,
     '\n': 100.0
   };
   public jobs: job[] = jobsConfig;
@@ -121,7 +121,8 @@ export class AboutMeComponent implements OnInit {
   writeText(timeToWrite = -1): any {
     return new Promise<void>((resolve, reject) => {
       if (timeToWrite === -1) {
-        timeToWrite = this.timeToWrite / this.fullText.length;
+        const textLengthMultiplier = (this.fullText.split(" ").length)/ 15
+        timeToWrite = (this.timeToWrite * textLengthMultiplier) / this.fullText.length;
         this.interruptWriting = false;
       }
       if (
@@ -175,11 +176,6 @@ export class AboutMeComponent implements OnInit {
               color: 'white',
             })
           .then(() => this.animateJobCards())
-          .then(() =>
-          () => {
-            ;
-          }
-        )
           .then(() => this.animateStudyCards());
       }, timer);
     });
@@ -229,7 +225,7 @@ export class AboutMeComponent implements OnInit {
   assignJobsPreviewFunctions() {
     this.showJob = (job) => {
       this.setJobDescriptionColor('white');
-      this.shownJob = { name: job.name, description: job.description };
+      this.shownJob = job;
     };
   }
 }

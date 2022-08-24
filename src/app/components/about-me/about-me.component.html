@@ -15,7 +15,7 @@
         </div>
         <div class="jobs-icon-container-1">
           <div class="centerer job-name job-description intermediate-text" #jobDescription>
-            {{ shownJob.name }}
+            {{ shownJob.name }}<br>{{shownJob.period.start}} - {{shownJob.period.end}}
           </div>
           <div class="jobs-icon-container-2" class="centerer">
             <div *ngFor="let job of jobs; index as i">
@@ -30,7 +30,7 @@
             </div>
           </div>
           <div class="centerer job-description" #jobDescription>
-            {{ shownJob.description }}
+            Role at the company:<br>{{ shownJob.description }}
           </div>
         </div>
       </div>
