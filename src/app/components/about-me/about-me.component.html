@@ -23,6 +23,7 @@
                 <app-job-card
                   class="inner-card"
                   (updateJob)="showJob(job)"
+                  [folder]="'assets/carreer/companies/images/'"
                   (leaveJob)="hideJob()"
                   [job]="job"
                 ></app-job-card>
@@ -48,13 +49,14 @@
               {{ shownStudy.name }}<br>{{shownStudy.period.start}} - {{shownStudy.period.end}}
             </div>
             <div class="jobs-icon-container-2" class="centerer">
-              <div *ngFor="let job of studies; index as i">
+              <div *ngFor="let study of studies; index as i">
                 <div class="card">
                   <app-job-card
                     class="inner-card"
-                    (updateJob)="showStudy(job)"
+                    (updateJob)="showStudy(study)"
+                    [folder]="'assets/carreer/studies/images/'"
                     (leaveJob)="hideStudy()"
-                    [job]="job"
+                    [job]="study"
                   ></app-job-card>
                 </div>
               </div>

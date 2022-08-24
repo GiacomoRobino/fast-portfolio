@@ -15,6 +15,7 @@ import { gsap, Power4 } from 'gsap';
 })
 export class JobCardComponent {
   @Input() job!: job;
+  @Input() folder = "";
   @Output() updateJob = new EventEmitter();
   @Output() leaveJob = new EventEmitter();
   @ViewChild('image') image: any;

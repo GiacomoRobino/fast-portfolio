@@ -6,8 +6,8 @@
         "link": "https://www.unito.it/",
         "description": "What I decided to do in my life, discovered after a lot of searching",
         "period": {
-            "start": "10-2015",
-            "end": "10-2019"
+            "start": "10/2015",
+            "end": "10/2019"
         }
     },
     {
@@ -17,8 +17,8 @@
         "link": "https://www.unito.it/",
         "description": "My first degree, even if it didn't became my carreer I still have a strong interest for public policy issues",
         "period": {
-            "start": "10-2010",
-            "end": "9-2015"
+            "start": "10/2010",
+            "end": "9/2015"
         }
     }
 ]
