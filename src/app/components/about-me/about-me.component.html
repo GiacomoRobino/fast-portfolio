@@ -36,6 +36,37 @@
       </div>
     </div>
   </div>
+
+    <div class="jobs">
+      <div class="jobs-list-container">
+        <div class="jobs-list">
+          <div class="jobs-header header-button companies-header-class">
+            <span #jobsHeaderText class="intermediate-text">Places where I studied</span>
+          </div>
+          <div class="jobs-icon-container-1">
+            <div class="centerer job-name job-description intermediate-text" #studyDescription>
+              {{ shownStudy.name }}<br>{{shownStudy.period.start}} - {{shownStudy.period.end}}
+            </div>
+            <div class="jobs-icon-container-2" class="centerer">
+              <div *ngFor="let job of studies; index as i">
+                <div class="card">
+                  <app-job-card
+                    class="inner-card"
+                    (updateJob)="showStudy(job)"
+                    (leaveJob)="hideStudy()"
+                    [job]="job"
+                  ></app-job-card>
+                </div>
+              </div>
+            </div>
+            <div class="centerer job-description" #studyDescription>
+              Level: {{ shownStudy.level }}<br>{{ shownStudy.description }}
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
 <!--
   <div class="jobs">
     <div class="jobs-list-container">
@@ -52,4 +83,3 @@
     </div>
   </div>
   -->
-</div>

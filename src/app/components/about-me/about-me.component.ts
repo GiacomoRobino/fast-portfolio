@@ -37,8 +37,12 @@ export class AboutMeComponent implements OnInit {
   @ViewChild('mainContainer') mainContainer: any;
   @ViewChildren('jobDescription')
   jobDescription: any = new QueryList();
+  @ViewChildren('studyDescription')
+  studyDescription: any = new QueryList();
 
   public shownJob = { name: '', description: '', period: {start: '', end: ''} };
+  public shownStudy = { name: '', description: '', period: {start: '', end: ''}, level: '' };
+
   private httpClient: HttpClient;
   private opened = false;
   private fullText = '';
@@ -195,6 +199,7 @@ export class AboutMeComponent implements OnInit {
     const waitPromiseList = this.studyCards.map((card, index) =>
       card.showImage(index)
     );
+    this.assignStudiesPreviewFunctions();
     Promise.all(waitPromiseList).then();
   }
 
@@ -222,9 +227,35 @@ export class AboutMeComponent implements OnInit {
     });
   }
 
+  showStudy(study: any) {
+    console.log('waiting');
+  }
+
+  hideStudy() {
+    this.setStudyDescriptionColor('transparent');
+  }
+
+  setStudyDescriptionColor(color: string) {
+    this.studyDescription._results.forEach((element: any, index: number) => {
+      const duration = 0.8 * (2 - index);
+      const tl = gsap.timeline();
+      tl.to(element.nativeElement, {
+        duration,
+        color: color,
+      });
+    });
+  }
+
   assignJobsPreviewFunctions() {
     this.showJob = (job) => {
       this.setJobDescriptionColor('white');
+      this.shownJob = job;
+    };
+  }
+
+  assignStudiesPreviewFunctions() {
+    this.showStudy = (job) => {
+      this.setStudyDescriptionColor('white');
       this.shownJob = job;
     };
   }
