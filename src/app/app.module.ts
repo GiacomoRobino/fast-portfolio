@@ -22,6 +22,7 @@ import { CopyMailComponent } from './components/contact-me/copy-mail/copy-mail.c
 import { WriteMailComponent } from './components/contact-me/write-mail/write-mail.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LinkedinLinkComponent } from './components/contact-me/linkedin-link/linkedin-link.component';
+import { SkillsComponent } from './components/about-me/skills/skills.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { LinkedinLinkComponent } from './components/contact-me/linkedin-link/lin
     AnimatedBorderButtonComponent,
     CopyMailComponent,
     WriteMailComponent,
-    LinkedinLinkComponent
+    LinkedinLinkComponent,
+    SkillsComponent
   ],
   imports: [
     BrowserModule,
