@@ -20,7 +20,7 @@ export class CopyMailComponent implements OnInit {
   }
   click(){
     this.cancelText(this.mailTextContext).then(()=> {
-      this.mailTextContext.fullText = "mail copied!";
+      this.mailTextContext.fullText = "copied to clipboard!";
       this.writeText(this.mailTextContext);
     })
     navigator.clipboard.writeText("robinogiacomo@gmail.com");
