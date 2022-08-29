@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 
 
 @Component({
@@ -9,6 +9,10 @@ import {Component, Input, OnInit} from '@angular/core';
 export class BackgroundComponent {
   inputOpacity = 0.9
   @Input() inputColor !: string;
-  @Input() linkRadius !: number
+  @Input() linkRadius !: number;
+  @ViewChild("canvas") canvas : any;
 
+  setParticles(particles : number){
+    this.canvas.setParticles(particles)
+  }
 }

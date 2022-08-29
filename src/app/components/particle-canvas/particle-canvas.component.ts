@@ -10,7 +10,7 @@ export class ParticleCanvasComponent implements AfterViewInit {
   @ViewChild('canvas') canvasReference: any;
   @Input() inputOpacity = 0;
   @Input() inputColor !: string;
-  @Input() linkRadius = 100;
+  @Input() linkRadius = 150;
   public canvas: any;
   public netActivated = true;
   public netType = 'poly';
@@ -24,7 +24,7 @@ export class ParticleCanvasComponent implements AfterViewInit {
   public options = {
     particleColor: 'rgba(255,255,255)',
     lineColor: this.inputColor,
-    particleAmount: 60,
+    particleAmount: 40,
     defaultRadius: 0.1,
     variantRadius: 0.1,
     defaultSpeed: 1,
@@ -79,13 +79,31 @@ export class ParticleCanvasComponent implements AfterViewInit {
     }
   }
 
+  addParticle(){
+    this.particles.push(new Particle(this.w, this.h, this.options, this.ctx))
+  }
+
+  removeParticle(){
+    this.particles.pop()
+  }
+
+  setParticles(particlesNumber: number){
+  const neededParticles = particlesNumber - this.particles.length
+  if(neededParticles > 0){
+  for(let i = 0; i < neededParticles; i++){
+    this.addParticle()
+    }
+  }
+  else if(neededParticles < 0){
+    for(let i = 0; i > neededParticles; i--){
+      this.removeParticle()
+      }
+  }
+  }
   startAnimation() {
     window.requestAnimationFrame(this.animationLoop.bind(this));
   }
 
-  activateNet() {
-    this.netActivated = !this.netActivated;
-  }
 
   animationLoop() {
     this.renderedFrames++;

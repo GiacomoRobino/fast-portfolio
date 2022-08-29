@@ -28,6 +28,8 @@ export class AppComponent implements AfterViewInit {
   @ViewChildren('contactMeComponent')
   contactMeComponent!: QueryList<ContactMeComponent>;
   @ViewChild('introductionButton') projectsButton: any;
+  @ViewChild('background') background: any;
+
   @ViewChildren('introductionComponent')
   projectsComponent!: QueryList<ProjectsComponent>;
   @ViewChild('componentContainer') componentContainer: any;
@@ -72,16 +74,12 @@ export class AppComponent implements AfterViewInit {
     setBackground(event:any) {
       const newBgRadius = 150 - window.pageYOffset/4
       this.linkRadius = newBgRadius > 0? newBgRadius : 0;
+      this.setParticles(40 + window.pageYOffset/2)
     }
 
-  getYPosition(e: any): number {
-    return (e.target as Element).scrollTop;
- }
-
- onWindowScroll(e : any){
-  console.log(e);
-  console.log(this.getYPosition(e))
- }
+    setParticles(particlesNumber: number){
+      this.background.setParticles(particlesNumber)
+    }
 
   ngAfterViewInit() {
     this.buttonBlock = false;
