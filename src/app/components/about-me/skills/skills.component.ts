@@ -1,11 +1,133 @@
-import { AfterViewInit, Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import * as d3 from 'd3';
 
 @Component({
   selector: 'app-skills',
   templateUrl: './skills.component.html',
-  styleUrls: ['./skills.component.scss']
+  styleUrls: ['./skills.component.scss'],
 })
-export class SkillsComponent {
+export class SkillsComponent implements AfterViewInit {
+  ngAfterViewInit(): void {
+    const svg = d3.select("#skillsId").append("svg:svg")
+    .attr("width", 400)
+    .attr("height", 200)
+    const  width = 400;
+    const  height = 200;
 
+      const n : any[] = []
+      const l : any[] = []
+
+    const graph = {
+      nodes: n,
+      links : l,
+    };
+
+    const simulation = d3
+      .forceSimulation()
+      .force('center', d3.forceCenter(width / 2, height / 2).strength(0.01))
+      .nodes(graph.nodes)
+      .force('link', d3.forceLink(graph.links).distance(100))
+      .on('tick', function () {
+        svg
+          .selectAll('.link')
+          .attr('x1', function (d: any) {
+            return d.source.x;
+          })
+          .attr('y1', function (d: any) {
+            return d.source.y;
+          })
+          .attr('x2', function (d: any) {
+            return d.target.x;
+          })
+          .attr('y2', function (d: any) {
+            return d.target.y;
+          });
+
+        svg
+          .selectAll('.node')
+          .attr('cx', function (d: any) {
+            return d.x;
+          })
+          .attr('cy', function (d: any) {
+            return d.y;
+          })
+          .attr('transform', function (d: any) {
+            return 'translate(' + d.x + ',' + d.y + ')';
+          });
+      })
+      .alphaDecay(0.0002); // just added alpha decay to delay end of execution
+
+    function update() {
+      // update links
+      const link = svg.selectAll('.link').data(graph.links);
+      link
+        .enter()
+        .insert('line', '.node')
+        .attr('class', 'link')
+        .style('stroke', '#d9d9d9');
+      link.exit().remove();
+
+      // update nodes
+      const node = svg.selectAll('.node').data(graph.nodes);
+      const g = node.enter().append('g').attr('class', 'node');
+      g.append('circle').attr('r', 20).style('fill', '#d9d9d9');
+      g.append('text')
+        .attr('class', 'text')
+        .text(function (d: any) {
+          return d.name;
+        });
+      node.exit().remove();
+
+      // update simulation
+      simulation
+        .nodes(graph.nodes)
+        .force('link', d3.forceLink(graph.links).distance(100))
+        .force('charge', d3.forceManyBody().strength(-200))
+        .restart();
+    }
+
+    function addNode(node: any) {
+      graph.nodes.push(node);
+      update();
+    }
+
+    function connectNodes(source : any, target: any) {
+      graph.links.push({
+        source: source,
+        target: target,
+      });
+      update();
+    }
+
+    addNode({
+      id: 'you',
+      name: 'you',
+    });
+
+    let index = 1;
+
+    // add a new node every three seconds and connect to 'you'
+    const interval = window.setInterval(() => {
+      let id = Math.random().toString(36).replace('0.', '');
+      id = id.slice(0, 4);
+      addNode({
+        id: id,
+        name: id,
+      });
+
+      connectNodes(0, index);
+      index++;
+    }, 3000);
+
+    // no more than 8 nodes
+    setTimeout(() => {
+      clearInterval(interval);
+    }, 3000 * 8);
+  }
 }
