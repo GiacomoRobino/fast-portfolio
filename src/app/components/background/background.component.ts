@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./background.component.scss']
 })
 export class BackgroundComponent {
-  inputOpacity = 1
+  inputOpacity = 0.9
   @Input() inputColor !: string;
   @Input() linkRadius !: number
 

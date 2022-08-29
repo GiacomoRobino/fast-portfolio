@@ -65,12 +65,12 @@ export class AppComponent implements AfterViewInit {
   public buttonBlock = true;
   public colors = { contactMe: '176, 242, 180', aboutMe: '186, 215, 242' };
   public bgColor = this.colors.aboutMe;
-  public linkRadius = 100;
+  public linkRadius = 150;
 
   
   @HostListener('window:scroll', ['$event']) 
     setBackground(event:any) {
-      const newBgRadius = 100 - window.pageYOffset/7
+      const newBgRadius = 150 - window.pageYOffset/4
       this.linkRadius = newBgRadius > 0? newBgRadius : 0;
     }
 
@@ -130,12 +130,9 @@ export class AppComponent implements AfterViewInit {
   switchColor() {
     if (this.bgColor == this.colors.aboutMe) {
       this.bgColor = this.colors.contactMe;
-      this.linkRadius =1000;
     } else {
       this.bgColor = this.colors.aboutMe;
-      this.linkRadius = 100
     }
-    console.log(this.bgColor)
   }
 
   download() {
