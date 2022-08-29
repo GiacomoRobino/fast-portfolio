@@ -7,6 +7,7 @@
     {{ author }}
   </div>
 </div>
+<div class=""*ngIf="!mainTextVisible">
   <div class="jobs">
     <div class="jobs-list-container">
       <div class="jobs-list">
@@ -70,19 +71,4 @@
       <app-skills></app-skills>
   </div>
 </div>
-<!--
-  <div class="jobs">
-    <div class="jobs-list-container">
-      <div class="jobs-list">
-        <div class="jobs-header header-button companies-header-class">
-          <span #jobsHeaderText class="intermediate-text">Places where I studied</span>
-        </div>
-        <div *ngFor="let study of studies; index as i">
-          <div class="card">
-            <app-study-card class="inner-card" [study]="study"></app-study-card>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  -->
+</div>
