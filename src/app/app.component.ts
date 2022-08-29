@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   forwardRef,
+  HostListener,
   QueryList,
   ViewChild,
   ViewChildren,
@@ -12,6 +13,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AnimatedBorderButtonComponent } from './components/common-components/animated-border-button/animated-border-button.component';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +22,7 @@ import { AnimatedBorderButtonComponent } from './components/common-components/an
 })
 @Injectable()
 export class AppComponent implements AfterViewInit {
+
   @ViewChildren('aboutMeComponent')
   aboutMeComponent!: QueryList<AboutMeComponent>;
   @ViewChildren('contactMeComponent')
@@ -46,7 +49,9 @@ export class AppComponent implements AfterViewInit {
   };
   private interruptWriting = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+
+  }
 
   public modules: { [key: string]: any } = {};
   public buttons: { [key: string]: any } = {};
@@ -61,6 +66,22 @@ export class AppComponent implements AfterViewInit {
   public colors = { contactMe: '176, 242, 180', aboutMe: '186, 215, 242' };
   public bgColor = this.colors.aboutMe;
   public linkRadius = 100;
+
+  
+  @HostListener('window:scroll', ['$event']) 
+    setBackground(event:any) {
+      const newBgRadius = 100 - window.pageYOffset/7
+      this.linkRadius = newBgRadius > 0? newBgRadius : 0;
+    }
+
+  getYPosition(e: any): number {
+    return (e.target as Element).scrollTop;
+ }
+
+ onWindowScroll(e : any){
+  console.log(e);
+  console.log(this.getYPosition(e))
+ }
 
   ngAfterViewInit() {
     this.buttonBlock = false;

@@ -122,7 +122,7 @@ export class ParticleCanvasComponent implements AfterViewInit {
         hubs[i].x,
         hubs[i].y
       );
-      const opacity = this.inputOpacity - distance / this.options.linkRadius;
+      const opacity = this.inputOpacity - distance / this.linkRadius;
       if (opacity > 0) {
         if (this.netActivated && point.valid && hubs[i].valid) {
           this.ctx.lineWidth = 0.5;
@@ -138,43 +138,6 @@ export class ParticleCanvasComponent implements AfterViewInit {
     point.radius = particleNeighborsNumber;
   }
 
-  linkPointsPoly(point: any, hubs: any[]) {
-    point.radius = 0.5;
-    const particleNeighborsNumber = point.radius;
-    const neighbors = [];
-    for (let i = 0; i < hubs.length; i++) {
-      const distance = this.checkDistance(
-        point.x,
-        point.y,
-        hubs[i].x,
-        hubs[i].y
-      );
-      const opacity =  this.inputOpacity - distance / this.options.linkRadius;
-      if (opacity > 0 && hubs[i].valid) {
-        if (this.netActivated) {
-          this.ctx.lineWidth = 0.5;
-          this.ctx.strokeStyle = 'rgb(100,100,200)';
-          neighbors.push(hubs[i]);
-        }
-      }
-    }
-    if (neighbors.length > 0 && this.netActivated) {
-      this.ctx.beginPath();
-      for (const neighbor of neighbors) {
-        this.ctx.moveTo(point.x, point.y);
-        this.ctx.lineTo(neighbor.x, neighbor.y);
-        this.ctx.moveTo(point.x, point.y);
-      }
-      this.ctx.closePath();
-      this.ctx.stroke();
-    }
-    point.radius = particleNeighborsNumber;
-  }
-  switchNetType() {
-    this.netType === 'poly'
-      ? (this.netType = 'single')
-      : (this.netType = 'poly');
-  }
   checkDistance(x1: number, y1: number, x2: number, y2: number) {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
   }
