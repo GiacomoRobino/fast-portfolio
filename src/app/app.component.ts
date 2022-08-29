@@ -63,7 +63,7 @@ export class AppComponent implements AfterViewInit {
   public visibleComponent = 'aboutMe';
   title = 'portfolio-fast';
   public buttonBlock = true;
-  public colors = { contactMe: '176, 242, 180', aboutMe: '186, 215, 242' };
+  public colors = { contactMe: '235, 88, 52', aboutMe: '52, 235, 204' };
   public bgColor = this.colors.aboutMe;
   public linkRadius = 150;
 
