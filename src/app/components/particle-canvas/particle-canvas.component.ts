@@ -102,7 +102,7 @@ export class ParticleCanvasComponent implements AfterViewInit {
   drawParticle() {
     for (const particle of this.particles) {
       particle.update();
-      particle.draw();
+      //particle.draw();
     }
   }
 
