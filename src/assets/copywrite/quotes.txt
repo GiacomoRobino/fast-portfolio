@@ -29,3 +29,4 @@ A language that doesn't affect the way you think about programming is not worth 
 When I am working on a problem, I never think about beauty but when I have finished, if the solution is not beautiful, I know it is wrong|R. Buckminster Fuller
 Trees sprout up just about everywhere in computer science|Donald Knuth
 Computer Science: A study akin to numerology and astrology, but lacking the precision of the former and the success of the latter|Stan Kelly-Bootle
+There are only two kinds of languages: the ones people complain about and the ones nobody uses|Bjarne Stroustrup

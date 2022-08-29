@@ -58,6 +58,9 @@ export class AppComponent implements AfterViewInit {
   public visibleComponent = 'aboutMe';
   title = 'portfolio-fast';
   public buttonBlock = true;
+  public colors = { contactMe: '176, 242, 180', aboutMe: '186, 215, 242' };
+  public bgColor = this.colors.aboutMe;
+  public linkRadius = 100;
 
   ngAfterViewInit() {
     this.buttonBlock = false;
@@ -85,21 +88,33 @@ export class AppComponent implements AfterViewInit {
   }
 
   changePage() {
-    if(!this.buttonBlock){
+    this.switchColor();
+    if (!this.buttonBlock) {
       this.buttonBlock = true;
-    this.cancelText(this.textContexts[this.getNonVisibleComponent()]).then(
-      () => {
-        this.changeTextContext();
-        const currentVisibleComponent = this.getVisibleComponent();
-        this.modules[currentVisibleComponent]
-          .clickClose()
-          .then((data: string) => {
-            this.buttonBlock = false;
-            this.expandElement();
-          });
-      }
-    );
+      this.cancelText(this.textContexts[this.getNonVisibleComponent()]).then(
+        () => {
+          this.changeTextContext();
+          const currentVisibleComponent = this.getVisibleComponent();
+          this.modules[currentVisibleComponent]
+            .clickClose()
+            .then((data: string) => {
+              this.buttonBlock = false;
+              this.expandElement();
+            });
+        }
+      );
     }
+  }
+
+  switchColor() {
+    if (this.bgColor == this.colors.aboutMe) {
+      this.bgColor = this.colors.contactMe;
+      this.linkRadius =1000;
+    } else {
+      this.bgColor = this.colors.aboutMe;
+      this.linkRadius = 100
+    }
+    console.log(this.bgColor)
   }
 
   download() {
@@ -111,10 +126,13 @@ export class AppComponent implements AfterViewInit {
     link.click();
     link.remove();
 
-    this.cancelText(this.downloadCvTextContext).then(()=>{
-    this.downloadCvTextContext = { shownText: '', fullText: 'Cv Downloaded!' }
-    this.writeText(this.downloadCvTextContext)}
-    )
+    this.cancelText(this.downloadCvTextContext).then(() => {
+      this.downloadCvTextContext = {
+        shownText: '',
+        fullText: 'Cv Downloaded!',
+      };
+      this.writeText(this.downloadCvTextContext);
+    });
   }
 
   changeTextContext() {

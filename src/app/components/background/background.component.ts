@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 
 @Component({
@@ -6,6 +6,9 @@ import {Component} from '@angular/core';
   templateUrl: './background.component.html',
   styleUrls: ['./background.component.scss']
 })
-export class BackgroundComponent{
+export class BackgroundComponent {
+  inputOpacity = 1
+  @Input() inputColor !: string;
+  @Input() linkRadius !: number
 
 }
