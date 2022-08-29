@@ -65,7 +65,7 @@ export class AppComponent implements AfterViewInit {
   public visibleComponent = 'aboutMe';
   title = 'portfolio-fast';
   public buttonBlock = true;
-  public colors = { introColor: '229, 255, 61', contactMe: '235, 88, 52', aboutMe: '52, 235, 204' };
+  public colors = { introColor: '2, 10, 166', aboutMe: '235, 88, 52',  contactMe: '52, 235, 204' };
   public bgColor = this.colors.introColor;
   public linkRadius = 150;
 
@@ -172,7 +172,9 @@ export class AppComponent implements AfterViewInit {
   }
 
   finishedIntro() {
-    this.bgColor = this.colors.aboutMe;
+    setTimeout(() => {
+      this.bgColor = this.colors.aboutMe
+    }, 100);
     this.headerVisible = true;
   }
 
