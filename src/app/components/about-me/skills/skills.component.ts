@@ -90,7 +90,7 @@ export class SkillsComponent implements AfterViewInit {
         .text(function (d: any) {
           return d.name;
         })
-        .on("mouseover", (d:any) => console.log(d.fromElement))
+        .on("mouseover", (d:any) => console.log(d.srcElement.innerHTML))
         ;
       node.exit().remove();
 
@@ -98,7 +98,7 @@ export class SkillsComponent implements AfterViewInit {
       simulation
         .nodes(graph.nodes)
         .force('link', d3.forceLink(graph.links).distance(100))
-        .force('charge', d3.forceManyBody().strength(-200))
+        .force('charge', d3.forceManyBody().strength(-10))
         .restart();
     }
 
@@ -126,12 +126,48 @@ export class SkillsComponent implements AfterViewInit {
       id: 1,
       name: "angular",
     });
-/*
+
     addNode({
       id: 2,
       name: "css3"
     });
-    */
+
+    addNode({
+      id: 3,
+      name: "d3js"
+    });
+
+    addNode({
+      id: 4,
+      name: "typescript",
+    });
+
+    addNode({
+      id: 5,
+      name: "greensock",
+    });
+
+    addNode({
+      id: 6,
+      name: "html",
+    });
+
+    addNode({
+      id: 7,
+      name: "rxjs",
+    });
+
+   
+    
     connectNodes(0, 1);
+    connectNodes(4, 1);
+    connectNodes(0, 3);
+    connectNodes(0, 5);
+    connectNodes(0, 6);
+    connectNodes(0, 2);
+    connectNodes(7, 1);
+
+
+
   }
 }
