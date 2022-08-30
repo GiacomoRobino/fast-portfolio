@@ -14,11 +14,11 @@ import * as d3 from 'd3';
 })
 export class SkillsComponent implements AfterViewInit {
   ngAfterViewInit(): void {
+    const  width = 800;
+    const  height = 400;
     const svg = d3.select("#skillsId").append("svg:svg")
-    .attr("width", 400)
-    .attr("height", 200)
-    const  width = 400;
-    const  height = 200;
+    .attr("width", width)
+    .attr("height", height)
 
       const n : any[] = []
       const l : any[] = []
@@ -76,12 +76,22 @@ export class SkillsComponent implements AfterViewInit {
       // update nodes
       const node = svg.selectAll('.node').data(graph.nodes);
       const g = node.enter().append('g').attr('class', 'node');
-      g.append('circle').attr('r', 20).style('fill', '#d9d9d9');
+      const imgSize = 24
+      g.append("svg:image")
+      .attr('x', -(imgSize/2))
+      .attr('y', -(imgSize/2))
+      .attr('width', imgSize)
+      .attr('height', imgSize)
+      .attr("xlink:href",(d:any) => "assets/scalableVectorGraphics/skills/" + d.name + ".svg")
+
       g.append('text')
         .attr('class', 'text')
+        .style('fill', '#d9d9d9')
         .text(function (d: any) {
           return d.name;
-        });
+        })
+        .on("mouseover", (d:any) => console.log(d.fromElement))
+        ;
       node.exit().remove();
 
       // update simulation
@@ -105,29 +115,23 @@ export class SkillsComponent implements AfterViewInit {
       update();
     }
 
+    
+
     addNode({
-      id: 'you',
-      name: 'you',
+      id: 0,
+      name: "javascript",
     });
 
-    let index = 1;
-
-    // add a new node every three seconds and connect to 'you'
-    const interval = window.setInterval(() => {
-      let id = Math.random().toString(36).replace('0.', '');
-      id = id.slice(0, 4);
-      addNode({
-        id: id,
-        name: id,
-      });
-
-      connectNodes(0, index);
-      index++;
-    }, 3000);
-
-    // no more than 8 nodes
-    setTimeout(() => {
-      clearInterval(interval);
-    }, 3000 * 8);
+    addNode({
+      id: 1,
+      name: "angular",
+    });
+/*
+    addNode({
+      id: 2,
+      name: "css3"
+    });
+    */
+    connectNodes(0, 1);
   }
 }

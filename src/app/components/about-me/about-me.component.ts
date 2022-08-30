@@ -175,12 +175,16 @@ export class AboutMeComponent implements OnInit {
               duration: 0.6,
               color: 'white',
             });
-            tl.to(this.jobsHeaderText.last.nativeElement, {
+            tl.to(this.jobsHeaderText.toArray()[1].nativeElement, {
               duration: 0.5,
               color: 'white',
             })
           .then(() => this.animateJobCards())
-          .then(() => this.animateStudyCards());
+          .then(() => this.animateStudyCards())
+          .then(() => tl.to(this.jobsHeaderText.last.nativeElement, {
+            duration: 0.5,
+            color: 'white',
+          }));
       }, timer);
     });
   }
