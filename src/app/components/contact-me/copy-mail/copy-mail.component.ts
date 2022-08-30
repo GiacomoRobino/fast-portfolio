@@ -7,27 +7,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CopyMailComponent implements OnInit {
   public mail = 'robinogiacomo@gmail.com';
-  public mailTextContext = { shownText: '', fullText: "click to copy" };
+  public mailTextContext = { shownText: '', fullText: 'click to copy' };
   private timeToWrite = 1000.0;
   private specialCaractersMultipliers: { [key: string]: number } = {
     '.': 500.0,
     ',': 200.0,
   };
   private interruptWriting = false;
+  public buttonBlock = false;
 
-  ngOnInit(){
-    this.writeText(this.mailTextContext)
+  ngOnInit() {
+    this.writeText(this.mailTextContext);
   }
-  click(){
-    this.cancelText(this.mailTextContext).then(()=> {
-      this.mailTextContext.fullText = "copied to clipboard!";
-      this.writeText(this.mailTextContext);
-    })
-    navigator.clipboard.writeText("robinogiacomo@gmail.com");
-    
+  click() {
+    if (!this.buttonBlock) {
+      this.buttonBlock = true;
+      this.cancelText(this.mailTextContext).then(() => {
+        this.mailTextContext.fullText = 'copied to clipboard!';
+        this.writeText(this.mailTextContext).then(
+          () => (this.buttonBlock = false)
+        );
+      });
+    }
+    navigator.clipboard.writeText('robinogiacomo@gmail.com');
   }
 
-  
   writeText(textContext: any, timeToWrite = -1): any {
     return new Promise<void>((resolve, reject) => {
       if (timeToWrite === -1) {

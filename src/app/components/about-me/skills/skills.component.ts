@@ -157,10 +157,16 @@ export class SkillsComponent implements AfterViewInit {
       name: "rxjs",
     });
 
+    addNode({
+      id: 8,
+      name: "github",
+    });
+
    
     
     connectNodes(0, 1);
     connectNodes(4, 1);
+    connectNodes(4, 8);
     connectNodes(0, 3);
     connectNodes(0, 5);
     connectNodes(0, 6);

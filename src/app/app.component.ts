@@ -22,7 +22,6 @@ import { fromEvent } from 'rxjs';
 })
 @Injectable()
 export class AppComponent implements AfterViewInit {
-
   @ViewChildren('aboutMeComponent')
   aboutMeComponent!: QueryList<AboutMeComponent>;
   @ViewChildren('contactMeComponent')
@@ -51,9 +50,6 @@ export class AppComponent implements AfterViewInit {
   };
   private interruptWriting = false;
 
-  constructor(private http: HttpClient) {
-
-  }
 
   public modules: { [key: string]: any } = {};
   public buttons: { [key: string]: any } = {};
@@ -65,24 +61,26 @@ export class AppComponent implements AfterViewInit {
   public visibleComponent = 'aboutMe';
   title = 'portfolio-fast';
   public buttonBlock = true;
-  public colors = { introColor: '2, 10, 166', aboutMe: '235, 88, 52',  contactMe: '52, 235, 204' };
+  public colors = {
+    introColor: '52, 91,235',
+    aboutMe: '235, 88, 52',
+    contactMe: '52, 235, 204',
+  };
   public bgColor = this.colors.introColor;
   public linkRadius = 150;
 
-  
-  @HostListener('window:scroll', ['$event']) 
-    setBackground(event:any) {
-      const newBgRadius = 150 - window.pageYOffset/4
-      this.linkRadius = newBgRadius > 0? newBgRadius : 0;
-      this.setParticles(40 + window.pageYOffset/2)
-    }
+  @HostListener('window:scroll', ['$event'])
+  setBackground(event: any) {
+    const newBgRadius = 150 - window.pageYOffset / 4;
+    this.linkRadius = newBgRadius > 0 ? newBgRadius : 0;
+    this.setParticles(40 + window.pageYOffset / 2);
+  }
 
-    setParticles(particlesNumber: number){
-      this.background.setParticles(particlesNumber)
-    }
+  setParticles(particlesNumber: number) {
+    this.background.setParticles(particlesNumber);
+  }
 
   ngAfterViewInit() {
-    this.buttonBlock = false;
     this.navigationButtonTextContext = this.contactMeTextContext;
     this.modules = {
       aboutMe: this.aboutMeComponent.first,
@@ -172,9 +170,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   finishedIntro() {
-    setTimeout(() => {
-      this.bgColor = this.colors.aboutMe
-    }, 100);
+    this.bgColor = this.colors.aboutMe;
     this.headerVisible = true;
   }
 
@@ -188,6 +184,7 @@ export class AppComponent implements AfterViewInit {
         textContext.shownText.length < textContext.fullText.length &&
         !this.interruptWriting
       ) {
+        this.buttonBlock = true
         textContext.shownText = this.addOneLetter(
           textContext.shownText,
           textContext.fullText
@@ -209,6 +206,7 @@ export class AppComponent implements AfterViewInit {
           this.writeText(textContext, timeToWrite).then(resolve);
         }, timeToWrite);
       } else {
+        this.buttonBlock = false
         resolve();
       }
     });
