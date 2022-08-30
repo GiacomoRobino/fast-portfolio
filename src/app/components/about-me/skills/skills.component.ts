@@ -86,6 +86,7 @@ export class SkillsComponent implements AfterViewInit {
 
       g.append('text')
         .attr('class', 'text')
+        .attr('x', imgSize/2)
         .style('fill', '#d9d9d9')
         .text(function (d: any) {
           return d.name;
