@@ -45,10 +45,12 @@ export class AppComponent implements AfterViewInit {
   public downloadCvTextContext = { shownText: '', fullText: 'Download cv' };
   private timeToWrite = 1000.0;
   private specialCaractersMultipliers: { [key: string]: number } = {
-    '.': 500.0,
+    '.': 300.0,
     ',': 200.0,
+    ':': 300.0
   };
   private interruptWriting = false;
+  public startingParticles = 40;
 
 
   public modules: { [key: string]: any } = {};
@@ -73,7 +75,7 @@ export class AppComponent implements AfterViewInit {
   setBackground(event: any) {
     const newBgRadius = 150 - window.pageYOffset / 4;
     this.linkRadius = newBgRadius > 0 ? newBgRadius : 0;
-    this.setParticles(40 + window.pageYOffset / 2);
+    this.setParticles(this.startingParticles + window.pageYOffset / 2);
   }
 
   setParticles(particlesNumber: number) {
@@ -124,11 +126,15 @@ export class AppComponent implements AfterViewInit {
   }
 
   switchColor() {
+    this.background.setParticlesProgressive(0).then(() => {
     if (this.bgColor == this.colors.aboutMe) {
       this.bgColor = this.colors.contactMe;
     } else {
       this.bgColor = this.colors.aboutMe;
     }
+    this.background.setParticlesProgressive(this.startingParticles)
+  }
+    )
   }
 
   download() {

@@ -15,4 +15,8 @@ export class BackgroundComponent {
   setParticles(particles : number){
     this.canvas.setParticles(particles)
   }
+
+  setParticlesProgressive(particles : number){
+    return this.canvas.setParticlesProgressive(particles)
+  }
 }

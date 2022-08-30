@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
+import { timer , takeWhile} from 'rxjs';
 import { Particle } from './model';
 
 @Component({
@@ -104,7 +105,6 @@ export class ParticleCanvasComponent implements AfterViewInit {
     window.requestAnimationFrame(this.animationLoop.bind(this));
   }
 
-
   animationLoop() {
     this.renderedFrames++;
     this.ctx.clearRect(0, 0, this.w, this.h);
@@ -158,5 +158,23 @@ export class ParticleCanvasComponent implements AfterViewInit {
 
   checkDistance(x1: number, y1: number, x2: number, y2: number) {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+  }
+
+  setParticlesProgressive(particles: number){
+    return new Promise<void>(resolve => {
+      if(particles < this.particles.length){
+        timer(0,100).pipe(takeWhile(() => this.particles.length >= 0)).subscribe(()=> {
+          this.removeParticle();
+          if(this.particles.length === 0){
+            resolve()}
+          })
+      }
+      if(particles >= this.particles.length){
+        timer(0,100).pipe(takeWhile(() => this.particles.length <= particles)).subscribe(()=> {this.addParticle();
+        if(this.particles.length === particles){
+          resolve()}
+        })
+      }
+    })
   }
 }
