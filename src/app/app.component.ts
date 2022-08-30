@@ -137,6 +137,14 @@ export class AppComponent implements AfterViewInit {
     )
   }
 
+  switchColorIntro() {
+    this.background.setParticlesProgressive(0).then(() => {
+      this.bgColor = this.colors.aboutMe;
+    this.background.setParticlesProgressive(this.startingParticles)
+  }
+    )
+  }
+
   download() {
     const link = document.createElement('a');
     link.setAttribute('type', 'hidden');
@@ -176,7 +184,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   finishedIntro() {
-    this.bgColor = this.colors.aboutMe;
+    this.switchColorIntro();
     this.headerVisible = true;
   }
 

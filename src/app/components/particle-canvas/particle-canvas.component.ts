@@ -161,17 +161,22 @@ export class ParticleCanvasComponent implements AfterViewInit {
   }
 
   setParticlesProgressive(particles: number){
+    const timeInterval = 50;
+    const elementsToRemove = this.particles.length;
     return new Promise<void>(resolve => {
       if(particles < this.particles.length){
-        timer(0,100).pipe(takeWhile(() => this.particles.length >= 0)).subscribe(()=> {
+        timer(timeInterval,timeInterval).pipe(takeWhile(val => val <= elementsToRemove)).subscribe(()=> {
           this.removeParticle();
           if(this.particles.length === 0){
+            console.log("r0");
             resolve()}
           })
       }
-      if(particles >= this.particles.length){
-        timer(0,100).pipe(takeWhile(() => this.particles.length <= particles)).subscribe(()=> {this.addParticle();
+      else {
+        timer(0,timeInterval).pipe(takeWhile(() => this.particles.length <= particles)).subscribe(()=> {
+          this.addParticle();
         if(this.particles.length === particles){
+          console.log("resolved")
           resolve()}
         })
       }
