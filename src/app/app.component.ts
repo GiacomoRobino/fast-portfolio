@@ -87,11 +87,11 @@ export class AppComponent implements AfterViewInit, OnInit {
   
   ngOnInit() {
   
-    this.responsive.observe(Breakpoints.HandsetLandscape)
+    this.responsive.observe(Breakpoints.Handset)
       .subscribe(result => {
 
         if (result.matches) {
-          console.log("screens matches HandsetLandscape");
+          console.log("screens matches Handset");
         }
 
   });}
