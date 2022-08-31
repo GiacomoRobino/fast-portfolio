@@ -3,6 +3,7 @@ import {
   Component,
   forwardRef,
   HostListener,
+  OnInit,
   QueryList,
   ViewChild,
   ViewChildren,
@@ -10,10 +11,11 @@ import {
 import { AboutMeComponent } from './components/about-me/about-me.component';
 import { ContactMeComponent } from './components/contact-me/contact-me.component';
 import { ProjectsComponent } from './components/projects/projects.component';
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AnimatedBorderButtonComponent } from './components/common-components/animated-border-button/animated-border-button.component';
-import { fromEvent } from 'rxjs';
+import {
+  BreakpointObserver, Breakpoints
+} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +23,7 @@ import { fromEvent } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 @Injectable()
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnInit {
   @ViewChildren('aboutMeComponent')
   aboutMeComponent!: QueryList<AboutMeComponent>;
   @ViewChildren('contactMeComponent')
@@ -71,6 +73,10 @@ export class AppComponent implements AfterViewInit {
   public bgColor = this.colors.introColor;
   public linkRadius = 150;
 
+  constructor(private responsive: BreakpointObserver) {
+  
+  }
+
   @HostListener('window:scroll', ['$event'])
   setBackground(event: any) {
     const newBgRadius = 150 - window.pageYOffset / 4;
@@ -78,9 +84,17 @@ export class AppComponent implements AfterViewInit {
     this.setParticles(this.startingParticles + window.pageYOffset / 2);
   }
 
-  setParticles(particlesNumber: number) {
-    this.background.setParticles(particlesNumber);
-  }
+  
+  ngOnInit() {
+  
+    this.responsive.observe(Breakpoints.HandsetLandscape)
+      .subscribe(result => {
+
+        if (result.matches) {
+          console.log("screens matches HandsetLandscape");
+        }
+
+  });}
 
   ngAfterViewInit() {
     this.navigationButtonTextContext = this.contactMeTextContext;
@@ -106,6 +120,10 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
+  setParticles(particlesNumber: number) {
+    this.background.setParticles(particlesNumber);
+  }
+
   changePage() {
     this.switchColor();
     if (!this.buttonBlock) {
@@ -129,8 +147,10 @@ export class AppComponent implements AfterViewInit {
     this.background.setParticlesProgressive(0).then(() => {
     if (this.bgColor == this.colors.aboutMe) {
       this.bgColor = this.colors.contactMe;
+      this.linkRadius = 300;
     } else {
       this.bgColor = this.colors.aboutMe;
+      this.linkRadius = 150;
     }
     this.background.setParticlesProgressive(this.startingParticles)
   }
