@@ -72,6 +72,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   };
   public bgColor = this.colors.introColor;
   public linkRadius = 150;
+  public isPhone = false;
 
   constructor(private responsive: BreakpointObserver) {
   
@@ -91,7 +92,7 @@ export class AppComponent implements AfterViewInit, OnInit {
       .subscribe(result => {
 
         if (result.matches) {
-          console.log("screens matches Handset");
+          this.isPhone = true
         }
 
   });}

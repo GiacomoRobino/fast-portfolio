@@ -3,9 +3,18 @@
     flex-direction: row;
     justify-content: space-evenly;
 }
-
+.is-phone{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
 .header-button{
     font-size: 4rem;
+    flex-shrink: 3;
+}
+
+.download-cv-phone{
+    font-size: 3rem;
     flex-shrink: 3;
 }
 
@@ -31,6 +40,4 @@
     flex-direction: column;
 }
 
-.background{
 
-}
