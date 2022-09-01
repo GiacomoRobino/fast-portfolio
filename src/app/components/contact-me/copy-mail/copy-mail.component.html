@@ -1,7 +1,17 @@
-<div class="container">
-
-<div class="intermediate-text">mail:<br>{{mail}}</div> 
-<div class="copy-button">
-<app-animated-border-button [initTime]="2" (click)="click()">{{mailTextContext.shownText}}</app-animated-border-button>
-</div>
+<div
+  [ngClass]="{
+    'phone-container': isPhone | async,
+    container: !(isPhone | async)
+  }"
+>
+  <div [ngClass]="{
+    'small-text': isPhone | async, 'intermediate-text':!(isPhone | async)
+  }">mail:<br />{{ mail }}</div>
+  <div [ngClass]="{
+    'copy-button-phone': isPhone | async, 'copy-button':!(isPhone | async)
+  }">
+    <app-animated-border-button [initTime]="2" (click)="click()">{{
+      mailTextContext.shownText
+    }}</app-animated-border-button>
+  </div>
 </div>

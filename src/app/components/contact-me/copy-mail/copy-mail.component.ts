@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DeviceCheckService } from 'src/app/services/device-check.service';
 
 @Component({
   selector: 'app-copy-mail',
@@ -15,7 +16,10 @@ export class CopyMailComponent implements OnInit {
   };
   private interruptWriting = false;
   public buttonBlock = false;
+  public isPhone = this.deviceCheckService.isPhone(true);
 
+  constructor(private deviceCheckService: DeviceCheckService) {
+  }
   ngOnInit() {
     this.writeText(this.mailTextContext);
   }

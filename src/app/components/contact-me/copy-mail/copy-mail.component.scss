@@ -7,8 +7,22 @@
     align-items: baseline;
 }
 
+.phone-container{
+    height: 30%;
+    display: flex;
+    margin: 15% 0%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+}
+
 .copy-button{
     width: 16rem;
     margin: 0% 4%;
     height: 2rem;
+}
+.copy-button-phone{
+    width: 16rem;
+    margin: 0% 4%;
+    height: 4rem;
 }
