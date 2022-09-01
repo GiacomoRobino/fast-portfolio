@@ -64,7 +64,7 @@ export class AppComponent implements AfterViewInit {
   };
   public initiated = false;
   public visibleComponent = 'aboutMe';
-  title = 'portfolio-fast';
+  title = 'portfolio';
   public buttonBlock = true;
   public colors = {
     introColor: '52, 91,235',
