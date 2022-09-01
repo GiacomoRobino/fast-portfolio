@@ -17,6 +17,8 @@ import { job } from './job-card/model';
 import { study } from './study-card/model';
 import { gsap } from 'gsap';
 import { StudyCardComponent } from './study-card/study-card.component';
+import { DeviceCheckService } from 'src/app/services/device-check.service';
+import { SkillsService } from 'src/app/services/skills.service';
 
 @Component({
   selector: 'app-about-me',
@@ -58,8 +60,11 @@ export class AboutMeComponent implements OnInit {
   public studies: study[] = studiesConfig;
   public mainTextVisible = true;
   public author = '';
+  public isPhone = this.deviceCheckService.isPhone(true);
+  public skills : Array<any> = this.skillService.getSkills().map(skill => skill?.name)
+  ;
 
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient,private deviceCheckService: DeviceCheckService, public skillService: SkillsService) {
     this.httpClient = http;
   }
 

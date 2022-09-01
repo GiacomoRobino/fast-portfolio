@@ -6,6 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import * as d3 from 'd3';
+import { SkillsService } from 'src/app/services/skills.service';
 
 @Component({
   selector: 'app-skills',
@@ -13,6 +14,7 @@ import * as d3 from 'd3';
   styleUrls: ['./skills.component.scss'],
 })
 export class SkillsComponent implements AfterViewInit {
+  constructor(public skillsService : SkillsService){}
   ngAfterViewInit(): void {
     const  width = window.innerWidth * 0.6;
     const  height = width / 2;
@@ -117,54 +119,9 @@ export class SkillsComponent implements AfterViewInit {
     }
 
     
-
-    addNode({
-      id: 0,
-      name: "javascript",
-    });
-
-    addNode({
-      id: 1,
-      name: "angular",
-    });
-
-    addNode({
-      id: 2,
-      name: "css3"
-    });
-
-    addNode({
-      id: 3,
-      name: "d3js"
-    });
-
-    addNode({
-      id: 4,
-      name: "typescript",
-    });
-
-    addNode({
-      id: 5,
-      name: "greensock",
-    });
-
-    addNode({
-      id: 6,
-      name: "html",
-    });
-
-    addNode({
-      id: 7,
-      name: "rxjs",
-    });
-
-    addNode({
-      id: 8,
-      name: "github",
-    });
-
-   
-    
+      for(const skill of this.skillsService.getSkills()){
+        addNode(skill)
+      }
     connectNodes(0, 1);
     connectNodes(4, 1);
     connectNodes(4, 8);

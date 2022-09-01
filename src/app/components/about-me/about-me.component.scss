@@ -84,15 +84,32 @@ span {
   color: transparent;
 }
 
-.author-class{
+.author-class {
   opacity: 0;
   margin-top: 1rem;
 }
 
-.skills-container{
+.skills-container {
   display: flex;
-    flex-direction: row;
-    align-content: flex-start;
-    justify-content: space-evenly;
-    align-items: center;
+  flex-direction: row;
+  align-content: flex-start;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.skills-container-phone {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.phone-view-skills-list{
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
