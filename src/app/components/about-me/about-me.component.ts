@@ -264,7 +264,6 @@ export class AboutMeComponent implements OnInit {
 
   assignStudiesPreviewFunctions() {
     this.showStudy = (study) => {
-      console.log(study)
       this.setStudyDescriptionColor('white');
       this.shownStudy = study;
     };

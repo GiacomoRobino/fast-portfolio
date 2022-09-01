@@ -18,7 +18,8 @@
           </div>
           <div class="jobs-icon-container-1">
             <div
-              class="centerer job-name job-description intermediate-text"
+              class="centerer job-name job-description"
+              [ngClass]="{'small-text': isPhone | async, 'intermediate-text': !(isPhone | async)}"
               #jobDescription
             >
               {{ shownJob.name }}<br />{{ shownJob.period.start }} -
@@ -54,8 +55,9 @@
             >
           </div>
           <div class="jobs-icon-container-1">
-            <div
-              class="centerer job-name job-description intermediate-text"
+            <div 
+              class="centerer job-name job-description"
+              [ngClass]="{'small-text': isPhone | async, 'intermediate-text': !(isPhone | async)}"
               #studyDescription
             >
               {{ shownStudy.name }}<br />{{ shownStudy.period.start }} -
@@ -94,15 +96,7 @@
       <div *ngIf="!(isPhone | async)">
         <app-skills></app-skills>
       </div>
-      <!--
-      <div class="" *ngIf="isPhone | async">
-        <ul>
-          <li *ngFor="let skill of skills" class="small-text">
-            <pre>{{skill | json}}</pre>
-          </li>
-        </ul>
-      </div>
-    -->
+
         <div class="phone-view-skills-list" *ngIf="isPhone | async">
           
           <div *ngFor="let skill of skills" class="small-text">

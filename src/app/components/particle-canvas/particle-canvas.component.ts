@@ -168,7 +168,6 @@ export class ParticleCanvasComponent implements AfterViewInit {
         timer(timeInterval,timeInterval).pipe(takeWhile(val => val <= elementsToRemove)).subscribe(()=> {
           this.removeParticle();
           if(this.particles.length === 0){
-            console.log("r0");
             resolve()}
           })
       }
