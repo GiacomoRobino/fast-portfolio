@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { job } from './model';
 import { gsap, Power4 } from 'gsap';
+import {DeviceCheckService} from '../../../services/device-check.service'
 
 @Component({
   selector: 'app-job-card',
@@ -19,7 +20,9 @@ export class JobCardComponent {
   @Output() updateJob = new EventEmitter();
   @Output() leaveJob = new EventEmitter();
   @ViewChild('image') image: any;
+  public isNotPhoneCheck = this.deviceCheckService.isPhone(false)
 
+  constructor(public deviceCheckService: DeviceCheckService){}
   showImage(index: number) {
     return new Promise<any>((resolve) => {
       setTimeout(() => {
@@ -42,7 +45,7 @@ export class JobCardComponent {
   }
 
   redirect(link: any){
-    console.log(link)
-    window.open(link)
+    this.isNotPhoneCheck.subscribe(()=> 
+    window.open(link))
   }
 }
