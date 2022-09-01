@@ -14,8 +14,8 @@ import * as d3 from 'd3';
 })
 export class SkillsComponent implements AfterViewInit {
   ngAfterViewInit(): void {
-    const  width = 800;
-    const  height = 400;
+    const  width = window.innerWidth * 0.6;
+    const  height = width / 2;
     const svg = d3.select("#skillsId").append("svg:svg")
     .attr("width", width)
     .attr("height", height)
