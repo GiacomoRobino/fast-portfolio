@@ -3,9 +3,9 @@
     <app-background #background [inputColor]="bgColor" [linkRadius]="linkRadius"></app-background>
   </div>
 
-  <div *ngIf="headerVisible" [ngClass]="{'is-phone': isPhone, 'header': !isPhone}">
+  <div *ngIf="headerVisible" [ngClass]="{'is-phone': isPhone | async, 'header': !(isPhone | async)}">
     <app-animated-border-button
-    [ngClass]="{'download-cv-phone': isPhone, 'header-button': !isPhone}"
+    [ngClass]="{'download-cv-phone': isPhone | async, 'header-button':  !(isPhone | async)}"
       #navigationButton
       (click)="download()"
     >

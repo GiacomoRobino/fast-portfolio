@@ -176,7 +176,6 @@ export class ParticleCanvasComponent implements AfterViewInit {
         timer(0,timeInterval).pipe(takeWhile(() => this.particles.length <= particles)).subscribe(()=> {
           this.addParticle();
         if(this.particles.length === particles){
-          console.log("resolved")
           resolve()}
         })
       }

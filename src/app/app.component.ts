@@ -16,6 +16,7 @@ import { AnimatedBorderButtonComponent } from './components/common-components/an
 import {
   BreakpointObserver, Breakpoints
 } from '@angular/cdk/layout';
+import { DeviceCheckService } from './services/device-check.service';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,7 @@ import {
   styleUrls: ['./app.component.scss'],
 })
 @Injectable()
-export class AppComponent implements AfterViewInit, OnInit {
+export class AppComponent implements AfterViewInit {
   @ViewChildren('aboutMeComponent')
   aboutMeComponent!: QueryList<AboutMeComponent>;
   @ViewChildren('contactMeComponent')
@@ -72,11 +73,9 @@ export class AppComponent implements AfterViewInit, OnInit {
   };
   public bgColor = this.colors.introColor;
   public linkRadius = 150;
-  public isPhone = false;
+  public isPhone = this.deviceCheckService.isPhone(true);
 
-  constructor(private responsive: BreakpointObserver) {
-  
-  }
+  constructor(private deviceCheckService: DeviceCheckService){}
 
   @HostListener('window:scroll', ['$event'])
   setBackground(event: any) {
@@ -86,16 +85,6 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
 
   
-  ngOnInit() {
-  
-    this.responsive.observe(Breakpoints.Handset)
-      .subscribe(result => {
-
-        if (result.matches) {
-          this.isPhone = true
-        }
-
-  });}
 
   ngAfterViewInit() {
     this.navigationButtonTextContext = this.contactMeTextContext;
