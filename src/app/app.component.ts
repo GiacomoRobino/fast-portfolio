@@ -24,7 +24,7 @@ import { DeviceCheckService } from './services/device-check.service';
   styleUrls: ['./app.component.scss'],
 })
 @Injectable()
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnInit {
   @ViewChildren('aboutMeComponent')
   aboutMeComponent!: QueryList<AboutMeComponent>;
   @ViewChildren('contactMeComponent')
@@ -83,8 +83,9 @@ export class AppComponent implements AfterViewInit {
     this.linkRadius = newBgRadius > 0 ? newBgRadius : 0;
     this.setParticles(this.startingParticles + window.pageYOffset / 2);
   }
-
-  
+  ngOnInit(){
+    this.isPhone.subscribe(() => this.downloadCvTextContext.fullText = "Get CV")
+  }
 
   ngAfterViewInit() {
     this.navigationButtonTextContext = this.contactMeTextContext;

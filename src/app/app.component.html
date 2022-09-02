@@ -5,7 +5,7 @@
 
   <div *ngIf="headerVisible" [ngClass]="{'is-phone': isPhone | async, 'header': !(isPhone | async)}">
     <app-animated-border-button
-    [ngClass]="{'download-cv-phone': isPhone | async, 'header-button':  !(isPhone | async)}"
+    class="header-button"
       #navigationButton
       (click)="download()"
     >
