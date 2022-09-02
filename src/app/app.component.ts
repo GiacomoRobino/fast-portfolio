@@ -74,6 +74,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   public bgColor = this.colors.introColor;
   public linkRadius = 150;
   public isPhone = this.deviceCheckService.isPhone(true);
+  public CVDownloadedText = "CV Downloaded!"
 
   constructor(private deviceCheckService: DeviceCheckService){}
 
@@ -84,7 +85,8 @@ export class AppComponent implements AfterViewInit, OnInit {
     this.setParticles(this.startingParticles + window.pageYOffset / 2);
   }
   ngOnInit(){
-    this.isPhone.subscribe(() => this.downloadCvTextContext.fullText = "Get CV")
+    this.isPhone.subscribe(() => {this.downloadCvTextContext.fullText = "Get CV";
+    this.CVDownloadedText = "Downloaded"})
   }
 
   ngAfterViewInit() {
@@ -168,7 +170,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     this.cancelText(this.downloadCvTextContext).then(() => {
       this.downloadCvTextContext = {
         shownText: '',
-        fullText: 'Cv Downloaded!',
+        fullText: this.CVDownloadedText
       };
       this.writeText(this.downloadCvTextContext);
     });
