@@ -46,6 +46,8 @@ export class ParticleCanvasComponent implements AfterViewInit {
     linkRadius: 100,
   };
 
+  public pointsForMousePointer : Array<any> = []
+
   ngAfterViewInit(): void {
     fromEvent(document.body, 'mousemove')
     .subscribe((e: any) => {
@@ -56,19 +58,6 @@ export class ParticleCanvasComponent implements AfterViewInit {
     this.canvas.height = window.innerHeight;
     this.w = this.canvas.width;
     this.h = this.canvas.height;
-    /*
-    window.addEventListener('click', (event) => {
-      this.particles.push(
-        new Particle(
-          event.clientX,
-          event.clientY,
-          this.staticParticleOptions,
-          this.ctx,
-          false
-        )
-      );
-    });
-    */
     this.ctx = this.canvas.getContext('2d');
     this.initializeElements();
     this.startAnimation();
@@ -135,14 +124,15 @@ export class ParticleCanvasComponent implements AfterViewInit {
   drawParticle() {
     for (const particle of this.particles) {
       particle.update();
-      //particle.draw();
     }
   }
 
   drawLine() {
+    this.pointsForMousePointer = []
     for (const particle of this.particles) {
         this.linkPoints(particle, this.particles);
     }
+    this.pointsForMousePointer.forEach((point : any) => point.draw())
   }
 
   linkPoints(point: any, hubs: Particle[]) {
@@ -176,7 +166,8 @@ export class ParticleCanvasComponent implements AfterViewInit {
     )
     point.radius =  size > 10? 10 : size;
     if(size > 4){
-    point.draw()}
+      this.pointsForMousePointer.push(point)
+    }
   }
 
   checkDistance(x1: number, y1: number, x2: number, y2: number) {
