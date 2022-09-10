@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
-import { timer , takeWhile} from 'rxjs';
+import { timer , takeWhile, Observable, fromEvent} from 'rxjs';
 import { Particle } from './model';
 
 @Component({
@@ -33,6 +33,8 @@ export class ParticleCanvasComponent implements AfterViewInit {
     linkRadius: this.linkRadius,
   };
 
+  public mousePosition = {x: 0, y:0}
+
   public staticParticleOptions = {
     particleColor: 'rgba(255,255,255)',
     lineColor: this.inputColor,
@@ -45,6 +47,10 @@ export class ParticleCanvasComponent implements AfterViewInit {
   };
 
   ngAfterViewInit(): void {
+    fromEvent(document.body, 'mousemove')
+    .subscribe((e: any) => {
+             this.mouseDetect(e);
+      });
     this.canvas = this.canvasReference.nativeElement;
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
@@ -66,6 +72,15 @@ export class ParticleCanvasComponent implements AfterViewInit {
     this.ctx = this.canvas.getContext('2d');
     this.initializeElements();
     this.startAnimation();
+  }
+
+  mouseDetect(evt: any){
+    const rect = this.canvas.getBoundingClientRect();
+   
+    const x = evt.clientX - rect.left;
+    const y =  evt.clientY - rect.top;
+  
+    this.mousePosition = {x, y}
   }
 
   reset() {
@@ -153,7 +168,15 @@ export class ParticleCanvasComponent implements AfterViewInit {
         }
       }
     }
-    point.radius = particleNeighborsNumber;
+    const size = 300 / this.checkDistance(
+      point.x,
+      point.y,
+      this.mousePosition.x,
+      this.mousePosition.y
+    )
+    point.radius =  size > 10? 10 : size;
+    if(size > 4){
+    point.draw()}
   }
 
   checkDistance(x1: number, y1: number, x2: number, y2: number) {
