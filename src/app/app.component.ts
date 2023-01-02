@@ -2,6 +2,8 @@ import {
   AfterViewInit,
   Component,
   forwardRef,
+  HostListener,
+  OnInit,
   QueryList,
   ViewChild,
   ViewChildren,
@@ -9,9 +11,12 @@ import {
 import { AboutMeComponent } from './components/about-me/about-me.component';
 import { ContactMeComponent } from './components/contact-me/contact-me.component';
 import { ProjectsComponent } from './components/projects/projects.component';
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AnimatedBorderButtonComponent } from './components/common-components/animated-border-button/animated-border-button.component';
+import {
+  BreakpointObserver, Breakpoints
+} from '@angular/cdk/layout';
+import { DeviceCheckService } from './services/device-check.service';
 
 @Component({
   selector: 'app-root',
@@ -19,12 +24,14 @@ import { AnimatedBorderButtonComponent } from './components/common-components/an
   styleUrls: ['./app.component.scss'],
 })
 @Injectable()
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnInit {
   @ViewChildren('aboutMeComponent')
   aboutMeComponent!: QueryList<AboutMeComponent>;
   @ViewChildren('contactMeComponent')
   contactMeComponent!: QueryList<ContactMeComponent>;
   @ViewChild('introductionButton') projectsButton: any;
+  @ViewChild('background') background: any;
+
   @ViewChildren('introductionComponent')
   projectsComponent!: QueryList<ProjectsComponent>;
   @ViewChild('componentContainer') componentContainer: any;
@@ -41,12 +48,13 @@ export class AppComponent implements AfterViewInit {
   public downloadCvTextContext = { shownText: '', fullText: 'Download cv' };
   private timeToWrite = 1000.0;
   private specialCaractersMultipliers: { [key: string]: number } = {
-    '.': 500.0,
+    '.': 300.0,
     ',': 200.0,
+    ':': 300.0
   };
   private interruptWriting = false;
+  public startingParticles = 40;
 
-  constructor(private http: HttpClient) {}
 
   public modules: { [key: string]: any } = {};
   public buttons: { [key: string]: any } = {};
@@ -56,7 +64,30 @@ export class AppComponent implements AfterViewInit {
   };
   public initiated = false;
   public visibleComponent = 'aboutMe';
-  title = 'portfolio-fast';
+  title = 'portfolio';
+  public buttonBlock = true;
+  public colors = {
+    introColor: '52, 91,235',
+    aboutMe: '235, 88, 52',
+    contactMe: '52, 235, 204',
+  };
+  public bgColor = this.colors.introColor;
+  public linkRadius = 150;
+  public isPhone = this.deviceCheckService.isPhone(true);
+  public CVDownloadedText = "CV Downloaded!"
+
+  constructor(private deviceCheckService: DeviceCheckService){}
+
+  @HostListener('window:scroll', ['$event'])
+  setBackground(event: any) {
+    const newBgRadius = 150 - window.pageYOffset / 4;
+    this.linkRadius = newBgRadius > 0 ? newBgRadius : 0;
+    this.setParticles(this.startingParticles + window.pageYOffset / 2);
+  }
+  ngOnInit(){
+    this.isPhone.subscribe(() => {this.downloadCvTextContext.fullText = "Get CV";
+    this.CVDownloadedText = "Downloaded"})
+  }
 
   ngAfterViewInit() {
     this.navigationButtonTextContext = this.contactMeTextContext;
@@ -82,18 +113,49 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  click() {
-    this.cancelText(this.textContexts[this.getNonVisibleComponent()]).then(
-      () => {
-        this.changeTextContext();
-        const currentVisibleComponent = this.getVisibleComponent();
-        this.modules[currentVisibleComponent]
-          .clickClose()
-          .then((data: string) => {
-            this.expandElement();
-          });
-      }
-    );
+  setParticles(particlesNumber: number) {
+    this.background.setParticles(particlesNumber);
+  }
+
+  changePage() {
+    this.switchColor();
+    if (!this.buttonBlock) {
+      this.buttonBlock = true;
+      this.cancelText(this.textContexts[this.getNonVisibleComponent()]).then(
+        () => {
+          this.changeTextContext();
+          const currentVisibleComponent = this.getVisibleComponent();
+          this.modules[currentVisibleComponent]
+            .clickClose()
+            .then((data: string) => {
+              this.buttonBlock = false;
+              this.expandElement();
+            });
+        }
+      );
+    }
+  }
+
+  switchColor() {
+    this.background.setParticlesProgressive(0).then(() => {
+    if (this.bgColor == this.colors.aboutMe) {
+      this.bgColor = this.colors.contactMe;
+      this.linkRadius = 300;
+    } else {
+      this.bgColor = this.colors.aboutMe;
+      this.linkRadius = 150;
+    }
+    this.background.setParticlesProgressive(this.startingParticles)
+  }
+    )
+  }
+
+  switchColorIntro() {
+    this.background.setParticlesProgressive(0).then(() => {
+      this.bgColor = this.colors.aboutMe;
+    this.background.setParticlesProgressive(this.startingParticles)
+  }
+    )
   }
 
   download() {
@@ -105,10 +167,13 @@ export class AppComponent implements AfterViewInit {
     link.click();
     link.remove();
 
-    this.cancelText(this.downloadCvTextContext).then(()=>{
-    this.downloadCvTextContext = { shownText: '', fullText: 'Cv Downloaded!' }
-    this.writeText(this.downloadCvTextContext)}
-    )
+    this.cancelText(this.downloadCvTextContext).then(() => {
+      this.downloadCvTextContext = {
+        shownText: '',
+        fullText: this.CVDownloadedText
+      };
+      this.writeText(this.downloadCvTextContext);
+    });
   }
 
   changeTextContext() {
@@ -132,6 +197,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   finishedIntro() {
+    this.switchColorIntro();
     this.headerVisible = true;
   }
 
@@ -145,6 +211,7 @@ export class AppComponent implements AfterViewInit {
         textContext.shownText.length < textContext.fullText.length &&
         !this.interruptWriting
       ) {
+        this.buttonBlock = true
         textContext.shownText = this.addOneLetter(
           textContext.shownText,
           textContext.fullText
@@ -166,6 +233,7 @@ export class AppComponent implements AfterViewInit {
           this.writeText(textContext, timeToWrite).then(resolve);
         }, timeToWrite);
       } else {
+        this.buttonBlock = false
         resolve();
       }
     });

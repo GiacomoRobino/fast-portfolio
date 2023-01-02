@@ -17,7 +17,9 @@ import { job } from './job-card/model';
 import { study } from './study-card/model';
 import { gsap } from 'gsap';
 import { StudyCardComponent } from './study-card/study-card.component';
-import { AnimatedBorderButtonComponent } from '../common-components/animated-border-button/animated-border-button.component';
+import { DeviceCheckService } from 'src/app/services/device-check.service';
+import { SkillsService } from 'src/app/services/skills.service';
+
 @Component({
   selector: 'app-about-me',
   templateUrl: './about-me.component.html',
@@ -33,45 +35,63 @@ export class AboutMeComponent implements OnInit {
   studyCards: QueryList<StudyCardComponent> = new QueryList();
   @ViewChildren('jobsHeaderText') jobsHeaderText: any = new QueryList();
   @ViewChild('mainText') mainText: any;
+  @ViewChild('authorText') authorText: any;
   @ViewChild('mainContainer') mainContainer: any;
   @ViewChildren('jobDescription')
   jobDescription: any = new QueryList();
+  @ViewChildren('studyDescription')
+  studyDescription: any = new QueryList();
 
-  public shownJob = { name: '', description: '' };
+  public shownJob = { name: '', description: '', period: {start: '', end: ''} };
+  public shownStudy = { name: '', description: '', period: {start: '', end: ''}, level: '' };
+
   private httpClient: HttpClient;
   private opened = false;
   private fullText = '';
   public shownText = '';
-  private timeToWrite = 400.0;
+  private timeToWrite = 1500.0;
   private interruptWriting = false;
   private specialCaractersMultipliers: { [key: string]: number } = {
-    '.': 500.0,
-    ',': 200.0,
+    '.': 50.0,
+    ',': 40.0,
+    '\n': 100.0
   };
   public jobs: job[] = jobsConfig;
   public studies: study[] = studiesConfig;
   public mainTextVisible = true;
+  public author = '';
+  public isPhone = this.deviceCheckService.isPhone(true);
+  public skills : Array<any> = this.skillService.getSkills().map(skill => skill?.name)
+  ;
 
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient,private deviceCheckService: DeviceCheckService, public skillService: SkillsService) {
     this.httpClient = http;
   }
 
   ngOnInit(): void {
     this.httpClient
-      .get('assets/copywrite/presentation.txt', { responseType: 'text' })
+      .get('assets/copywrite/quotes.txt', { responseType: 'text' })
       .subscribe((data) => {
         if (this.initiated) {
           this.returnToPageAnimation();
         } else {
           this.initiated = true;
           this.initiatedChange.emit(true);
-          this.fullText = data;
+          this.fullText = this.getRandomQuote(data);
           this.writeText().then(() => {
             const tl = gsap.timeline();
+            tl.to(this.authorText.nativeElement, { duration: 1, opacity: 1})
+            .then(()=>
             tl.to(this.mainText.nativeElement, {
               duration: 1,
               color: 'transparent',
-            }).then(() => {
+            }))
+            .then(()=>
+            tl.to(this.authorText.nativeElement, {
+              duration: 0.5,
+              color: 'transparent',
+            }))
+            .then(() => {
               this.mainTextVisible = false;
               this.finishedIntro.emit();
               this.animateJobs(1000);
@@ -98,10 +118,20 @@ export class AboutMeComponent implements OnInit {
     });
   }
 
+  getRandomQuote(data: string){
+    const splittedData =  data.split("\n");
+    const randomIndex = Math.floor(Math.random()*splittedData.length)
+    const quote = splittedData[randomIndex].split("|");
+    this.author = quote[1].split("\r")[0].trim();
+    return quote[0] + ".";
+
+  }
+
   writeText(timeToWrite = -1): any {
     return new Promise<void>((resolve, reject) => {
       if (timeToWrite === -1) {
-        timeToWrite = this.timeToWrite / this.fullText.length;
+        const textLengthMultiplier = (this.fullText.split(" ").length)/ 15
+        timeToWrite = (this.timeToWrite * textLengthMultiplier) / this.fullText.length;
         this.interruptWriting = false;
       }
       if (
@@ -147,20 +177,19 @@ export class AboutMeComponent implements OnInit {
       const tl = gsap.timeline();
       setTimeout(() => {
             tl.to(this.jobsHeaderText.first.nativeElement, {
-              duration: 1,
+              duration: 0.6,
               color: 'white',
             });
-            tl.to(this.jobsHeaderText.last.nativeElement, {
-              duration: 1,
+            tl.to(this.jobsHeaderText.toArray()[1].nativeElement, {
+              duration: 0.5,
               color: 'white',
             })
           .then(() => this.animateJobCards())
-          .then(() =>
-          () => {
-            ;
-          }
-        )
-          .then(() => this.animateStudyCards());
+          .then(() => this.animateStudyCards())
+          .then(() => tl.to(this.jobsHeaderText.last.nativeElement, {
+            duration: 0.5,
+            color: 'white',
+          }));
       }, timer);
     });
   }
@@ -179,6 +208,7 @@ export class AboutMeComponent implements OnInit {
     const waitPromiseList = this.studyCards.map((card, index) =>
       card.showImage(index)
     );
+    this.assignStudiesPreviewFunctions();
     Promise.all(waitPromiseList).then();
   }
 
@@ -206,10 +236,36 @@ export class AboutMeComponent implements OnInit {
     });
   }
 
+  showStudy(study: any) {
+    console.log('waiting');
+  }
+
+  hideStudy() {
+    this.setStudyDescriptionColor('transparent');
+  }
+
+  setStudyDescriptionColor(color: string) {
+    this.studyDescription._results.forEach((element: any, index: number) => {
+      const duration = 0.8 * (2 - index);
+      const tl = gsap.timeline();
+      tl.to(element.nativeElement, {
+        duration,
+        color: color,
+      });
+    });
+  }
+
   assignJobsPreviewFunctions() {
     this.showJob = (job) => {
       this.setJobDescriptionColor('white');
-      this.shownJob = { name: job.name, description: job.description };
+      this.shownJob = job;
+    };
+  }
+
+  assignStudiesPreviewFunctions() {
+    this.showStudy = (study) => {
+      this.setStudyDescriptionColor('white');
+      this.shownStudy = study;
     };
   }
 }

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 
 
 @Component({
@@ -6,6 +6,17 @@ import {Component} from '@angular/core';
   templateUrl: './background.component.html',
   styleUrls: ['./background.component.scss']
 })
-export class BackgroundComponent{
+export class BackgroundComponent {
+  inputOpacity = 0.9
+  @Input() inputColor !: string;
+  @Input() linkRadius !: number;
+  @ViewChild("canvas") canvas : any;
 
+  setParticles(particles : number){
+    this.canvas.setParticles(particles)
+  }
+
+  setParticlesProgressive(particles : number){
+    return this.canvas.setParticlesProgressive(particles)
+  }
 }

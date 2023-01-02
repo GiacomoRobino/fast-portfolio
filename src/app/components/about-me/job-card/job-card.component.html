@@ -1,5 +1,10 @@
 <div class="container">
-    <div class="company-logo" (mouseenter)="showJob()" (mouseleave)="hideJob()">
-        <img  #image class="institution-image" [src]="'assets/carreer/companies/images/' + job.name + '.png'" [alt]="job.name + ' image'">
-    </div>
+  <div (click)="redirect(job.link)" class="company-logo" (mouseenter)="showJob()" (mouseleave)="hideJob()">
+      <img
+        #image
+        class="institution-image"
+        [src]="folder + job.name + '.png'"
+        [alt]="job.name + ' image'"
+      />
+  </div>
 </div>

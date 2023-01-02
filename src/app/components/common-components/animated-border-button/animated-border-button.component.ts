@@ -20,6 +20,7 @@ export class AnimatedBorderButtonComponent implements AfterViewInit {
   @ViewChild('content') content: any;
   @Input('initTime') initTime = -1;
 
+
   ngAfterViewInit(){
     if(this.initTime > 0){
       this.showBorder(this.initTime);

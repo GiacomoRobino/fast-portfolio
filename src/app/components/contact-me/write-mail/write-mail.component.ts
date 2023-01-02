@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-write-mail',
@@ -7,8 +7,8 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./write-mail.component.scss']
 })
 export class WriteMailComponent {
-  public mailForm = new FormGroup({
-    mail : new FormControl('')})
+  public mailForm = new UntypedFormGroup({
+    mail : new UntypedFormControl('')})
 
   click(){
     console.log("click")

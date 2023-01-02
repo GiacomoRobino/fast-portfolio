@@ -1,50 +1,109 @@
 <div class="main-container" #mainContainer>
-  <div #mainText *ngIf="mainTextVisible" class="main-text">
-    {{ shownText }}
+  <div *ngIf="mainTextVisible" class="main-text intermediate-text">
+    <div #mainText>
+      {{ shownText }}
+    </div>
+    <div #authorText class="author-class">
+      {{ author }}
+    </div>
   </div>
-  <div class="jobs">
-    <div class="jobs-list-container">
-      <div class="jobs-list">
-        <div class="jobs-header header-button companies-header-class">
-          <span #jobsHeaderText class="intermediate-text">Companies I worked for</span>
-        </div>
-        <div class="jobs-icon-container-1">
-          <div class="centerer job-name job-description intermediate-text" #jobDescription>
-            {{ shownJob.name }}
+  <div class="" *ngIf="!mainTextVisible">
+    <div class="jobs">
+      <div class="jobs-list-container">
+        <div class="jobs-list">
+          <div class="jobs-header header-button companies-header-class">
+            <span #jobsHeaderText class="intermediate-text"
+              >Companies I worked for</span
+            >
           </div>
-          <div class="jobs-icon-container-2" class="centerer">
-            <div *ngFor="let job of jobs; index as i">
-              <div class="card">
-                <app-job-card
-                  class="inner-card"
-                  (updateJob)="showJob(job)"
-                  (leaveJob)="hideJob()"
-                  [job]="job"
-                ></app-job-card>
+          <div class="jobs-icon-container-1">
+            <div
+              class="centerer job-name job-description"
+              [ngClass]="{'small-text': isPhone | async, 'intermediate-text': !(isPhone | async)}"
+              #jobDescription
+            >
+              {{ shownJob.name }}<br />{{ shownJob.period.start }} -
+              {{ shownJob.period.end }}
+            </div>
+            <div class="jobs-icon-container-2" class="centerer">
+              <div *ngFor="let job of jobs; index as i">
+                <div class="card">
+                  <app-job-card
+                    class="inner-card"
+                    (updateJob)="showJob(job)"
+                    [folder]="'assets/carreer/companies/images/'"
+                    (leaveJob)="hideJob()"
+                    [job]="job"
+                  ></app-job-card>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="centerer job-description" #jobDescription>
-            {{ shownJob.description }}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-<!--
-  <div class="jobs">
-    <div class="jobs-list-container">
-      <div class="jobs-list">
-        <div class="jobs-header header-button companies-header-class">
-          <span #jobsHeaderText class="intermediate-text">Places where I studied</span>
-        </div>
-        <div *ngFor="let study of studies; index as i">
-          <div class="card">
-            <app-study-card class="inner-card" [study]="study"></app-study-card>
+            <div class="centerer job-description" #jobDescription>
+              Role at the company:<br />{{ shownJob.description }}
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="jobs">
+      <div class="jobs-list-container">
+        <div class="jobs-list">
+          <div class="jobs-header header-button companies-header-class">
+            <span #jobsHeaderText class="intermediate-text"
+              >Places where I studied</span
+            >
+          </div>
+          <div class="jobs-icon-container-1">
+            <div 
+              class="centerer job-name job-description"
+              [ngClass]="{'small-text': isPhone | async, 'intermediate-text': !(isPhone | async)}"
+              #studyDescription
+            >
+              {{ shownStudy.name }}<br />{{ shownStudy.period.start }} -
+              {{ shownStudy.period.end }}
+            </div>
+            <div class="jobs-icon-container-2" class="centerer">
+              <div *ngFor="let study of studies; index as i">
+                <div class="card">
+                  <app-job-card
+                    class="inner-card"
+                    (updateJob)="showStudy(study)"
+                    [folder]="'assets/carreer/studies/images/'"
+                    (leaveJob)="hideStudy()"
+                    [job]="study"
+                  ></app-job-card>
+                </div>
+              </div>
+            </div>
+            <div class="centerer job-description" #studyDescription>
+              Level: {{ shownStudy.level }}<br />{{ shownStudy.description }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="skills-container"
+      [ngClass]="{
+        'skills-container': !(isPhone | async),
+        'skills-container-phone': isPhone | async
+      }"
+    >
+      <div class="jobs-header header-button companies-header-class">
+        <span #jobsHeaderText class="intermediate-text">Skills</span>
+      </div>
+      <div *ngIf="!(isPhone | async)">
+        <app-skills></app-skills>
+      </div>
+
+        <div class="phone-view-skills-list" *ngIf="isPhone | async">
+          
+          <div *ngFor="let skill of skills" class="small-text">
+            {{skill}}
+          </div>
+          
+        </div>
+    </div>
   </div>
-  -->
 </div>

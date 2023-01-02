@@ -1,12 +1,12 @@
 <div class="app-main-container">
   <div class="background">
-    <app-background></app-background>
+    <app-background #background [inputColor]="bgColor" [linkRadius]="linkRadius"></app-background>
   </div>
 
-  <div *ngIf="headerVisible" class="header">
+  <div *ngIf="headerVisible" [ngClass]="{'is-phone': isPhone | async, 'header': !(isPhone | async)}">
     <app-animated-border-button
+    class="header-button"
       #navigationButton
-      class="header-button"
       (click)="download()"
     >
       <div #downloadCvButtonContainer class="header-element-container">
@@ -17,7 +17,7 @@
     <app-animated-border-button
       #navigationButton
       class="header-button"
-      (click)="click()"
+      (click)="changePage()"
     >
       <div #navigationButtonContainer class="header-element-container">
         {{ navigationButtonTextContext.shownText }}
