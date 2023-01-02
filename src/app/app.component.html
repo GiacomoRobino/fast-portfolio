@@ -23,6 +23,16 @@
         {{ navigationButtonTextContext.shownText }}
       </div>
     </app-animated-border-button>
+
+    <app-animated-border-button
+    class="header-button"
+      #navigationButton
+      (click)="download()"
+    >
+      <div #downloadCvButtonContainer class="header-element-container">
+        {{ blogTextContext.shownText }}
+      </div>
+    </app-animated-border-button>
   </div>
 
   <div class="" #componentContainer>

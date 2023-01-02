@@ -36,13 +36,15 @@ export class AppComponent implements AfterViewInit, OnInit {
   projectsComponent!: QueryList<ProjectsComponent>;
   @ViewChild('componentContainer') componentContainer: any;
   @ViewChildren(forwardRef(() => AnimatedBorderButtonComponent))
-  navigationButtonsBorders: QueryList<AnimatedBorderButtonComponent> = new QueryList();
+  navigationButtonsBorders: any = new QueryList();
   public headerVisible = false;
   public contactMeTextContext = { shownText: '', fullText: 'Contact me' };
   public aboutMeTextContext = { shownText: '', fullText: 'About me' };
+  public blogTextContext = { shownText: '', fullText: 'Blog' };
   public textContexts: { [key: string]: any } = {
     contactMe: this.contactMeTextContext,
     aboutMe: this.aboutMeTextContext,
+    blog: this.blogTextContext
   };
   public navigationButtonTextContext = { shownText: '', fullText: '' };
   public downloadCvTextContext = { shownText: '', fullText: 'Download cv' };
@@ -104,11 +106,13 @@ export class AppComponent implements AfterViewInit, OnInit {
     });
     this.navigationButtonsBorders.changes.subscribe((comps: QueryList<any>) => {
       {
-        this.navigationButtonsBorders.first
+        this.navigationButtonsBorders.get(0)
           .showBorder(1.3)
           .then(() => this.writeText(this.downloadCvTextContext))
-          .then(() => this.navigationButtonsBorders.last.showBorder(1.2))
-          .then(() => this.writeText(this.contactMeTextContext));
+          .then(() => this.navigationButtonsBorders.get(1).showBorder(1.2))
+          .then(() => this.writeText(this.contactMeTextContext))
+          .then(() => this.navigationButtonsBorders.get(2).showBorder(1.2))
+          .then(() => this.writeText(this.blogTextContext));
       }
     });
   }
