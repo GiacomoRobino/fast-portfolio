@@ -14,20 +14,22 @@ import { SkillsService } from 'src/app/services/skills.service';
   styleUrls: ['./skills.component.scss'],
 })
 export class SkillsComponent implements AfterViewInit {
-  constructor(public skillsService : SkillsService){}
+  constructor(public skillsService: SkillsService) { }
   ngAfterViewInit(): void {
-    const  width = window.innerWidth * 0.6;
-    const  height = width / 2;
-    const svg = d3.select("#skillsId").append("svg:svg")
-    .attr("width", width)
-    .attr("height", height)
+    const width = window.innerWidth * 0.6;
+    const height = width / 2;
+    const svg = d3
+      .select('#skillsId')
+      .append('svg:svg')
+      .attr('width', width)
+      .attr('height', height);
 
-      const n : any[] = []
-      const l : any[] = []
+    const n: any[] = [];
+    const l: any[] = [];
 
     const graph = {
       nodes: n,
-      links : l,
+      links: l,
     };
 
     const simulation = d3
@@ -78,23 +80,25 @@ export class SkillsComponent implements AfterViewInit {
       // update nodes
       const node = svg.selectAll('.node').data(graph.nodes);
       const g = node.enter().append('g').attr('class', 'node');
-      const imgSize = 24
-      g.append("svg:image")
-      .attr('x', -(imgSize/2))
-      .attr('y', -(imgSize/2))
-      .attr('width', imgSize)
-      .attr('height', imgSize)
-      .attr("xlink:href",(d:any) => "assets/scalableVectorGraphics/skills/" + d.name + ".svg")
+      const imgSize = 24;
+      g.append('svg:image')
+        .attr('x', -(imgSize / 2))
+        .attr('y', -(imgSize / 2))
+        .attr('width', imgSize)
+        .attr('height', imgSize)
+        .attr(
+          'xlink:href',
+          (d: any) => 'assets/scalableVectorGraphics/skills/' + d.name + '.svg'
+        );
 
       g.append('text')
         .attr('class', 'text')
-        .attr('x', imgSize/2)
+        .attr('x', imgSize / 2)
         .style('fill', '#d9d9d9')
         .text(function (d: any) {
           return d.name;
         })
-        .on("mouseover", (d:any) => console.log(d.srcElement.innerHTML))
-        ;
+        .on('mouseover', (d: any) => console.log(d.srcElement.innerHTML));
       node.exit().remove();
 
       // update simulation
@@ -110,7 +114,7 @@ export class SkillsComponent implements AfterViewInit {
       update();
     }
 
-    function connectNodes(source : any, target: any) {
+    function connectNodes(source: any, target: any) {
       graph.links.push({
         source: source,
         target: target,
@@ -118,20 +122,17 @@ export class SkillsComponent implements AfterViewInit {
       update();
     }
 
-    
-      for(const skill of this.skillsService.getSkills()){
-        addNode(skill)
-      }
+    for (const skill of this.skillsService.getSkills()) {
+      addNode(skill);
+    }
     connectNodes(0, 1);
     connectNodes(4, 1);
     connectNodes(4, 8);
     connectNodes(0, 3);
     connectNodes(0, 5);
     connectNodes(0, 6);
+    connectNodes(0, 9);
     connectNodes(0, 2);
     connectNodes(7, 1);
-
-
-
   }
 }

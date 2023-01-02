@@ -48,6 +48,10 @@ export class SkillsService {
         id: 8,
         name: 'github',
       },
+      {
+        id: 9,
+        name: 'react',
+      }
     ];
   }
 }
