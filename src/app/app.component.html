@@ -26,10 +26,10 @@
 
     <app-animated-border-button
     class="header-button"
-      #navigationButton
-      (click)="download()"
+      #blogButton
+      (click)="openBlog()"
     >
-      <div #downloadCvButtonContainer class="header-element-container">
+      <div #openBlogButtonContainer class="header-element-container">
         {{ blogTextContext.shownText }}
       </div>
     </app-animated-border-button>
@@ -37,17 +37,20 @@
 
   <div class="" #componentContainer>
     <div
-      *ngIf="visible.contactMe"
+      *ngIf="visible.contactMe && ! blogOpened"
       class="element-container contact-me-container"
     >
       <app-contact-me #contactMeComponent></app-contact-me>
     </div>
-    <div *ngIf="visible.aboutMe" class="element-container">
+    <div *ngIf="visible.aboutMe && !blogOpened" class="element-container">
       <app-about-me
         #aboutMeComponent
         [(initiated)]="initiated"
         (finishedIntro)="finishedIntro()"
       ></app-about-me>
+    </div>
+    <div *ngIf="blogOpened" class="element-container">
+      blog
     </div>
   </div>
 </div>

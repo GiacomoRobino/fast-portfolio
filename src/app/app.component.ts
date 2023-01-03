@@ -38,6 +38,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   @ViewChildren(forwardRef(() => AnimatedBorderButtonComponent))
   navigationButtonsBorders: any = new QueryList();
   public headerVisible = false;
+  public blogOpened = false;
   public contactMeTextContext = { shownText: '', fullText: 'Contact me' };
   public aboutMeTextContext = { shownText: '', fullText: 'About me' };
   public blogTextContext = { shownText: '', fullText: 'Blog' };
@@ -63,6 +64,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   public visible: { [key: string]: boolean } = {
     contactMe: false,
     aboutMe: true,
+    blog: false,
   };
   public initiated = false;
   public visibleComponent = 'aboutMe';
@@ -279,5 +281,18 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   removeOneLetter(text: string) {
     return text.slice(0, -1);
+  }
+
+  openBlog(){
+    if(!this.blogOpened){
+    this.modules[this.getVisibleComponent()]
+            .clickClose()
+            .then((data: string) => {          
+              this.blogOpened = true;
+            });
+    }
+    else{
+      this.blogOpened = false;
+    }
   }
 }
