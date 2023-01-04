@@ -24,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LinkedinLinkComponent } from './components/contact-me/linkedin-link/linkedin-link.component';
 import { SkillsComponent } from './components/about-me/skills/skills.component';
 import { BlogComponent } from './components/blog/blog/blog.component';
+import { BlogHeaderComponent } from './components/blog/blog/blog-header/blog-header.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { BlogComponent } from './components/blog/blog/blog.component';
     WriteMailComponent,
     LinkedinLinkComponent,
     SkillsComponent,
-    BlogComponent
+    BlogComponent,
+    BlogHeaderComponent
   ],
   imports: [
     BrowserModule,
