@@ -49,7 +49,7 @@ export class AboutMeComponent implements OnInit {
   private opened = false;
   private fullText = '';
   public shownText = '';
-  private timeToWrite = 1500.0;
+  private timeToWrite = 15.0;
   private interruptWriting = false;
   private specialCaractersMultipliers: { [key: string]: number } = {
     '.': 50.0,

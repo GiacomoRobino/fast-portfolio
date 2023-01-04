@@ -13,9 +13,7 @@ import { ContactMeComponent } from './components/contact-me/contact-me.component
 import { ProjectsComponent } from './components/projects/projects.component';
 import { Injectable } from '@angular/core';
 import { AnimatedBorderButtonComponent } from './components/common-components/animated-border-button/animated-border-button.component';
-import {
-  BreakpointObserver, Breakpoints
-} from '@angular/cdk/layout';
+
 import { DeviceCheckService } from './services/device-check.service';
 
 @Component({

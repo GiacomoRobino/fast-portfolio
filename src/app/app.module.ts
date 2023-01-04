@@ -23,6 +23,7 @@ import { WriteMailComponent } from './components/contact-me/write-mail/write-mai
 import { ReactiveFormsModule } from '@angular/forms';
 import { LinkedinLinkComponent } from './components/contact-me/linkedin-link/linkedin-link.component';
 import { SkillsComponent } from './components/about-me/skills/skills.component';
+import { BlogComponent } from './components/blog/blog/blog.component';
 
 @NgModule({
   declarations: [
@@ -44,13 +45,14 @@ import { SkillsComponent } from './components/about-me/skills/skills.component';
     CopyMailComponent,
     WriteMailComponent,
     LinkedinLinkComponent,
-    SkillsComponent
+    SkillsComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
