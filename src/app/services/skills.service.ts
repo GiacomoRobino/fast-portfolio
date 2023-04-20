@@ -52,7 +52,7 @@ export class SkillsService {
       },
       {
         id: 9,
-        name: 'react',
+        name: 'python',
       }
     ];
   }
