@@ -10,10 +10,12 @@ export class SkillsService {
         id: 0,
         name: 'javascript',
       },
+
       {
         id: 1,
         name: 'angular',
       },
+
       {
         id: 2,
         name: 'css3',

@@ -134,5 +134,6 @@ export class SkillsComponent implements AfterViewInit {
     connectNodes(0, 9);
     connectNodes(0, 2);
     connectNodes(7, 1);
+    connectNodes(8, 10);
   }
 }

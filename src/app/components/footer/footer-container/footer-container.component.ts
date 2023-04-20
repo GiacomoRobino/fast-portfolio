@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
@@ -13,6 +13,6 @@ export class FooterComponent {
   {name:"html"},
   {name:"greensock"},
   {name:"javascript"},
-  {name:"github"}]
-
+  {name:"github"},
+  {name:"python"}]
 }
