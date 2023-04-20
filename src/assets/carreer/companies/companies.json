@@ -1,11 +1,19 @@
-[
+[{
+        "name": "PARADOX Engineering",
+        "link": "https://www.pdxeng.ch",
+        "description": "Backend developer for the Iot in the field of sensors. Main language used: Python",
+        "period": {
+            "start": "5/2023",
+            "end": "currently working"
+        }
+    },
     {
         "name": "CLUSTER REPLY",
         "link": "https://www.reply.com/cluster-reply",
         "description": "Front end developer, with a focus on Angular, for the banking sector",
         "period": {
             "start": "5/2021",
-            "end": "currently working"
+            "end": "4/2023"
         }
     },
     {
